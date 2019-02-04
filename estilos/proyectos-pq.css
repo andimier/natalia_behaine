@@ -1,0 +1,108 @@
+#bmastexto {
+	font-size:17px;
+}
+
+.contenedor-proyecto {
+	width: 50%;
+}
+
+.contenedor-proyecto h2 {
+	font-size: 14px;
+}
+
+.contenedor-proyecto h1 {
+	font-size: 18px;
+}
+
+.cnt_txt_prg {
+    width: 100%;
+    text-align: left;
+    padding-top: 45px;
+}
+
+.txt_prg {
+    border-bottom: none;
+}
+
+.img_prg {
+	float:none;
+	width:100%;
+}
+
+.txt_resena {
+	position:initial;
+	width:100%;
+	height:auto;
+	padding:5px 0 15px 0;
+}
+
+.prg_p{
+	width:100%;
+	padding:5px 0 15px 0;
+	font-size:15px;
+}
+
+.btn-compra{
+	width:200px;
+	clear:both;
+	margin:0 0 0px 0;
+	padding:10px 0 20px 0;
+}
+
+#cnt_galeria h1{
+	font-size:18px;
+}
+
+.tt-mas-imagenes {
+	font-size: 15px;
+}
+
+#cnt_galeria h2 {
+	font-size: 15px;
+}
+
+.cnt-videos{
+	width:100%;
+	height:auto;
+	padding:30px 0 0 0;
+	margin:10px auto 0 auto;
+}
+
+.cnt-videos h1{
+	width:100%;
+	padding:0;
+	margin:0 0 20px 0;
+	font-size:18px;	
+}
+
+#cerrar{
+	top:-50px;
+}
+
+#btn-vid-siguiente{
+	position:absolute;
+	width:30px;
+	height:30px;
+	top:50%;
+	right:0;
+	margin-top:-15px;
+	margin-right: 10px;
+	cursor:pointer;
+	background-image:url('../imagenes/flecha-siguiente.png');
+	background-size:100%;
+	background-repeat:no-repeat;
+}
+
+#btn-vid-anterior{
+	position:absolute;
+	width:30px;
+	height:30px;
+	top:50%;
+	left:0;
+	margin-top:-15px;
+	margin-left: 10px;
+}
+
+.installation-img {
+    flex-basis: 50%;
+}

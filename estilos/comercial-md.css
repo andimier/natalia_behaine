@@ -1,0 +1,38 @@
+#comercial-cabezote{
+	position:relative;
+	width: 100%;
+	height:auto;
+	margin:0 auto 25px auto;
+	padding:0 0 0 0;
+
+}
+
+#comercial-banner{
+	/* margen al los logos de las redes*/
+	margin:0 auto 165px auto;
+}
+
+
+
+#comercial-cnt-logo {
+	position: absolute;
+	width:  200px;
+	height: 200px;
+	top: 100%;
+	left: 50%;
+	margin: -70px 0 0 -100px;
+
+}
+
+#comercial-logo{
+	width:100%;
+	height:auto;
+	margin:0px auto 0 auto;
+	padding:0 0 0 0;
+	
+}
+
+#menu {
+	height: 70px;
+	margin-bottom: 10px;
+}

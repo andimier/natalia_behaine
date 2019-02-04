@@ -1,0 +1,170 @@
+[27-Jul-2015 09:40:40 America/Denver] PHP Notice:  Undefined variable: palabras2 in /home5/natalic6/public_html/requeridos/tags.php on line 11
+[27-Jul-2015 09:40:40 America/Denver] PHP Notice:  Undefined variable: descripcion2 in /home5/natalic6/public_html/requeridos/tags.php on line 12
+[31-Jul-2015 07:26:03 America/Denver] PHP Notice:  Undefined variable: palabras2 in /home5/natalic6/public_html/requeridos/tags.php on line 13
+[31-Jul-2015 07:26:03 America/Denver] PHP Notice:  Undefined variable: descripcion2 in /home5/natalic6/public_html/requeridos/tags.php on line 14
+[31-Jul-2015 08:26:10 America/Bogota] PHP Notice:  Undefined variable: palabras2 in /home5/natalic6/public_html/requeridos/tags.php on line 13
+[31-Jul-2015 08:26:10 America/Bogota] PHP Notice:  Undefined variable: descripcion2 in /home5/natalic6/public_html/requeridos/tags.php on line 14
+[31-Jul-2015 07:26:15 America/Denver] PHP Notice:  Undefined variable: palabras2 in /home5/natalic6/public_html/requeridos/tags.php on line 13
+[31-Jul-2015 07:26:15 America/Denver] PHP Notice:  Undefined variable: descripcion2 in /home5/natalic6/public_html/requeridos/tags.php on line 14
+[31-Jul-2015 07:26:22 America/Denver] PHP Notice:  Undefined variable: palabras2 in /home5/natalic6/public_html/requeridos/tags.php on line 13
+[31-Jul-2015 07:26:22 America/Denver] PHP Notice:  Undefined variable: descripcion2 in /home5/natalic6/public_html/requeridos/tags.php on line 14
+[31-Jul-2015 07:26:28 America/Denver] PHP Notice:  Undefined variable: palabras2 in /home5/natalic6/public_html/requeridos/tags.php on line 13
+[31-Jul-2015 07:26:28 America/Denver] PHP Notice:  Undefined variable: descripcion2 in /home5/natalic6/public_html/requeridos/tags.php on line 14
+[14-Aug-2015 10:58:22 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Aug-2015 11:58:27 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Aug-2015 10:58:31 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Aug-2015 10:58:36 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Aug-2015 10:58:41 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[22-Aug-2015 14:49:19 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[22-Aug-2015 14:49:21 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[22-Aug-2015 14:49:21 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[22-Aug-2015 14:49:23 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[22-Aug-2015 14:49:24 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[22-Aug-2015 15:49:25 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[22-Aug-2015 14:49:25 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[24-Aug-2015 11:36:27 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[27-Aug-2015 19:21:48 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[27-Aug-2015 20:21:52 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[27-Aug-2015 19:21:57 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[27-Aug-2015 19:22:02 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[27-Aug-2015 19:22:07 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[11-Sep-2015 00:52:56 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[11-Sep-2015 01:53:01 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[11-Sep-2015 00:53:05 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[11-Sep-2015 00:53:10 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[11-Sep-2015 00:53:15 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Sep-2015 08:29:38 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Sep-2015 09:29:43 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Sep-2015 08:29:48 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Sep-2015 08:29:53 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Sep-2015 08:29:57 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Sep-2015 21:02:27 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[09-Oct-2015 04:26:50 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[09-Oct-2015 05:26:55 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[09-Oct-2015 04:27:00 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[09-Oct-2015 04:27:07 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[09-Oct-2015 04:27:14 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Oct-2015 04:02:40 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Oct-2015 04:02:41 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Oct-2015 05:02:42 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Oct-2015 04:02:42 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[14-Oct-2015 04:02:43 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[23-Oct-2015 01:14:16 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[23-Oct-2015 02:14:21 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[23-Oct-2015 01:14:26 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[23-Oct-2015 01:14:31 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[23-Oct-2015 01:14:36 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Oct-2015 21:09:41 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:02:55 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 09:03:03 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:03:10 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:03:15 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:03:20 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:03:41 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 09:03:47 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:03:58 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:04:03 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:04:26 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:04:28 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 09:04:31 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:04:33 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:04:35 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:04:38 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:05:36 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:05:38 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 09:05:40 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:05:43 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:05:45 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[06-Nov-2015 07:05:48 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:56:29 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 07:56:35 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:56:44 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:56:48 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:56:53 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:57:14 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 07:57:19 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:57:28 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:57:33 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:57:53 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:57:55 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 07:57:58 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:58:00 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:58:02 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:58:05 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:58:23 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:58:26 America/Denver] PHP Notice:  Undefined variable: sub_id in /home5/natalic6/public_html/requeridos/qs.php on line 145
+[20-Nov-2015 05:58:26 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:58:26 America/Denver] PHP Notice:  Undefined variable: tag_titulo in /home5/natalic6/public_html/requeridos/tags.php on line 4
+[20-Nov-2015 05:58:26 America/Denver] PHP Notice:  Undefined offset: 1 in /home5/natalic6/public_html/cuerpo/proyecto.php on line 104
+[20-Nov-2015 05:58:26 America/Denver] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/cuerpo/proyecto.php on line 197
+[20-Nov-2015 05:59:09 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:59:11 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 07:59:14 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:59:16 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:59:19 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[20-Nov-2015 05:59:21 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[25-Nov-2015 16:43:31 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 263
+[03-Dec-2015 20:30:25 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:30:25 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 22:30:32 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 22:30:32 America/Bogota] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 22:30:32 America/Bogota] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[03-Dec-2015 20:30:45 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:30:45 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 20:30:50 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:30:50 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 20:30:58 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:30:58 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 20:31:01 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:31:01 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 20:31:29 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:31:29 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 20:31:29 America/Denver] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[03-Dec-2015 20:31:32 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:31:32 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[03-Dec-2015 20:31:32 America/Denver] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[03-Dec-2015 20:31:53 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 278
+[03-Dec-2015 20:31:53 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[11-Dec-2015 14:11:20 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 345
+[11-Dec-2015 14:11:20 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[11-Dec-2015 16:11:28 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 345
+[11-Dec-2015 16:11:28 America/Bogota] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[11-Dec-2015 16:11:28 America/Bogota] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[11-Dec-2015 14:11:29 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 345
+[11-Dec-2015 14:11:29 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[11-Dec-2015 14:11:29 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 345
+[11-Dec-2015 14:11:29 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[11-Dec-2015 14:11:29 America/Denver] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[11-Dec-2015 14:11:29 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 345
+[11-Dec-2015 14:11:29 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[11-Dec-2015 14:11:29 America/Denver] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[11-Dec-2015 14:11:29 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 345
+[11-Dec-2015 14:11:29 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[11-Dec-2015 14:11:31 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 345
+[11-Dec-2015 14:11:31 America/Denver] PHP Notice:  Undefined variable: tag_titulo in /home5/natalic6/public_html/requeridos/tags.php on line 4
+[11-Dec-2015 14:11:31 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 75
+[18-Dec-2015 05:38:58 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[18-Dec-2015 05:38:58 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[18-Dec-2015 07:39:06 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[18-Dec-2015 07:39:06 America/Bogota] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[18-Dec-2015 07:39:06 America/Bogota] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[18-Dec-2015 05:39:21 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[18-Dec-2015 05:39:21 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[18-Dec-2015 05:39:26 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[18-Dec-2015 05:39:26 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[18-Dec-2015 05:40:05 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[18-Dec-2015 05:40:05 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[18-Dec-2015 05:40:05 America/Denver] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[18-Dec-2015 05:40:09 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[18-Dec-2015 05:40:09 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[18-Dec-2015 05:40:09 America/Denver] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[18-Dec-2015 05:40:12 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[18-Dec-2015 05:40:12 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[18-Dec-2015 05:40:12 America/Denver] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123
+[22-Dec-2015 19:47:03 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[22-Dec-2015 19:47:03 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[22-Dec-2015 19:47:16 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[22-Dec-2015 19:47:16 America/Denver] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[22-Dec-2015 21:47:27 America/Bogota] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home5/natalic6/public_html/requeridos/qs.php on line 344
+[22-Dec-2015 21:47:27 America/Bogota] PHP Notice:  Undefined variable: hijo in /home5/natalic6/public_html/requeridos/cabezote1.php on line 76
+[22-Dec-2015 21:47:27 America/Bogota] PHP Notice:  Use of undefined constant php - assumed 'php' in /home5/natalic6/public_html/cuerpo/proyectos.php on line 123

@@ -1,0 +1,19 @@
+#contenedor_enlaces {
+    display: none;
+}
+
+#contenedor_enlaces div {
+    padding: 15px 0;
+}
+
+#btn_menu {
+	display: block;
+}
+
+#redes1 {
+    margin: 0 auto;
+}
+
+.red1{
+	margin: 3px 3px 0 3px;
+}

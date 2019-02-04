@@ -1,0 +1,14 @@
+[19-Dec-2018 17:26:21 America/Denver] PHP Parse error:  syntax error, unexpected 'global' (T_GLOBAL), expecting ',' or ';' in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imgbanners_insertar.php on line 152
+[19-Dec-2018 17:26:43 America/Denver] PHP Parse error:  syntax error, unexpected 'global' (T_GLOBAL), expecting ',' or ';' in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imgbanners_insertar.php on line 152
+[19-Dec-2018 17:27:07 America/Denver] PHP Parse error:  syntax error, unexpected 'global' (T_GLOBAL), expecting ',' or ';' in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imgbanners_insertar.php on line 152
+[23-Dec-2018 15:44:10 America/Denver] PHP Notice:  Undefined offset: 0 in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imgbanners_guardar_eliminar.php on line 34
+[23-Dec-2018 15:44:10 America/Denver] PHP Notice:  Undefined offset: 1 in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imgbanners_guardar_eliminar.php on line 34
+[23-Dec-2018 15:44:10 America/Denver] PHP Notice:  Undefined offset: 2 in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imgbanners_guardar_eliminar.php on line 34
+[31-Dec-2018 17:51:42 America/Denver] PHP Warning:  require_once(includes/requeridos.php): failed to open stream: No such file or directory in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imagenespublicaciones.php on line 2
+[31-Dec-2018 17:51:42 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'includes/requeridos.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imagenespublicaciones.php on line 2
+[31-Dec-2018 17:51:58 America/Denver] PHP Warning:  require_once(../includes/connection.php): failed to open stream: No such file or directory in /home5/natalic6/public_html/cms/edicion/edc_imagenes/insertarimagen1.php on line 2
+[31-Dec-2018 17:51:58 America/Denver] PHP Fatal error:  require_once(): Failed opening required '../includes/connection.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home5/natalic6/public_html/cms/edicion/edc_imagenes/insertarimagen1.php on line 2
+[31-Dec-2018 18:16:11 America/Denver] PHP Notice:  Undefined variable: id in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imagenesarticulos.php on line 8
+[31-Dec-2018 18:16:11 America/Denver] PHP Notice:  Undefined variable: modulo in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imagenesarticulos.php on line 11
+[31-Dec-2018 18:16:11 America/Denver] PHP Notice:  Undefined variable: grupo_imagenes_articulo in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imagenesarticulos.php on line 21
+[31-Dec-2018 18:16:11 America/Denver] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, null given in /home5/natalic6/public_html/cms/edicion/edc_imagenes/imagenesarticulos.php on line 21

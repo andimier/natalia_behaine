@@ -1,0 +1,245 @@
+body{
+	margin:0;
+	padding:0;
+}
+
+a{
+	text-decoration:none;
+}
+
+input[type=submit]{
+	float:none;
+	padding:10px 20px 12px 20px;
+	border:0;
+	color:#fff;
+	font-family: "Courier New", Courier, monospace;
+	font-size:15px;
+	cursor:pointer
+}
+
+input[type=checkbox]{
+	
+	float:none;
+	border:none;
+	background:none;
+	cursor:pointer;
+	
+}
+
+label {
+	font-family: "Courier New", Courier, monospace;
+	height:30px;
+	margin: 0 0 25px 0;
+}
+
+input[type=password]{
+	float:none;
+	margin: 0px 0px 10px 0px;
+	border:none;
+	padding: 15px 15px 15px 15px;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 15px;
+	
+}
+
+input[type="text"]{
+	display: block;
+	margin: 15px 0 30px 0;
+	padding: 15px 15px 15px 15px;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 15px;
+}
+
+input[type="text"]:focus{
+	border:none;
+	background-color:#eee;
+}
+
+textarea {
+	float:none;
+	max-width: 500px;
+	padding: 10px 2%;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 15px;
+	margin: 0px 0px 10px 0px;
+	border: 1px solid #ccc;
+	resize:none;
+	overflow:scroll;
+	
+}
+
+textarea:focus{
+	background-color:#eee;
+}
+
+ul{
+	padding:0;
+	margin:15px 0 0 0;
+	list-style-type:none;
+}
+
+li{
+	padding:0;
+	
+}
+
+.fondo_azul{background-color:#3cb8f9}
+.fondo_rojo{background-color:#f00}
+.fondo_negro{background-color:#000}
+.fondo_verde{background-color:#3cf971}
+.fondo_celeste{background-color:8cf9f0}
+.fondo_gris{background-color:#ccc}
+.fondo_gris2{background-color:#999}
+.fondo_naranja{background-color:#e5450d}
+
+
+.fondo_azul:hover{background-color:#3cf971}
+.fondo_rojo:hover{background-color:#3cf971}
+.fondo_negro:hover{background-color:#3cf971}
+.fondo_gris2:hover{background-color:#000}
+
+.letra_azul{color:#3cb8f9}
+.letra_roja{color:#f00}
+.letra_negra{color:#000}
+.letra_verde{color:#3cf971}
+.letra_celeste{color:#8cf9f0}
+.letra_blanca{color:#fff}
+
+
+.borde_puntos{
+	border:1px dotted #666;
+}
+
+
+
+.nuevo_archivo{
+	
+	padding: 20px 10px 20px 10px;
+	border:none;
+	font-family: "Courier New", Courier, monospace;
+	border:none;
+	cursor:pointer;
+	
+}
+
+.nuevo_archivo:hover{color:#f00}
+
+
+.cnt_nuevo_archivo{
+	float:left;
+	max-width:450px;
+	height:auto;
+	margin: 0 0 0 40px;
+	padding:0 10px 10px 0;
+	font-family: "Courier New", Courier, monospace;
+	
+}
+
+.cnt_nuevo_archivo2{
+	
+	max-width:450px;
+	height:auto;
+	margin: 0 0 0 0;
+	padding:0 10px 0 0;
+	font-family: "Courier New", Courier, monospace;
+	
+}
+
+
+
+#fileUpload {
+	position: relative;
+	width:150px;
+	height:45px;
+	margin:0 0 0 0;
+	overflow: hidden;
+	
+}
+#fileUpload input.mascara{
+	position: absolute;
+	width:150px;
+	height:42px;
+	
+	top: 0;
+	left:0;
+	
+	padding: 0 0 0 0;
+	cursor:pointer;
+	border:none;
+	background-color:#333840;
+	
+	color:#fff;
+	font-weight:300;
+	font-family: "Courier New", Courier, monospace;
+	font-size:12px;
+	text-align:center;
+	
+	
+	background-image:url('../imagenes/ico3.png');
+	background-size:45px 45px;
+	background-repeat:no-repeat;
+	background-position:100%
+}
+
+#fileUpload input.mascara:hover{
+	background-color:#999;
+}
+
+#fileUpload input.upload {
+	position: absolute;
+	width:150px;
+	height:45px;
+	top: 0;
+	left: 0;
+	font-size:0px;
+	
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.btn_f{
+	position:absolute;
+	width:80px;
+	height:30px;
+	top:14px;
+	left:10px;
+	padding:10px 0 0px 10px;
+	background-color:#ccc;
+	
+	color:#f00;
+	
+	border:1px solid #000;
+	opacity:.5;
+}
+
+.vacio {
+	width:100%;
+	height:10px;
+	background-color:#000
+}
+
+
+#bsubirimg{
+	display:none;
+	width:50px;
+	height:50px;
+	background-color:#53d656;
+	background-image:url('../iconos/subir.png');
+	background-size:100%;
+	background-repeat:no-repeat;
+}
+
+#bsubirimg:hover{
+	background-color:#f00;
+}
+
+
+
+
+
+
+
+
+
+

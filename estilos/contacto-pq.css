@@ -1,0 +1,26 @@
+#cnt_contacto{
+	width:100%;
+	height:auto;
+	text-align:center;
+}
+
+#cnt_contacto h1{
+	font-size:22px;
+}
+
+#cnt_contacto h2{
+	font-size:16px;
+}
+
+.campo{
+	width:96%;
+	padding:20px 2% 20px 2%;
+
+	font-size:14px;
+}
+
+
+
+.espacioizq{
+	margin-left:42px;
+}

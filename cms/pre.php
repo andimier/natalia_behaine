@@ -1,0 +1,1 @@
+<pre id="pre" style="width:100%; border:1px solid #000" contenteditable="true"></pre>

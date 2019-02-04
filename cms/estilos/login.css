@@ -1,0 +1,91 @@
+body {background-color: #FFF; margin:0px}
+
+table {
+	border-collapse:collapse; 
+	vertical-align:top; 
+	padding-top:20px;
+}
+
+form{
+	padding:0;
+	margin:0;
+	
+}
+
+
+#cnt_login {
+	position:absolute;
+	width:650px; 
+	height:450px;
+	top:45%;
+	left:50%;
+	margin:-225px 0 0 -365px;
+	padding:10px 40px 40px 40px; 
+	
+	font-family:Arial; 
+	font-style:normal; 
+	font-size:14px; 
+	color:#fff;
+	/*background-color: green;*/
+}
+
+
+#frm-login{
+	width:500px;
+	height:300px;
+	padding:50px 70px 50px 70px;
+	border:1px solid white;
+	background-color:#ccc;
+}
+
+
+#label{
+	float:none;
+	width:50%;
+	height:30px;
+	padding:20px 20px 20px 20px;
+	text-align:center;
+	
+}
+
+#campo_usuario{
+	width:470px;
+	margin:20px auto;
+
+	text-align:center;
+	color:#3cb8f9
+}
+
+#password{
+	width:470px;
+	margin:20px auto;
+	
+	text-align:center;
+	color:#3cb8f9
+}
+
+.boton_entrar {
+	width:100%;
+	
+	border:none; 
+	font-size:16px;
+	cursor:pointer;
+}
+
+#mensaje_login {
+	
+	width:auto; 
+	min-height:15px;
+	margin: 0 auto 20px auto;
+	padding:10px;
+	text-align:center;
+	font-family: "Courier New", Courier, monospace;
+	font-size:14px; 
+	color:#000;
+	/*background-color:red;*/
+}
+
+
+
+
+

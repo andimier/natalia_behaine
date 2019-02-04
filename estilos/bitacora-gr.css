@@ -1,0 +1,108 @@
+
+.tt_bitacora{
+	width:100%;
+	padding:0 0 0 0;
+	font-size:22px;
+}
+
+.tt_mas{
+	width:100%;
+	padding:0 0 30px 0;
+	font-size:22px;
+	
+	line-height:20px;
+}
+
+.tt_mas a{
+	color:#000;
+}
+
+.tt_mas a:hover{
+	color:#33ffff;
+}
+
+
+.fch_bitacora{
+	width:100%;
+	padding:0 0 0 0;
+	font-size:16px;
+}
+
+.tj_bitacora{
+	width:100%;
+	height:auto;
+	padding:0 0 0 0;
+	text-align:justify;
+}
+
+.txt_bitacora{
+	text-align:justify;
+}
+
+.img_bitacora{
+
+	float:left;
+	width:40%;
+	height:auto;
+	padding:0 20px 0 0;
+	margin-bottom:15px;
+	overflow:hidden;
+}
+
+.img_bitacora img{
+	width:100%;
+	
+}
+
+.tj_bitacora p{ 
+	padding:0 0 0 0;
+	text-align:justify;
+}
+
+#cnt_galeria{
+	width:100%;
+	height:auto;
+	padding:0 0 0 0;
+}
+
+#galeria{
+	clear:both;
+	width:100%;
+	height:auto;
+	paddng:0 0 0 0;
+	margin:auto;
+
+}
+
+
+#tt_galeria{
+	width:99.5%;
+	height:50px;
+	margin:0 auto 20px auto;
+	background-color:#000;
+}
+
+#tt_galeria h1{
+	padding:15px 0 0 15px;
+	font-size:18px;
+	font-weight:100;
+	color:#ccc;
+	
+}
+
+
+
+
+.foto{
+	float:left;
+	width:15.66%;
+	height:200px;
+	margin:0 0.5% 0 0.5%;
+	background-color:#666;
+	overflow:hidden;
+}
+
+.foto img{
+	width:120%;
+	
+}

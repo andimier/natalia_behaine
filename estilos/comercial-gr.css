@@ -1,0 +1,148 @@
+#comercial-cabezote{
+	position:relative;
+	width: 100%;
+	height:auto;
+	margin:0 auto 50px auto;
+	padding:0 0 0 0;
+}
+
+#comercial-banner{
+	position:relative;
+	width:100%;
+	height:350px;
+	margin:0 auto 165px auto;
+	padding:0 0 0 0;
+}
+
+#comercial-banner img {
+	width: 100%;
+}
+
+#comercial-img-banner {
+	width:100%;
+	height:350px;
+	overflow: hidden;
+}
+
+#comercial-img-banner img {
+	width: 100%;
+}
+
+#comercial-cnt-logo {
+	position: absolute;
+	width:  250px;
+	height: 250px;
+	top: 100%;
+	left: 50%;
+	margin: -70px 0 0 -125px;
+	/*background-color: yellow;*/
+}
+
+#comercial-foto{
+	width: 150px;
+	height:150px;
+	margin:0 auto 15px auto;
+	padding:0 0 0 0;
+	overflow:hidden;
+	/*background-color:#ff0;*/
+}
+
+#comercial-foto img{
+	width:100%;
+}
+
+#comercial-logo{
+	width:215px;
+	height:60px;
+	margin:0px auto 0 auto;
+	padding:0 0 0 0;
+	
+} 
+#comercial-logo img{
+	width:100%;
+}
+
+#menu {
+	height: 70px;
+	margin: 0 auto 10px auto;
+}
+
+#redes1 {
+	width: 53px;
+	margin:0 auto 10px auto;
+}
+
+#logo-acf {
+	clear: both;
+	width: 70px;
+	height: 70px;
+	margin: 0 auto 0 auto;
+}
+
+#logo-acf img {
+	width: 100%;
+}
+
+.comercial-tarjeta {
+	max-width: 900px;
+	height: auto;
+	padding: 30px 20px 10px 20px;
+	margin: 0 0 40px 0;
+	background-color: #EEE;
+}
+
+.comercial-tarjeta h1 {
+	font-size: 26px;
+	padding: 0 0 0 0;
+	margin: 0 0 12px 0;
+	color: black;
+}
+
+.comercial-tarjeta h2 {
+	font-size: 20px;
+	padding: 0 0 0 0;
+	margin: 0 0 12px 0;
+	color: grey;
+}
+
+.comercial-cnt-img {
+	width: 100%;
+	height: auto;
+	margin: 0 0 20px 0;
+	/*background-color: red;*/
+}
+
+.comercial-cnt-img img {
+	width: 100%;
+}
+
+.comercial-cnt-imagenes {
+	height: auto;
+}
+.comercial-cnt-imagenes img {
+	width: 100%;
+}
+
+.comercial-txt {
+	clear: both;
+}
+
+#cnt_contacto{
+	width:96%;
+	height:auto;
+	margin:auto;
+	text-align:center;
+	margin:0px auto 50px auto;
+}
+
+#cnt_contacto h1{
+	font-size:26px;
+	padding:0;
+	margin:0;
+}
+
+#cnt_contacto h2{
+	font-size:18px;
+	padding:0;
+	margin:0
+}

@@ -1,0 +1,206 @@
+#cabezote {
+	position: relative;
+    box-sizing: border-box;
+	max-width: 960px;
+	height: auto;
+	margin: 0 auto;
+	padding: 28px 0 45px 0;
+}
+
+#logo {
+	width: 182px;
+	margin: 0 auto;
+} 
+
+#logo img {
+	width:100%;
+}
+
+#foto {
+	position:relative;
+    box-sizing: border-box;
+	width:150px;
+	height:150px;
+	margin: 44px auto;
+	overflow:hidden;
+}
+
+#foto img {
+	width:100%;
+}
+
+#mascara {
+	position:absolute;
+	width:170px;
+	height:170px;
+	top:0;
+	left:0;
+	background-image:url('../imagenes/mascara.png');
+	background-repeat:noe-repeat;
+	background-size: 100% 100%;
+}
+
+#btn_menu {
+	display: none;
+	max-width: 150px;
+	margin: 0 auto;
+	font-size: 18px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#btn_menu:hover {
+	color: #33FFFF;
+}
+
+.abierto {
+    padding-bottom: 15px;
+}
+
+#menu {
+	position: relative;
+	max-width: 960px;
+	margin: 0 auto;
+    padding-bottom: 40px;
+	border-bottom: 1px solid #bbb;
+}
+
+#contenedor_enlaces {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+}
+
+#cnt_idiomas {
+    box-sizing: border-box;
+	text-align: center;
+}
+
+#cnt_idiomas a {
+	font-family: 'Times New Roman';
+	font-weight: 100;
+	font-size: 18px;
+	text-decoration: none;
+	color: #000;
+}
+
+#cnt_idiomas a:hover {
+	color:#33ffff;
+}
+
+.enlaces1 {
+    box-sizing: border-box;
+	font-family: 'Times New Roman';
+	font-weight: 100;
+	font-size: 19px;
+	text-transform: capitalize;
+	text-align: center;
+	color: #eee;
+}
+
+.enlaces1 a {
+	color: #000;
+	text-decoration: none;
+}
+
+.enlaces1 a:hover{
+	color: #33ffff;
+}
+
+.enlaces1 a:active {
+	color: #33ffff;
+}
+
+#redes1 {
+    max-width: 52px;
+    margin: 0;
+}
+
+#redes1 a{
+	color:#000;
+	text-decoration:none;
+}
+#redes1 a:hover{
+	color:#33ffff;
+}
+
+#redes1-2{
+	width:100px;
+	height:20px;
+	margin:5px auto 25px auto;
+	opacity:.6;
+}
+
+#redes1-2 a{
+	color: #000;
+	text-decoration: none;
+}
+
+#redes1-2 a:hover{
+	color: #33ffff;
+}
+
+.red1{
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin: 0 3px;
+}
+
+.red1:hover{
+	opacity:.5
+}
+
+.red2{
+	clear: both;
+	width: 100px;
+	height: 25px;
+	margin: auto;
+	background-image: url('../imagenes/logo-la-ventana2.png');
+	background-size: 100%;
+	background-repeat: no-repeat;	
+}
+
+.red2:hover{
+	opacity:.5
+}
+
+.espacioizq{
+	margin-left:0px;
+}
+
+.fb{
+	width:20px;
+	height:20px;
+	background-image:url('../imagenes/fb.png');
+	background-size:100%;
+	background-repeat:no-repeat;
+	cursor:pointer;
+}
+
+.in{
+	width:20px;
+	height:20px;
+	background-image:url('../imagenes/in.png');
+	background-size:100%;
+	background-repeat:no-repeat;
+	cursor:pointer;
+}
+
+.acf{
+	width:20px;
+	height:20px;
+	background-image:url('../imagenes/logo-acf-redes.png');
+	background-size:100%;
+	background-repeat:no-repeat;
+	cursor:pointer;
+}
+
+#cnt_enlaces_mv{
+	width:100%;
+	height:200px;
+	margin:auto;
+}

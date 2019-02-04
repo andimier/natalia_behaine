@@ -1,0 +1,61 @@
+# Use PHP5.3 as default
+AddHandler application/x-httpd-php54 .php
+
+RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^en/?$  index.php?lang=1 [NC,L]
+RewriteRule ^fr/?$  index.php?lang=2 [NC,L]
+
+RewriteRule ^bio/?$ bio.php [NC,L]
+RewriteRule ^en/bio/?$  bio.php?lang=1 [NC,L]
+RewriteRule ^fr/bio/?$  bio.php?lang=2 [NC,L]
+
+RewriteRule ^carrito/?$    carrito.php [NC,L]
+RewriteRule ^en/cart/?$    carrito.php?lang=1 [NC,L]
+RewriteRule ^fr/carrito/?$ carrito.php?lang=2 [NC,L]
+
+RewriteRule ^comercial/?$  comercial/index.php [NC,L]
+RewriteRule ^es/comercial/?$  comercial/index.php?lang=0 [NC,L]
+RewriteRule ^en/comercial/?$  comercial/index.php?lang=1 [NC,L]
+RewriteRule ^fr/comercial/?$  comercial/index.php?lang=2 [NC,L]
+
+# PROYECTOS
+RewriteRule ^proyectos-([0-9-]+)/?$ proyectos.php?Y=$1 [NC,L]
+RewriteRule ^en/projects-([0-9-]+)/?$ proyectos.php?Y=$1&lang=1 [NC,L]
+RewriteRule ^fr/projets-([0-9-]+)/?$ proyectos.php?Y=$1&lang=2 [NC,L]
+
+RewriteRule ^proyectos/?$ proyectos.php [NC,L]
+RewriteRule ^en/projects/?$ proyectos.php?lang=1 [NC,L]
+RewriteRule ^fr/projets/?$ proyectos.php?lang=2 [NC,L]
+
+# BITACORA
+RewriteRule ^bitacora/?$ bitacora.php [NC,L]
+RewriteRule ^en/binacle/?$ bitacora.php?lang=1 [NC,L]
+RewriteRule ^fr/habitacle/?$ bitacora.php?lang=2 [NC,L]
+
+RewriteRule ^contacto/?$ contacto.php  [NC,L]
+RewriteRule ^en/contact/?$ contacto.php?lang=1 [NC,L]
+RewriteRule ^fr/contact/?$ contacto.php?lang=2 [NC,L]
+
+# PROYECTO
+RewriteRule ^proyecto/([A-Za-z0-9-,]+)/?$ proyecto.php?p=$1 [NC,L]
+RewriteRule ^en/project/([A-Za-z0-9-,]+)/?$ proyecto.php?p=$1&lang=1 [NC,L]
+RewriteRule ^fr/projet/([A-Za-z0-9-,]+)/?$ proyecto.php?p=$1&lang=2 [NC,L]
+
+#GALERIA
+RewriteRule   ^galeria-([0-9-]+)/?$ galeria.php?g=$1 [NC,L]
+RewriteRule   ^en/gallery-([0-9-]+)/?$  galeria.php?g=$1&lang=1 [NC,L]
+RewriteRule   ^fr/galerie-([0-9-]+)/?$  galeria.php?g=$1&lang=2 [NC,L]
+
+#PROYECTO BITACORA
+RewriteRule ^bitacora/([A-Za-z0-9-]+)/?$ proyecto-bitacora.php?b=$1 [NC,L]
+RewriteRule ^en/bitacora/([A-Za-z0-9-]+)/?$ proyecto-bitacora.php?b=$1&lang=1 [NC,L]
+RewriteRule ^fr/bitacora/([A-Za-z0-9-]+)/?$ proyecto-bitacora.php?b=$1&lang=2 [NC,L]
+
+
+
+
+
+

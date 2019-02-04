@@ -1,0 +1,140 @@
+input[type="text"] {
+	float: none;
+	font-family:'Times New Roman';
+	margin: 0px 0px 10px 0px;
+	border: none;
+}
+
+input[type="email"] {
+	float: none;
+	font-family:'Times New Roman';
+	margin: 0px 0px 10px 0px;
+	border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+	float:none;
+	border:0;
+	padding:0;
+	height:0px;
+	color:#fff;
+	cursor:pointer;
+}
+
+textarea {
+	float: none;
+	height: 120px;
+	padding: 10px 2%;
+	margin: 0px 0px 10px 0px;
+	border: 1px solid #ccc;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	resize:none;
+}
+
+textarea:focus, input:focus {
+	border: none;
+	background-color:#ccffff;
+}
+
+label {
+	float: none;
+	text-align:right;
+	margin-right:2%;
+	width: 20%;
+	padding:10px 0;
+	font-size: 17px;	
+	font-family: 'IM Fell English', serif;
+	font-style:italic;
+}
+
+#cnt_contacto {
+	width:96%;
+	height:auto;
+	margin:auto;
+	text-align:center;
+	margin:0px auto 50px auto;
+}
+
+#cuerpo h2 {
+	padding:0;
+	margin:0;
+}
+
+#cnt_contacto h1 {
+	font-size:26px;
+	padding:0;
+	margin:0;
+}
+
+#cnt_contacto h2 {
+	font-size:18px;
+	padding:0;
+	margin:0
+}
+
+#cnt_formulario {
+	max-width: 600px;
+	height: auto;
+	margin: 45px auto 0 auto;
+}
+
+.campo {
+	width:96%;
+	padding:20px 2% 20px 2%;
+	background-color:#ccc;
+	color:#000;
+	font-family:'Times New Roman';
+	font-size:16px;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+   font-family:'Times New Roman';
+   text-transform:capitalize;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+   font-family:'Times New Roman';
+   text-transform:capitalize;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;  
+   font-family:'Times New Roman';
+   text-transform:capitalize;
+}
+
+:-ms-input-placeholder {  
+    color: black; 
+	font-family:'Times New Roman';   
+	text-transform:capitalize;
+}
+
+.red {
+	float:left;
+	width:25px;
+	height:25px;
+	margin:0 3px 0 3px;	
+}
+
+#redes2 {
+	width:83px;
+	height:50px;
+	margin:0 auto 0 auto;
+}
+
+#btn_enviar {
+	width:100%;
+	height:60px;
+	font-family:'Times New Roman'; 
+	font-size:1em;
+	text-transform:capitalize;
+	color:#000;
+	background-color:#ccffff;
+}
+
+#btn_enviar:hover{
+	background-color:#33ffff;
+}
