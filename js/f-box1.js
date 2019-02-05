@@ -1,48 +1,83 @@
-var fBoxCollection = {};
+var fboxElHandlers = {
+    "buildElementContainer": function(clickedElementID) {
+        var elementContainer = document.getElementById('fbox-element-container')
 
-var FBox = function(imageElement) {
+        elementContainer.style.position = 'fixed';
+        elementContainer.height = 'auto';
+        elementContainer.style.opacity = 0;
+        elementContainer.setAttribute('fbox-element-id', clickedElementID);
+    },
+
+    "manageListeners": function(removeListener) {
+        if (!removeListener) {
+            document.addEventListener('keydown', FBox.prototype.fBoxKeyControllerPress, false);
+        } else {
+            document.removeEventListener('keydown', FBox.prototype.fBoxKeyControllerPress, false);
+        }
+    },
+
+    "galleryContainer": function() {
+        return document.getElementById('footer1');
+    },
+
+    "elementContainer": function() {
+        return document.getElementById('fbox-element-container');
+    },
+
+    "screen": function() {
+        return document.getElementById('fbox-screen');
+    },
+
+    "animationDuration": 500
+};
+
+var FBox = function(fboxClickedElement) {
     var self = this;
 
-    this.isVideo = imageElement.getAttribute('type') === 'video';
-    this.imageElement = imageElement;
-    this.setElements(imageElement);
+    this.isVideo = fboxClickedElement.getAttribute('type') === 'video';
+    this.fboxClickedElement = fboxClickedElement;
+    this.setElements();
 
-    if (imageElement.getAttribute('type') !== 'video') {
-        this.elements.fbox_img.addEventListener('load', function() {
+    if (!this.isVideo) {
+        this.elements.fboxElement.addEventListener('load', function() {
             self.setImageDimensions();
         }, false);
     } else {
         self.setImageDimensions();
     }
+
+    this.attachControllers();
+    this.appendFBoxElementsToDOM();
+    this.openFBox();
 };
 
-FBox.prototype.setElements = function(imageElement) {
+FBox.prototype.setElements = function() {
     var self = this,
-        elementId = Number(imageElement.id);
+        clickedElement = this.fboxClickedElement,
+        elementId = fboxElHandlers["elementId"];
 
     this["baseMobileDeviceHeight"] = 420;
-    this["elementId"] = elementId;
 
-    this.elements = {
-        "fbox_img": !this.isVideo ? self.buildImageElement(imageElement.href, elementId) : self.buildVideoElement(imageElement.getAttribute('video-src'), elementId),
-        "fbox_image_container": self.buildFotoElement(elementId),
-        "pantalla": self.buildWindowScreen(),
-        "fbox_cerrar": self.buidCloseElement(),
-        "imageFootnoteText": imageElement.getAttribute('texto'),
-        "animationDuration": 500,
-        "callBack": function() {
-            self.closeAndRemoveFBox(self.elements);
-        }
+    this.elements = {};
+    this.elements["elementContainer"] = fboxElHandlers.elementContainer();
+    this.elements["fboxElement"] = !this.isVideo ?
+        self.buildfboxClickedElement(clickedElement.href, elementId) :
+        self.buildVideoElement(clickedElement.getAttribute('video-src'), elementId);
+
+    this.elements["bkScreen"] = self.buildWindowScreen();
+    this.elements["closeButton"] = self.buidCloseElement();
+    this.elements["imageFootnoteText"] = clickedElement.getAttribute('texto');
+    this.elements["animationDuration"] = fboxElHandlers.animationDuration;
+    this.elements["galleryContainer"] = fboxElHandlers.galleryContainer();
+    this.elements["callBack"] = function() {
+        self.closeAndRemoveFBox(self.elements);
     }
-
-    
-    self.attachControllers();
 };
 
 FBox.prototype.setImageDimensions = function() {
-    var elements = this.elements,
-        imageContainer = elements.fbox_image_container,
-        image = elements.fbox_img;
+    var el = this.elements,
+        imageContainer = el.elementContainer,
+        image = el.fboxElement;
 
     imageContainer.style.height = this.getElementDimension()['height'] + 'px';
     imageContainer.style.width = this.getElementDimension()['width'] + 'px';
@@ -50,16 +85,13 @@ FBox.prototype.setImageDimensions = function() {
 
     this.centerImage(imageContainer, this.getElementDimension()['width'], this.getElementDimension()['height']);
 
-    if (elements.fbox_texto) {
+    if (el.fbox_texto) {
         this.setTextDimensions();
     }
-
-    this.appendFBoxElementsToDOM();
-    this.openFBox();
 };
 
 FBox.prototype.getElementDimension = function() {
-    var image = this.elements && this.elements.fbox_img || this.imageElement,
+    var image = this.elements && this.elements.fboxElement || this.fboxClickedElement,
         ratio = !this.isVideo ? (image.height / image.width) : (720 / 1280),
         height = this.getImageHeight(!this.isVideo ? image.height : 720),
         width = height / ratio,
@@ -74,39 +106,61 @@ FBox.prototype.getElementDimension = function() {
 };
 
 FBox.prototype.appendFBoxElementsToDOM = function() {
-    var elements = this.elements
+    var el = this.elements,
+        closeButton = el.closeButton,
+        elementContainer = el.elementContainer,
+        screen = el.bkScreen,
+        element = el.fboxElement,
+        galleryContainer = el.galleryContainer;
 
-    document.body.appendChild(elements.pantalla);
-    elements.fbox_image_container.appendChild(elements.fbox_cerrar);
-    elements.fbox_image_container.appendChild(elements.fbox_img);
-    document.body.appendChild(elements.fbox_image_container);
+    galleryContainer.appendChild(screen);
+    elementContainer.appendChild(element);
+    elementContainer.appendChild(closeButton);
 
-    if (elements.imageFootnoteText) {
+    if (el.imageFootnoteText) {
         fbox_texto = this.buildFotoTextElementContainer(imageFootnoteText);
-        fbox_image_container.appendChild(fbox_texto);
+        elementContainer.appendChild(fbox_texto);
     }
 };
 
 FBox.prototype.openFBox = function() {
-    var elements = this.elements,
+    var el = this.elements,
         options = {opacity: 1},
-        callBack = elements.callBack;
+        callBack = el.callBack;
 
-    $(this.elements.fbox_image_container).animate(options, elements.animationDuration, function(){
-        elements.fbox_cerrar.addEventListener('click', callBack, false);
-        elements.pantalla.addEventListener('click', callBack, false);
+    $(el.elementContainer).animate(options, el.animationDuration, function(){
+        el.closeButton.addEventListener('click', callBack, false);
+        el.bkScreen.addEventListener('click', callBack, false);
     });
 };
 
-FBox.prototype.closeAndRemoveFBox = function(elements) {
-    var imageContainer = document.getElementById('fbox-element-container'),
-        pantalla = document.getElementById('fbox-screen'),
-        duration = elements.animationDuration;
+FBox.prototype.fBoxKeyControllerPress = function(event) {
+    console.log('KEY PRESSED ', event.key);
 
-    $(imageContainer).animate({opacity: 0}, duration, function() {
-        document.body.removeChild(imageContainer);
-        document.body.removeChild(pantalla);
+    if (event.key === 'ArrowRight') {
+        keyBoardClickedController = 'fbox-right-controller';
+        FBox.prototype.changeElementSRC(event, keyBoardClickedController);
+    } else if (event.key === 'ArrowLeft') {
+        keyBoardClickedController = 'fbox-left-controller';
+        FBox.prototype.changeElementSRC(event, keyBoardClickedController);
+    } else if (event.key === 'Escape') {
+        FBox.prototype.closeAndRemoveFBox();
+    }
+};
+
+FBox.prototype.closeAndRemoveFBox = function() {
+    var galleryContainer = fboxElHandlers.galleryContainer(),
+        elementContainer = fboxElHandlers.elementContainer(),
+        screen = fboxElHandlers.screen(),
+        duration = fboxElHandlers.animationDuration;
+
+    $(elementContainer).animate({opacity: 0}, duration, function() {
+        elementContainer.innerHTML = '';
+        elementContainer.removeAttribute('style');
+        galleryContainer.removeChild(screen);
     });
+
+    fboxElHandlers.manageListeners('removeListener');
 };
 
 FBox.prototype.getIsMobileDisplay = function() {
@@ -191,7 +245,7 @@ FBox.prototype.centerImage = function(imageContainer, width, height) {
 FBox.prototype.buildWindowScreen = function() {
     var screen = document.createElement('div');
 
-    screen.id = 'fbox-pantalla';
+    screen.id = 'fbox-bkScreen';
     screen.style.position = 'fixed';
     screen.style.top = 0;
     screen.id = 'fbox-screen';
@@ -202,18 +256,6 @@ FBox.prototype.buildWindowScreen = function() {
     screen.style.cursor = 'pointer';
 
     return screen;
-};
-
-FBox.prototype.buildFotoElement = function(elementId) {
-    var fbox_image_container = document.createElement("div");
-
-    fbox_image_container.style.position = 'fixed';
-    fbox_image_container.id = 'fbox-element-container';
-    fbox_image_container.height = 'auto';
-    fbox_image_container.style.opacity = 0;
-    fbox_image_container.setAttribute('fbox-element-id', elementId);
-
-    return fbox_image_container;
 };
 
 FBox.prototype.attachControllers = function() {
@@ -236,7 +278,7 @@ FBox.prototype.attachControllers = function() {
         self.setControllersDimensions(i, controller);
         controller.addEventListener('click', self.changeElementSRC.bind(self));
 
-        self.elements.fbox_image_container.appendChild(controller);
+        self.elements.elementContainer.appendChild(controller);
 
         i++;
     }
@@ -256,18 +298,21 @@ FBox.prototype.setControllersDimensions = function(i, controller) {
     }
 };
 
-FBox.prototype.changeElementSRC = function() {
-    var clickedController = event.target.id,
-        collectionLength = fBoxCollection.collection.length,
-        nextElementId = this.elementId === 0 ? collectionLength -1 : this.elementId - 1;
+FBox.prototype.changeElementSRC = function(event, controller) {
+    var clickedController = controller || event.target.id,
+        collectionLastElementID = fboxElHandlers.collection.length - 1,
+        currentElemetID = fboxElHandlers['clickedElementID'],
+        nextElementId;
+
+    nextElementId = currentElemetID === 0 ? collectionLastElementID : currentElemetID - 1;
 
     if (clickedController === 'fbox-right-controller') {
-        nextElementId = this.elementId === collectionLength -1 ? 0 : this.elementId + 1;
+        nextElementId = currentElemetID === collectionLastElementID ? 0 : currentElemetID + 1;
     }
 
-    this.elementId = nextElementId;
-    document.getElementById('fbox-img').src = fBoxCollection.collection[nextElementId].getAttribute('video-src');
-}
+    fboxElHandlers['clickedElementID'] = nextElementId;
+    document.getElementById('fbox-img').src = fboxElHandlers.collection[nextElementId].getAttribute('video-src');
+};
 
 FBox.prototype.buildFotoTextElementContainer = function(textNode) {
     var fbox_texto = document.createElement("div"),
@@ -289,68 +334,64 @@ FBox.prototype.buildFotoTextElementContainer = function(textNode) {
 };
 
 FBox.prototype.buildVideoElement = function(videoSRC, elementId) {
-    var fbox_img = document.createElement("IFRAME");
+    var fboxElement = document.createElement("IFRAME");
 
-    fbox_img.id = 'fbox-img';
-    fbox_img.setAttribute('element-id', elementId);
-    fbox_img.src = videoSRC;
-    fbox_img.width = this.getElementDimension().width;
-    fbox_img.height = this.getElementDimension().height;
-    fbox_img.setAttribute('allow', 'autoplay; fullscreen');
-    fbox_img.style.position = 'relative';
-    fbox_img.style.border = 'none';
+    fboxElement.id = 'fbox-img';
+    fboxElement.setAttribute('element-id', elementId);
+    fboxElement.src = videoSRC;
+    fboxElement.width = this.getElementDimension().width;
+    fboxElement.height = this.getElementDimension().height;
+    fboxElement.setAttribute('webkitallowfullscreen', '');
+    fboxElement.setAttribute('mozallowfullscreen', '');
+    fboxElement.setAttribute('allowfullscreen', '');
+    fboxElement.setAttribute('frameborder', 0);
 
-    return fbox_img;
-    /*
-    <iframe
-        src="https://player.vimeo.com/video/95900092?app_id=122963"
-        width="640"
-        height="360"
-        frameborder="0"
-        title="CarroYa"
-        allow="autoplay; fullscreen"
-        allowfullscreen>
-        */
+    return fboxElement;
 };
 
-FBox.prototype.buildImageElement = function(imageSource) {
-    var fbox_img = document.createElement("img");
+FBox.prototype.buildfboxClickedElement = function(imageSource) {
+    var fboxElement = document.createElement("img");
 
-    fbox_img.id = 'fbox-img';
-    fbox_img.src = imageSource;
-    fbox_img.style.position = 'relative';
+    fboxElement.id = 'fbox-img';
+    fboxElement.src = imageSource;
+    fboxElement.style.position = 'relative';
 
-    return fbox_img;
+    return fboxElement;
 };
 
 FBox.prototype.buidCloseElement = function() {
-    var fbox_cerrar = document.createElement("div"),
+    var closeButton = document.createElement("div"),
         isMobileDisplay = this.getIsMobileDisplay(),
         baseDimention = isMobileDisplay ? 35 : 50;
 
-    fbox_cerrar.style.position = 'absolute';
-    fbox_cerrar.style.width = baseDimention + 'px';
-    fbox_cerrar.style.height = baseDimention + 'px';
-    fbox_cerrar.style.top = -(baseDimention + 5) + 'px';
-    fbox_cerrar.style.right = '0';
-    fbox_cerrar.style.cursor = 'pointer';
-    fbox_cerrar.style.backgroundImage = 'url("imagenes/cerrar.png")';
-    fbox_cerrar.style.backgroundSize = '100%';
+    closeButton.style.position = 'absolute';
+    closeButton.style.width = baseDimention + 'px';
+    closeButton.style.height = baseDimention + 'px';
+    closeButton.style.top = -(baseDimention + 5) + 'px';
+    closeButton.style.right = '0';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.backgroundImage = 'url("imagenes/cerrar.png")';
+    closeButton.style.backgroundSize = '100%';
 
-    return fbox_cerrar;
+    return closeButton;
 };
 
 function buildFBox(event) {
-    var fbox;
+    var fbox,
+        clickedElementID = Number(this.getAttribute('fbox-elemt-id'));
 
     event.preventDefault();
+    fboxElHandlers.buildElementContainer(clickedElementID);
+    fboxElHandlers['clickedElementID'] = clickedElementID;
+
     fbox = new FBox(this);
+    fboxElHandlers.manageListeners();
 }
 
 (function loadFBox() {
     var fBoxGalleryCollection = document.getElementsByClassName("f-box");
 
-    fBoxCollection.collection = fBoxGalleryCollection;
+    fboxElHandlers.collection = fBoxGalleryCollection;
 
 	for (i = 0; i < fBoxGalleryCollection.length; i++) {
 		fBoxGalleryCollection[i].addEventListener('click', buildFBox, false);
@@ -358,12 +399,13 @@ function buildFBox(event) {
 })();
 
 window.addEventListener('resize', function(){
-    var imageContainer = document.getElementById('fbox-element-container'),
-        pantalla = document.getElementById('fbox-screen');
+    var elementContainer = document.getElementById('fbox-element-container'),
+        screen = document.getElementById('fbox-screen'),
+        galleryContainer = fboxElHandlers.galleryContainer();
 
-    if (imageContainer) {
-        document.body.removeChild(imageContainer);
-        document.body.removeChild(pantalla);
+    if (elementContainer) {
+        galleryContainer.removeChild(elementContainer);
+        galleryContainer.removeChild(screen);
     }
 }, false);
 

@@ -100,7 +100,7 @@
                             <?php for ($i = 0; $i < count($instData); $i++): ?>
                                 <?php if ($i < 6): ?>
                                 	<div class="installation-img">
-                                		<a id=<?php echo $i ?> <?php echo $instData[$i]['linkTagAttributes']; ?> >
+                                		<a fbox-element-id=<?php echo $i ?> <?php echo $instData[$i]['linkTagAttributes']; ?> >
                                         	<img class="foto-img" src="<?php echo $instData[$i]['smallImage']; ?>"/>
                                         </a>
                                     </div>
@@ -218,6 +218,7 @@
 			<script src="js/f-box1.js"></script>
 		</div>
 		<?php require_once('requeridos/footer.php'); ?>
+        <div id="fbox-element-container"></div>
 	</body>
 </html>
 
