@@ -24,7 +24,7 @@
 		<div id="cuerpo">
 			<div class="tarjeta_prg">
 				<div class="img_prg">
-					<a class="fbox" href="cms/<?php echo $largeImage; ?>" img-id="<?php echo $imageId; ?>" title="" texto="<?php echo piedefoto($imageId); ?>">
+					<a class="f-box f-box-main-image" href="cms/<?php echo $largeImage; ?>" img-id="<?php echo $imageId; ?>" title="" texto="<?php echo piedefoto($imageId); ?>">
 						<img id="prg-img" class="fbox-over" src="cms/<?php echo $largeImage; ?>" alt="<?php echo piedefoto($imageId); ?>" />
 					</a>
 				</div>

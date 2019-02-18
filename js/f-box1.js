@@ -1,3 +1,9 @@
+/*
+    1. The image or video elements must have the "f-box" class to properly launch the gallery.
+    2. The main image of the project will not attach the controllers. (f-box-main-image)
+*/
+
+
 var fboxElHandlers = {
     "buildElementContainer": function(clickedElementID) {
         var elementContainer = document.getElementById('fbox-element-container')
@@ -46,7 +52,10 @@ var FBox = function(fboxClickedElement) {
         self.setImageDimensions();
     }
 
-    this.attachControllers();
+    if (fboxClickedElement.classList.value.indexOf('f-box-main-image') === -1) {
+        this.attachControllers();
+    }
+
     this.appendFBoxElementsToDOM();
     this.openFBox();
 };
