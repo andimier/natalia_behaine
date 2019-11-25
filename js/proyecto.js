@@ -53,15 +53,30 @@ function asignarEstilosAimagenes() {
     ajustarEstilosDelVideo();
 }
 
+function loadGallery() {
+    var target = event.target;
+
+    if (!target.classList.contains('load-gallery-btn')) {
+        return;
+    }
+
+    window.location = target.dataset.href;
+}
+
+function init() {
+    document.querySelector('#cnt_galeria').addEventListener('click', loadGallery);
+}
+
 (function setPageTitle() {
     document.querySelectorAll('title')[0].innerHTML = document.getElementsByClassName('txt_prg')[0].children[0].innerText + document.querySelectorAll('title')[0].innerHTML;
 })();
 
 window.addEventListener('load', function() {
     asignarEstilosAimagenes();
+    init();
 });
 
-function reordenar () {
+function reordenar() {
     asignarEstilosAimagenes();
 }
 

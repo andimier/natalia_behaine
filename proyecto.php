@@ -122,31 +122,30 @@
 							<h1><?php echo setImagesCountText($idioma, $img_arr, $gn_arr) ?></h1>
 						</div>
 
-						<h2 class="tt-mas-imagenes tt-izquierda">
-							<a href="<?php echo $gn_arr['url-lang'][6][$idioma] . $albumId; ?>">
-								+ <?php echo $gn_arr['titulos']['ir-a-galeria-completa'][$idioma] ?>
-							</a>
-						</h2>
+						<button class="load-gallery-btn" data-href=<?php echo $gn_arr['url-lang'][6][$idioma] . $albumId; ?>>
+							+ <?php echo $gn_arr['titulos']['ir-a-galeria-completa'][$idioma] ?>
+						</button>
 
 						<div id="galeria">
 							<?php for ($i = 0; $i < count($img_arr); $i++): ?>
                                 <?php if ($i < 6): ?>
-                                    <div class="foto">
-                                        <a class="fancybox" href="<?php echo 'cms/' . $img_arr[$i]['imagen3']; ?>" data-fancybox-group="gallery" title="<?php echo $img_arr[$i]['alt']; ?>" >
-                                            <img class="foto-img" src="<?php echo 'cms/' . $img_arr[$i]['imagen1']; ?>" alt="<?php echo $img_arr[$i]['alt']; ?>"/>
-                                        </a>
+                                    <div class="foto-wrapper">
+										<div class="foto-container">
+											<a class="foto"
+												href="<?php echo 'cms/' . $img_arr[$i]['imagen3']; ?>"
+												title="<?php echo $img_arr[$i]['alt']; ?>"
+											>
+												<img class="foto-img" src="<?php echo 'cms/' . $img_arr[$i]['imagen1']; ?>" alt="<?php echo $img_arr[$i]['alt']; ?>" />
+											</a>
+										</div>
                                     </div>
                                 <?php endif; ?>
 							<?php endfor; ?>
 						</div>
-						<br />
-						<br />
 
-						<h2 class="tt-mas-imagenes tt-derecha">
-							<a href="<?php echo $gn_arr['url-lang'][6][$idioma] . $albumId; ?>">
-								+ <?php echo $gn_arr['titulos']['ir-a-galeria-completa'][$idioma] ?>
-							</a>
-						</h2>
+						<button class="load-gallery-btn" data-href="<?php echo $gn_arr['url-lang'][6][$idioma] . $albumId; ?>">
+							+ <?php echo $gn_arr['titulos']['ir-a-galeria-completa'][$idioma] ?>
+						</button>
 					</div>
 				<?php endif; ?>
 			<?php endif; ?>
