@@ -3,14 +3,14 @@
 	$num_gal = isset($_GET['g']) ? $_GET['g'] : '';
 
 	$gn_arr = array(
-		'idiomas' => array( 
+		'idiomas' => array(
 			0 => array( 0 => 'español', 1 => 'spanish', 2 => 'español', 'abrev' => ''),
-			1 => array( 0 => 'inglés',  1 => 'english', 2 => 'español', 'abrev' => 'en'), 
+			1 => array( 0 => 'inglés',  1 => 'english', 2 => 'español', 'abrev' => 'en'),
 			2 => array( 0 => 'francés', 1 => 'french',  2 => 'français', 'abrev' => 'fr')
 		),
-        
+
         'ubicacion' => array(
-            0 => array( 0 => 'Ginebra, Suiza', 1 => 'Geneva, Switzerland')
+            0 => array( 0 => 'Bogotá, Colombia', 1 => 'Bogota, Colombia')
         ),
 
 		'secciones' => array(
@@ -27,7 +27,7 @@
 			2 => array( 0 => 'proyectos', 1 => 'projects', 2 => 'projets'),
 			3 => array( 0 => 'bitacora',  1 => 'binacle' , 2 => 'habitacle'),
 			4 => array( 0 => 'contacto',  1 => 'contact' , 2 => 'contact'),
-			5 => array( 0 => 'proyecto',  1 => 'project',  2 => 'pojet'), 
+			5 => array( 0 => 'proyecto',  1 => 'project',  2 => 'pojet'),
 			6 => array( 0 => 'galeria',   1 => 'gallery',  2 => 'galerie'),
 			7 => array( 0 => 'bitacora',  1 => 'binacle',  2 => 'habitacle'),
 			8 => array( 0 => 'carrito',   1 => 'cart',     2 => 'panier')
@@ -40,34 +40,34 @@
 			3 => array( 0 => 'bitacora',  1 => 'en/binacle',  2 => 'fr/habitacle'),
 			4 => array( 0 => 'contacto',  1 => 'en/contact',  2 => 'fr/contact'),
 
-			5 => array( 
-				0 => 'proyecto/'  . $tt = str_replace(' ', '-', $tt),  
-				1 => 'en/project/'. $tt = str_replace(' ', '-', $tt),  
+			5 => array(
+				0 => 'proyecto/'  . $tt = str_replace(' ', '-', $tt),
+				1 => 'en/project/'. $tt = str_replace(' ', '-', $tt),
 				2 => 'fr/projet/' . $tt
-			), 
+			),
 
-			6 => array( 
-				0 => 'galeria-' . $num_gal,   
-				1 => 'en/gallery-' . $num_gal,  
+			6 => array(
+				0 => 'galeria-' . $num_gal,
+				1 => 'en/gallery-' . $num_gal,
 				2 => 'fr/galerie-' . $num_gal
 			),
 
-			7 => array( 
-				0 => 'bitacora/'    . $tt = str_replace(' ', '-', $tt), 
+			7 => array(
+				0 => 'bitacora/'    . $tt = str_replace(' ', '-', $tt),
 				1 => 'en/bitacora/' . $tt = str_replace(' ', '-', $tt),
-				2 => 'fr/bitacora/' . $tt = str_replace(' ', '-', $tt) 
+				2 => 'fr/bitacora/' . $tt = str_replace(' ', '-', $tt)
 			),
 
-			8 => array( 
-				0 => 'comercial/', 
+			8 => array(
+				0 => 'comercial/',
 				1 => 'en/commercial/',
-				2 => 'fr/commercial/' 
+				2 => 'fr/commercial/'
 			),
 
-			9 => array( 
-				0 => 'carrito/', 
+			9 => array(
+				0 => 'carrito/',
 				1 => 'cart/',
-				2 => 'fr/carrito/' 
+				2 => 'fr/carrito/'
 			)
 		),
 
@@ -77,31 +77,31 @@
 			2 => array( 0 => 'Proyectos, Natalia Behaine', 1 => 'Projects, Natalia Behaine', 2 => 'Projets, Natalia Behaine'),
 			3 => array( 0 => 'Bitácora, Natalia Behaine',  1 => 'Binacle, Natalia Behaine',  2 => 'Habitacle, Natalia Behaine'),
 			4 => array( 0 => 'Contacto, Natalia Behaine',  1 => 'Contact, Natalia Behaine',  2 => 'Contact, Natalia Behaine'),
-			5 => array( 
-				0 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine', 
-				1 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine', 
+			5 => array(
+				0 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine',
+				1 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine',
 				2 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine'
 			),
-			6 => array( 
-				0 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine', 
-				1 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine', 
+			6 => array(
+				0 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine',
+				1 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine',
 				2 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine'
 			),
-			7 => array( 
-				0 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine', 
-				1 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine', 
+			7 => array(
+				0 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine',
+				1 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine',
 				2 => $tt = str_replace('-', ' ', $tt) . ', Natalia Behaine'
 			),
-			8 => array( 
-				0 => 'Commercial, Natalia Behaine', 
+			8 => array(
+				0 => 'Commercial, Natalia Behaine',
 				1 => 'Commercial, Natalia Behaine',
-				2 => 'Commercial, Natalia Behaine' 
+				2 => 'Commercial, Natalia Behaine'
 			),
-			
-			9 => array( 
-				0 => 'Carrito,  Natalia Behaine', 
+
+			9 => array(
+				0 => 'Carrito,  Natalia Behaine',
 				1 => 'Cart, Natalia Behaine',
-				2 => 'Carrito, Natalia Behaine' 
+				2 => 'Carrito, Natalia Behaine'
 			)
 		),
 
@@ -124,37 +124,37 @@
 			'proyectos' => array( 0 => 'proyectos', 1 => 'pojects',  2 => 'projets'),
 			'bitacora'  => array( 0 => 'Bitácora',  1 => 'Binacle' , 2 => ''),
 			'contacto'  => array( 0 => 'Contacto',  1 => 'Contact' , 2 => 'Contact'),
-			'proyecto'  => array( 0 => 'proyecto',  1 => 'project',  2 => 'pojet'), 
+			'proyecto'  => array( 0 => 'proyecto',  1 => 'project',  2 => 'pojet'),
 			'galeria'   => array( 0 => 'galería',   1 => 'gallery',  2 => 'galerie'),
 
-			'descripcion-de-la-obra' => array( 
-				0=> 'Descripción de la Obra', 
-				1=>'Description of the Work of Art', 
+			'descripcion-de-la-obra' => array(
+				0=> 'Descripción de la Obra',
+				1=>'Description of the Work of Art',
 				2=>'Description de l&apos;oeuvre'
 			),
-			'leer-mas' => array( 
-				0=> 'Leer más', 
-				1=> 'Read more', 
+			'leer-mas' => array(
+				0=> 'Leer más',
+				1=> 'Read more',
 				2=> 'Lire la suite'
 			),
-			'galeria-de-fotos' => array( 
-				0=> 'Galería de fotos',   
-				1=> 'Photo gallery',  
+			'galeria-de-fotos' => array(
+				0=> 'Galería de fotos',
+				1=> 'Photo gallery',
 				2=> 'Galerie de photos'
-			),  
-			'galeria-de-videos' => array( 
-				0=> 'Galería de videos',  
-				1=> 'Video gallery', 
+			),
+			'galeria-de-videos' => array(
+				0=> 'Galería de videos',
+				1=> 'Video gallery',
 				2=> 'Galerie de vidéos'
 			),
 			'ir-a-galeria-completa' => array(
-                0=> 'Ir a galería completa', 
-                1=> 'View full gallery', 
+                0=> 'Ir a galería completa',
+                1=> 'View full gallery',
                 2=>'Acceder à la galerie complète'
             ),
-			'de' => array( 
-                0=> 'de ', 
-                1=> 'of', 
+			'de' => array(
+                0=> 'de ',
+                1=> 'of',
                 2=>''
             ),
 			'siguiente' => array( 0=> 'siguiente', 1=> 'next', 2=>'suivant'),
@@ -163,29 +163,29 @@
 			'correo'  => array( 0=> 'e-mail',  1=> 'email', 2=>'email'),
 			'mensaje' => array( 0=> 'mensaje', 1=> 'message', 2=>'message'),
 			'enviar'  => array( 0=> 'enviar',  1=> 'send', 2=>'envoyer'),
-			
 
-			'correo-invalido' => array( 
-				0=> "El correo que ingresaste no es valido, por favor intenta de nuevo", 
-				1=> "The e-mail address is not valid, please try again", 
+
+			'correo-invalido' => array(
+				0=> "El correo que ingresaste no es valido, por favor intenta de nuevo",
+				1=> "The e-mail address is not valid, please try again",
 				2=> "L'adresse e-mail est pas valide, s'il vous plaît essayer à nouveau"
 			),
 
-			'escribir-nombre' => array( 
-				0=> "Por favor escribe tu nombre", 
-				1=> "Please enter your name", 
+			'escribir-nombre' => array(
+				0=> "Por favor escribe tu nombre",
+				1=> "Please enter your name",
 				2=> "S'il vous plaît entrer le nom"
 			),
 
-			'escribir-correo' => array( 
-				0=> "Por favor escribe un correo electrónico", 
-				1=> "Please type an e-mail address", 
+			'escribir-correo' => array(
+				0=> "Por favor escribe un correo electrónico",
+				1=> "Please type an e-mail address",
 				2=> "S'il vous plaît entrer une adresse e-mail"
 			),
 
-			'escribir-mensaje' => array( 
-				0=> "Por favor escribe un mensaje", 
-				1=> "Please write a message", 
+			'escribir-mensaje' => array(
+				0=> "Por favor escribe un mensaje",
+				1=> "Please write a message",
 				2=> "S'il vous plaît entrer une message"
 			),
 
@@ -223,7 +223,7 @@
 				0 => "items en el pedido",
 				1 => "items in cart",
 				2 => "éléments dans l'ordre"
-			), 
+			),
 
 			'comprar-obra' => array(
 				0 => "comprar obra",

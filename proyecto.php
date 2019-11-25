@@ -133,7 +133,8 @@
                                     <div class="foto-wrapper">
 										<div class="foto-container">
 											<a class="foto fancybox"
-											fbox-element-id="<?php echo $i ?>"
+												data-fancybox-group="gallery"
+												fbox-element-id="<?php echo $i ?>"
 												href="<?php echo 'cms/' . $img_arr[$i]['imagen3']; ?>"
 												title="<?php echo $img_arr[$i]['alt']; ?>"
 											>
