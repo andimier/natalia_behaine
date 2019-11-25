@@ -23,7 +23,7 @@
 
 		<div id="cuerpo">
 			<div class="tarjeta_prg">
-				<div class="img_prg">
+				<div class="img_prg f-box-gallery">
 					<a class="f-box f-box-main-image" href="cms/<?php echo $largeImage; ?>" img-id="<?php echo $imageId; ?>" title="" texto="<?php echo piedefoto($imageId); ?>">
 						<img id="prg-img" class="fbox-over" src="cms/<?php echo $largeImage; ?>" alt="<?php echo piedefoto($imageId); ?>" />
 					</a>
@@ -96,12 +96,12 @@
 							<h1><?php echo $gn_arr['titulos']['galeria-de-videos'][$idioma]; ?></h1>
 						</div>
 
-                        <div id="installation-container">
+                        <div id="installation-container" class="f-box-gallery">
                             <?php for ($i = 0; $i < count($instData); $i++): ?>
                                 <?php if ($i < 6): ?>
-                                	<div class="installation-img">
-                                		<a fbox-element-id=<?php echo $i ?> <?php echo $instData[$i]['linkTagAttributes']; ?> >
-                                        	<img class="foto-img" src="<?php echo $instData[$i]['smallImage']; ?>"/>
+									<div class="installation-img">
+										<a class="f-box" fbox-element-id=<?php echo $i ?> <?php echo $instData[$i]['linkTagAttributes']; ?> >
+											<img class="foto-img" src="<?php echo $instData[$i]['smallImage']; ?>"/>
                                         </a>
                                     </div>
                                 <?php endif; ?>
@@ -131,7 +131,8 @@
                                 <?php if ($i < 6): ?>
                                     <div class="foto-wrapper">
 										<div class="foto-container">
-											<a class="foto"
+											<a class="foto fancybox"
+											fbox-element-id="<?php echo $i ?>"
 												href="<?php echo 'cms/' . $img_arr[$i]['imagen3']; ?>"
 												title="<?php echo $img_arr[$i]['alt']; ?>"
 											>

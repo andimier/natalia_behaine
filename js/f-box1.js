@@ -149,10 +149,12 @@ FBox.prototype.fBoxKeyControllerPress = function(event) {
     if (event.key === 'ArrowRight') {
         keyBoardClickedController = 'fbox-right-controller';
         FBox.prototype.changeElementSRC(event, keyBoardClickedController);
-    } else if (event.key === 'ArrowLeft') {
+    }
+    else if (event.key === 'ArrowLeft') {
         keyBoardClickedController = 'fbox-left-controller';
         FBox.prototype.changeElementSRC(event, keyBoardClickedController);
-    } else if (event.key === 'Escape') {
+    }
+    else if (event.key === 'Escape') {
         FBox.prototype.closeAndRemoveFBox();
     }
 };
@@ -386,21 +388,27 @@ FBox.prototype.buidCloseElement = function() {
 };
 
 function buildFBox(event) {
-    var fbox,
-        clickedElementID = Number(this.getAttribute('fbox-elemt-id'));
+    var fbox = event.target;
+
+    if (fbox.nodeName == 'IMG') {
+        fbox = fbox.parentElement;
+    }
+
+    var clickedElementID = Number(fbox.getAttribute('fbox-element-id'));
+
+    fboxElHandlers.collection = event.currentTarget.querySelectorAll('.f-box');
 
     event.preventDefault();
     fboxElHandlers.buildElementContainer(clickedElementID);
     fboxElHandlers['clickedElementID'] = clickedElementID;
+    fboxElHandlers.itemsLength = '';
 
-    fbox = new FBox(this);
+    new FBox(fbox);
     fboxElHandlers.manageListeners();
 }
 
 (function loadFBox() {
-    var fBoxGalleryCollection = document.getElementsByClassName("f-box");
-
-    fboxElHandlers.collection = fBoxGalleryCollection;
+    var fBoxGalleryCollection = document.getElementsByClassName("f-box-gallery");
 
 	for (i = 0; i < fBoxGalleryCollection.length; i++) {
 		fBoxGalleryCollection[i].addEventListener('click', buildFBox, false);
