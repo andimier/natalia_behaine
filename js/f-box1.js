@@ -416,12 +416,13 @@ function buildFBox(event) {
 })();
 
 window.addEventListener('resize', function(){
-    var elementContainer = document.getElementById('fbox-element-container'),
-        screen = document.getElementById('fbox-screen'),
-        galleryContainer = fboxElHandlers.galleryContainer();
+    var screen = document.getElementById('fbox-screen');
 
-    if (screen && elementContainer) {
-        galleryContainer.removeChild(elementContainer);
+    if (screen) {
+        var elementContainer = document.getElementById('fbox-element-container');
+        var galleryContainer = fboxElHandlers.galleryContainer();
+
+        document.removeChild(elementContainer);
         galleryContainer.removeChild(screen);
     }
 }, false);
