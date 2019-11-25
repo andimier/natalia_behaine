@@ -420,7 +420,7 @@ window.addEventListener('resize', function(){
         screen = document.getElementById('fbox-screen'),
         galleryContainer = fboxElHandlers.galleryContainer();
 
-    if (elementContainer) {
+    if (screen && elementContainer) {
         galleryContainer.removeChild(elementContainer);
         galleryContainer.removeChild(screen);
     }
