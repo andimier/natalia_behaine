@@ -91,10 +91,10 @@
             <?php if (!empty($projectDataList['installation'])) : ?>
                 <?php $instData = $projectDataList['installation']; ?>
 
-                    <div id="installation" class="<?php echo $topGalleryPadding; ?>">
-                        <div id="tt_galeria">
-							<h1><?php echo $gn_arr['titulos']['galeria-de-videos'][$idioma]; ?></h1>
-						</div>
+                    <div id="installation" class="<?php echo $topGalleryPadding; ?> gallery-container">
+						<h2>
+							<span><?php echo $gn_arr['titulos']['galeria-de-videos'][$idioma]; ?></span>
+						</h2>
 
                         <div id="installation-container" class="f-box-gallery">
                             <?php for ($i = 0; $i < count($instData); $i++): ?>
@@ -117,10 +117,11 @@
 			<!--  GALERIA DE IMÁGENES -->
 			<?php if (!empty($albumId)) : ?>
 				<?php if (mysql_num_rows($r_imagenes) >= 1) : ?>
-					<div id="cnt_galeria" class="<?php echo $topGalleryPadding; ?>">
-						<div id="tt_galeria">
-							<h1><?php echo setImagesCountText($idioma, $img_arr, $gn_arr) ?></h1>
-						</div>
+					<div id="cnt_galeria" class="<?php echo $topGalleryPadding; ?> gallery-container">
+
+						<h2>
+							<span><?php echo setImagesCountText($idioma, $img_arr, $gn_arr) ?></span>
+						</h2>
 
 						<button class="load-gallery-btn" data-href=<?php echo $gn_arr['url-lang'][6][$idioma] . $albumId; ?>>
 							+ <?php echo $gn_arr['titulos']['ir-a-galeria-completa'][$idioma] ?>

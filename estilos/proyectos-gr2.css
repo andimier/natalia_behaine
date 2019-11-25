@@ -145,17 +145,37 @@
     border-bottom: 1px solid #CCCCCC;
 }
 
-#cnt_galeria h1{
-	color: #999;
-	font-family: 'Times New Roman';
-	font-size: 24px;
+#installation.gallery-container h2 {
+	padding: 40px;
 }
 
-.load-gallery-btn {
+.gallery-container h2 {
+	color: black;
+	font-family: 'Times New Roman';
+	font-size: 18px;
+	text-align: center;
+}
+
+.gallery-container h2 a {
+	color:#000;
+	text-decoration:none;
+}
+
+.gallery-container h2 a:hover {
+	color:#33ffff;
+}
+
+.gallery-container span {
+	text-align: center;
+	border-bottom: 1px solid black;
+	padding: 15px;
+}
+
+.gallery-container .load-gallery-btn {
 	border: 1px solid black;
 	cursor: pointer;
 	clear: both;
-	display:block;
+	display: block;
 	margin: 40px auto;
     padding: 10px;
     width: auto;
@@ -171,21 +191,6 @@
     text-align: right;
     padding-top: 37px;
     padding-bottom: 44px;
-}
-
-#cnt_galeria h2{
-	color:#000;
-	font-family:'Times New Roman';
-	font-size:18px;
-}
-
-#cnt_galeria h2 a{
-	color:#000;
-	text-decoration:none;
-}
-
-#cnt_galeria h2 a:hover{
-	color:#33ffff;
 }
 
 #tt_galeria{
@@ -310,14 +315,6 @@
 	font-size:38px;
 	color:#33ffff;
 }
-
-.cnt-galeria {
-	width:100%;
-	height: auto;
-	padding: 45px 0 10px 0;
-	border-top:1px solid #ccc;
-}
-
 
 .cnt-videos {
 	width:100%;
