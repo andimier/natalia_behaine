@@ -131,7 +131,7 @@
 							<?php for ($i = 0; $i < count($img_arr); $i++): ?>
                                 <?php if ($i < 6): ?>
                                     <div class="foto-wrapper">
-										<div class="foto-container">
+
 											<a class="foto fancybox"
 												data-fancybox-group="gallery"
 												fbox-element-id="<?php echo $i ?>"
@@ -140,7 +140,7 @@
 											>
 												<img class="foto-img" src="<?php echo 'cms/' . $img_arr[$i]['imagen1']; ?>" alt="<?php echo $img_arr[$i]['alt']; ?>" />
 											</a>
-										</div>
+
                                     </div>
                                 <?php endif; ?>
 							<?php endfor; ?>
