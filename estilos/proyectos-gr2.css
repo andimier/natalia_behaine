@@ -695,12 +695,14 @@ input[type="submit"] {
 }
 
 #extra-text-container {
-    display: none;
+	display: none;
+	opacity: 0;
+	width: 100%;
 }
 
 #extra-text-button {
-    display: none;
-    cursor: pointer;
+	cursor: pointer;
+	display: none;
 }
 
 #extra-text-button:hover{

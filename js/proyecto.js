@@ -64,7 +64,11 @@ function loadGallery() {
 }
 
 function init() {
-    document.querySelector('#cnt_galeria').addEventListener('click', loadGallery);
+    var galeria = document.querySelector('#cnt_galeria');
+
+    if (galeria) {
+        document.querySelector('#cnt_galeria').addEventListener('click', loadGallery);
+    }
 }
 
 (function setPageTitle() {

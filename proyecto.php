@@ -202,8 +202,8 @@
 
 			<script>
 				var descriptionText = '<?php echo stripslashes($textos['descripcion-obra']); ?>',
-                    buttonTextClosed = '<?php echo stripslashes($gn_arr['titulos']['leer-mas'][$idioma]); ?>';
-                    buttonTextOpened = '<?php echo stripslashes($gn_arr['titulos']['cerrar'][$idioma]); ?>';
+                    reedMoreLabel = '<?php echo stripslashes($gn_arr['titulos']['leer-mas'][$idioma]); ?>';
+                    closeLabel = '<?php echo stripslashes($gn_arr['titulos']['cerrar'][$idioma]); ?>';
 			</script>
 			<script src="js/leer-mas.js"></script>
 			<script src="js/proyecto.js"></script>

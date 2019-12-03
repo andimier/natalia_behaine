@@ -65,36 +65,55 @@ function getExtratextInsideInitialString (descriptionText, extraTextList) {
 }
 
 function setTextsInDocument(descriptionTextArray) {
-    var defaultText = getDefaultText(descriptionTextArray),
-        extraTextList = getExtraText(descriptionTextArray),
-        extraText = getExtratextInsideInitialString(descriptionText, extraTextList),
-        extraTextContainer;
+    var defaultText = getDefaultText(descriptionTextArray);
+    var extraTextList = getExtraText(descriptionTextArray);
+    var extraText = getExtratextInsideInitialString(descriptionText, extraTextList);
 
     document.getElementById('txt-fragmento1').innerHTML = defaultText;
     document.getElementById('extra-text-container').innerHTML = '<br>' + extraText;
-}
+};
+
+function getAnimationDuration(textContainer) {
+    var text = textContainer.text();
+    var contentWrapper = textContainer.parent();
+    var time = text.length / contentWrapper.width();
+
+    return (time < 1) ? 600 : 1000;
+};
+
+function animateText() {
+    var $textContainer = $('#extra-text-container');
+    var animationDuration = getAnimationDuration($textContainer) || 500;
+    var extraTextButton = this;
+    var text = reedMoreLabel;
+    var opacity = 0;
+
+    if ($textContainer.css('display') === 'none') {
+        text = closeLabel;
+        opacity = 1;
+    }
+
+    $textContainer.stop().animate({
+            height: [ "toggle", "swing" ],
+            opacity: opacity
+        },
+        animationDuration,
+        function() {
+            extraTextButton.innerText = text;
+        }
+    );
+};
 
 (function() {
-    var descriptionTextArray = getDescriptionTextArray(descriptionText),
-        extraTextButton;
+    var $extraTextButton = $('#extra-text-button');
+    var descriptionTextArray = getDescriptionTextArray(descriptionText);
 
     if (descriptionTextArray.length > 3) {
         setTextsInDocument(descriptionTextArray);
-        extraTextButton = document.getElementById('extra-text-button');
-        extraTextButton.style.display = 'block';
-
-    } else {
+        $extraTextButton.css('display', 'block').click(animateText);;
+    }
+    else {
         document.getElementById('txt-fragmento1').innerHTML = descriptionText;
     }
 })();
-
-$extraTextButton = $('#extra-text-button')
-if ($extraTextButton.css('display') === 'block') {
-    $extraTextButton.click(function() {
-        $('#extra-text-container').stop().toggle(250, function() {
-            buttonText = ($(this).css('display') === 'none') ? buttonTextClosed : buttonTextOpened;
-            $extraTextButton.text(buttonText);
-        });
-    });
-}
 
