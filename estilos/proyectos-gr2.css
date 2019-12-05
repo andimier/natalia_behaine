@@ -146,7 +146,7 @@
 }
 
 #installation.gallery-container h2 {
-	padding: 40px;
+	padding: 0 0 60px;
 }
 
 .gallery-container h2 {
@@ -168,7 +168,7 @@
 .gallery-container span {
 	text-align: center;
 	border-bottom: 1px solid black;
-	padding: 15px;
+	padding: 23px;
 }
 
 .gallery-container .load-gallery-btn {
@@ -176,7 +176,7 @@
 	cursor: pointer;
 	clear: both;
 	display: block;
-	margin: 40px auto;
+	margin: 50px auto 40px;
     padding: 10px;
     width: auto;
 }
