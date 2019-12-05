@@ -1,4 +1,4 @@
-<?php 
+<?php
 	require_once('../requeridos/conexion/connection.php');
 	$seccion = 8;
 
@@ -25,7 +25,7 @@
 
 		<div id="cuerpo">
 			<div id="cnt_contacto">
-				<h2>Geneva, Switzerland</h2>
+				<h2>Bogotá, Colombia</h2>
 				<h2><a href="http://www.nataliabehaine.com/en/contact">nataliabehaine@gmail.com</a></h2>
 			</div>
 
