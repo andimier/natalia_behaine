@@ -4,8 +4,8 @@ function reducir_imagen( $ruta3, $ruta2, $extension, $ruta1 ){
 	list( $w_orig, $h_orig ) = getimagesize( $ruta3 );
 	$scale_ratio = $w_orig / $h_orig;
 	
-	// Este es el tamaño del que quedarán las imágenes en la carpeta de MEDIANAS. 
-	// Viene del archivo de edición.
+	// Este es el tamaï¿½o del que quedarï¿½n las imï¿½genes en la carpeta de MEDIANAS. 
+	// Viene del archivo de ediciï¿½n.
 		
 	$w = 500;
 	$h = 500 / $scale_ratio;
@@ -18,8 +18,6 @@ function reducir_imagen( $ruta3, $ruta2, $extension, $ruta1 ){
 	}else{
 		$img = imagecreatefromjpeg($ruta3);
 	}
-	
-
 
 	$basenuevaimagen = imagecreatetruecolor($w, $h);  //  esta funcion crea un rec negro con los parametros dados
 	imagealphablending($basenuevaimagen, false);
@@ -96,10 +94,6 @@ function crop_imagen( $ruta2, $ruta1, $extension ){
 	}else{
 		imagejpeg($basenuevaimagenpequena1, $ruta1, 100);
 	}
-	
-	
-
-	
 }
 
 

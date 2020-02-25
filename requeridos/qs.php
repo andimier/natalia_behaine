@@ -122,19 +122,32 @@
 
 	$laseccion = $seccion + 1;
 	$q_metas = "SELECT * FROM metatags WHERE seccion_id = " . $laseccion;
-	$r_metas = mysql_query($q_metas, $connection);
-	$f_metas = mysql_fetch_array($r_metas);
+	// $r_metas = mysql_query($q_metas, $connection);
+	// $f_metas = mysql_fetch_array($r_metas);
+
+	$r_metas = mysqli_query($connection, $q_metas);
+	$f_metas = mysqli_fetch_array($r_metas);
 
 	$q_inicio1 = "SELECT * FROM secciones WHERE id = 1";
 
-	if (mysql_query($q_inicio1, $connection)) {
-		$r_inicio1 = mysql_query($q_inicio1, $connection);
+	// if (mysql_query($q_inicio1, $connection)) {
+	// 	$r_inicio1 = mysql_query($q_inicio1, $connection);
 
-		while($imagen = mysql_fetch_array($r_inicio1)){
+	// 	while($imagen = mysql_fetch_array($r_inicio1)){
+	// 		$imgInicio = $imagen['imagen2'];
+	// 	}
+	// } else {
+	// 	mysql_error();
+	// }
+
+	if (mysqli_query($connection, $q_inicio1)) {
+		$r_inicio1 = mysqli_query($connection, $q_inicio1);
+
+		while($imagen = mysqli_fetch_array($r_inicio1)){
 			$imgInicio = $imagen['imagen2'];
 		}
 	} else {
-		mysql_error();
+		mysqli_error($connection);
 	}
 
 	if ($seccion == 0) {
@@ -256,9 +269,15 @@
 
 	// REDES
 	$q_redes = "SELECT contenido FROM contenidos WHERE seccion_id = 7";
-	$r_redes = mysql_query($q_redes, $connection);
+	// $r_redes = mysql_query($q_redes, $connection);
 
-	while($red = mysql_fetch_array($r_redes)){
+	// while($red = mysql_fetch_array($r_redes)){
+	// 	$redes[] = $red['contenido'];
+	// }
+
+	$r_redes = mysqli_query($connection, $q_redes);
+
+	while($red = mysqli_fetch_array($r_redes)){
 		$redes[] = $red['contenido'];
 	}
 
@@ -298,8 +317,12 @@
 
 	if ($seccion == 8){
 		$q_comercial = "SELECT * FROM secciones WHERE id = 8";
-		$r_comercial = mysql_query($q_comercial, $connection);
-		$f_comercial = mysql_fetch_array($r_comercial);
+		// $r_comercial = mysql_query($q_comercial, $connection);
+		// $f_comercial = mysql_fetch_array($r_comercial);
+
+		$r_comercial = mysqli_query($connection, $q_comercial);
+		$f_comercial = mysqli_fetch_array($r_comercial);
+
 		$banner = $f_comercial['imagen3'];
 	}
 

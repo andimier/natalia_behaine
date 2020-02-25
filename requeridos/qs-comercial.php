@@ -3,6 +3,40 @@
 	$arr_imagenes2 = array();
 	$fotos_arr = array();
 
+	function phpMethods($method, $param) {
+		global $connection;
+
+		if (phpversion() < 6) {
+			switch ($method) {
+				case 'query':
+					return mysql_query($param, $connection);
+					break;
+				case 'error':
+					return mysql_error();
+					break;
+				case 'fetch':
+					return mysql_fetch_array($param);
+					break;
+				case 'select_db':
+					return mysql_select_db($param, $connection);
+					break;
+			}
+		} 
+		else {
+			switch ($method) {
+				case 'query':
+					return mysqli_query($connection, $param);
+					break;
+				case 'error':
+					return mysqli_error($connection);
+					break;
+				case 'fetch':
+					return mysqli_fetch_array($param);
+					break;
+			}
+		}
+	}
+
 	function piedefotoComercial($id, $idioma, $cnt){
 		// $cnt = 1 = foto principal
 		// $cnt = 2 = fotos genrales
@@ -24,14 +58,15 @@
 		$q .= " AND img_entradas_textos.img_id = imagenes_albums.id ";
 		$q .= " AND img_entradas_textos.idioma = " . $idioma;
 
-		$r  = mysql_query($q, $connection);
+		// $r  = mysql_query($q, $connection);
+		$r = phpMethods('query', $q);
 
-		if(mysql_query($q, $connection)){
-			while($z = mysql_fetch_array($r)){
+		if (phpMethods('query', $q)) {
+			while($z = phpMethods('fetch', $r)){
 				$alt = $z['texto'];
 			}
 		}else{
-			echo mysql_error();
+			echo phpMethods('error', NULL);
 		}
 
 		return $alt;
@@ -40,12 +75,15 @@
 	function imagenPrincipal($contenido_id, $idioma){
 		// TRAER IMAGEN PRINCIPAL Y PIEDEFOTO CON LA OTRA FUNCION
 		global $connection;
+
 		$q = 'SELECT * FROM contenidos WHERE id = ' . $contenido_id . ' LIMIT 1';
-		$r = mysql_query($q, $connection);
-		while($z = mysql_fetch_array($r)){
+		$r = phpMethods('query', $q);
+
+		while ($z = phpMethods('fetch', $r)) {
 			$imagen  = '<a href="cms/'. $z['imagen3'] . '" data-fancybox-group="gallery" title="' . piedefotoComercial($z['id'], $idioma, $cnt=1) . '">';
 			$imagen .= '<img src="cms/' . $z['imagen3'] . '" />';
 			$imagen .= '</a>';
+
 			echo $imagen;
 		}
 	}
@@ -58,7 +96,7 @@
 		$q_comercial_album = 'SELECT * FROM albumes WHERE contenido_id = ' . $contenido_id . ' LIMIT 1';
 		$r_comercial_album = mysql_query($q_comercial_album, $connection);
 
-		if(mysql_query($q_comercial_album, $connection)){
+		if (mysql_query($q_comercial_album, $connection)) {
 			
 			while($album = mysql_fetch_array($r_comercial_album)){
 				$q_fotos  = " SELECT * ";
@@ -94,6 +132,6 @@
 	$q_comercial .= " AND textos_contenidos.contenido_id = contenidos.id ";
 	$q_comercial .= " AND textos_contenidos.idioma = " . $idioma;
 	$q_comercial .= " ORDER BY contenidos.fecha DESC";
-	$r_comercial  = mysql_query($q_comercial, $connection);
-	
+
+	$r_comercial  = phpMethods('query', $q_comercial);
 ?>

@@ -29,7 +29,7 @@
 				<h2><a href="http://www.nataliabehaine.com/en/contact">nataliabehaine@gmail.com</a></h2>
 			</div>
 
-			<?php while($contenido = mysql_fetch_array($r_comercial)): ?>
+			<?php while($contenido = phpMethods('fetch', $r_comercial)): ?>
 				<div class="comercial-tarjeta">
 
 					<h1><?php echo $contenido['titulo']; ?></h1>
