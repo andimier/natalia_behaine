@@ -135,7 +135,7 @@
         $output = [];
 
         if (!empty($query)) {
-            while ($item = mysql_fetch_array($query)) {
+            while ($item = phpMethods('fetch', $query)) {
                 array_push($output, [
                     'id' => $item['id'],
                     'title' => $item['titulo'],

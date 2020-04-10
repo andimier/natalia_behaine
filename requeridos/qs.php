@@ -46,16 +46,18 @@
 	}
 
 	function getImageId ($ruta_img) {
-		$q_idfoto  = " SELECT * FROM imagenes_albums WHERE imagen1 LIKE '%$ruta_img%'";
-		$r_idfoto = phpMethods('query', $q_idfoto);
-
-		if ($r_idfoto != NULL) {
-			$idfoto = phpMethods('fetch', $r_idfoto);
-		} else {
-			echo phpMethods('error');
+		try {
+			$r = phpMethods('fetch', 
+				phpMethods('query', 
+					"SELECT * FROM imagenes_albums WHERE imagen1 LIKE '%$ruta_img%'"
+				)
+			);
+		}
+		catch (Exception $e) {
+			echo $e->getMessage();
 		}
 
-		return $idfoto['id'];
+		return ($r != NULL || !empty($r)) ? $r['id'] : NULL;
 	}
 
 	function videoSeccion($cadenaVideos, $idioma) {
