@@ -1,4 +1,8 @@
 cms/imagenes/
+<<<<<<< Updated upstream
 requeridos/tags.*
+=======
+requeridos/tags.php
+>>>>>>> Stashed changes
 requeridos/tags-galeria.php
 .vscode/
