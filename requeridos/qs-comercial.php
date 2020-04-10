@@ -17,8 +17,8 @@
 				case 'fetch':
 					return mysql_fetch_array($param);
 					break;
-				case 'select_db':
-					return mysql_select_db($param, $connection);
+				case 'num-rows':
+					return mysql_num_rows($param);
 					break;
 			}
 		} 
@@ -32,6 +32,9 @@
 					break;
 				case 'fetch':
 					return mysqli_fetch_array($param);
+					break;
+				case 'num-rows':
+					return mysqli_num_rows($param);
 					break;
 			}
 		}
@@ -80,8 +83,8 @@
 		$r = phpMethods('query', $q);
 
 		while ($z = phpMethods('fetch', $r)) {
-			$imagen  = '<a href="cms/'. $z['imagen3'] . '" data-fancybox-group="gallery" title="' . piedefotoComercial($z['id'], $idioma, $cnt=1) . '">';
-			$imagen .= '<img src="cms/' . $z['imagen3'] . '" />';
+			$imagen  = '<a href="http://www.nataliabehaine.com/cms/'. $z['imagen3'] . '" data-fancybox-group="gallery" title="' . piedefotoComercial($z['id'], $idioma, $cnt=1) . '">';
+			$imagen .= '<img src="http://www.nataliabehaine.com/cms/' . $z['imagen3'] . '" />';
 			$imagen .= '</a>';
 
 			echo $imagen;
@@ -89,30 +92,32 @@
 	}
 
 	function qFotosAlbum($contenido_id, $idioma){
-
 		global $connection;
 		global $fotos_arr;
+
 		$fotos = '';
 		$q_comercial_album = 'SELECT * FROM albumes WHERE contenido_id = ' . $contenido_id . ' LIMIT 1';
-		$r_comercial_album = mysql_query($q_comercial_album, $connection);
+		// $r_comercial_album = mysql_query($q_comercial_album, $connection);
+		$r_comercial_album = phpMethods('query', $q_comercial_album);
 
-		if (mysql_query($q_comercial_album, $connection)) {
-			
-			while($album = mysql_fetch_array($r_comercial_album)){
+		if ($r_comercial_album) {
+			// while($album = mysql_fetch_array($r_comercial_album)){
+			while ($album = phpMethods('fetch', $r_comercial_album)){ 
 				$q_fotos  = " SELECT * ";
 				$q_fotos .= " FROM imagenes_albums";
 				$q_fotos .= " WHERE imagenes_albums.album_id = " . $album['id'];
 				$q_fotos .= " ORDER BY posicion ASC";
 				
-				if(mysql_query($q_fotos)){
-					$r_fotos = mysql_query($q_fotos);
-					
-					while($foto = mysql_fetch_array($r_fotos)){
-						
-						if(mysql_num_rows($r_fotos)>1){
-							echo '<img alt="'. piedefotoComercial($foto['id'], $idioma, $cnt=2) .'" src="cms/'.$foto['imagen1'] .'"/>';
+				// $r_fotos = mysql_query($q_fotos);
+				$r_fotos = phpMethods('query', $q_fotos);
+
+				if ($r_fotos) {
+					// while ($foto = mysql_fetch_array($r_fotos)) {
+					while ($foto = phpMethods('fetch', $r_fotos)) {
+						if(phpMethods('num-rows', $r_fotos) > 1){
+							echo '<img alt="'. piedefotoComercial($foto['id'], $idioma, $cnt=2) .'" src="http://www.nataliabehaine.com/cms/'.$foto['imagen1'] .'"/>';
 						}else{
-							echo '<img alt="'. piedefotoComercial($foto['id'], $idioma, $cnt=2) .'" src="cms/'.$foto['imagen3'] .'"/>';
+							echo '<img alt="'. piedefotoComercial($foto['id'], $idioma, $cnt=2) .'" src="http://www.nataliabehaine.com/cms/'.$foto['imagen3'] .'"/>';
 						}
 					}
 				}else{

@@ -1,8 +1,5 @@
-cms/imagenes/
-<<<<<<< Updated upstream
-requeridos/tags.*
-=======
-requeridos/tags.php
->>>>>>> Stashed changes
-requeridos/tags-galeria.php
+cms/imagenes
 .vscode/
+requeridos/tags.php
+requeridos/tags-galeria.php
+requeridos/qs-comercial.php

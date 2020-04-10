@@ -14,9 +14,9 @@
 <html>
 	<head>
 		<?php include('../requeridos/tags.php'); ?>
-		<link href="estilos/comercial-gr.css" rel="stylesheet" type="text/css"  media="screen"/>
-		<link href="estilos/comercial-md.css" rel="stylesheet" type="text/css"  media="only screen and (min-width:481px) and (max-width:800px)"  />
-		<link href="estilos/comercial-pq.css" rel="stylesheet" type="text/css"  media="only screen and (min-width:50px)  and (max-width:480px)" />
+		<link href="../estilos/comercial-gr.css" rel="stylesheet" type="text/css"  media="screen"/>
+		<link href="../estilos/comercial-md.css" rel="stylesheet" type="text/css"  media="only screen and (min-width:481px) and (max-width:800px)"  />
+		<link href="../estilos/comercial-pq.css" rel="stylesheet" type="text/css"  media="only screen and (min-width:50px)  and (max-width:480px)" />
 		<?php include('../requeridos/tags-galeria.php'); ?>
 	</head>
 
@@ -58,8 +58,8 @@
 
 		<?php require_once('../requeridos/footer.php'); ?>
 	</body>
-	<script src="js/f-box.js"></script>
-	<script src="js/comercial.js"></script>
+	<script src="../js/f-box1.js"></script>
+	<script src="../js/comercial.js"></script>
 </html>
 
 

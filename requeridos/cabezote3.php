@@ -1,7 +1,7 @@
 	<div id="comercial-cabezote">
 		<div id="comercial-banner">
 
-			<div id="comercial-img-banner"><img id="comercial-cnt-img-banner"  src="cms/<?php echo $banner; ?>" /></div>
+			<div id="comercial-img-banner"><img id="comercial-cnt-img-banner"  src="http://wwww.nataliabehaine.com/cms/<?php echo $banner; ?>" /></div>
 			
 			<div id="comercial-cnt-logo">
 				<div id="comercial-foto">

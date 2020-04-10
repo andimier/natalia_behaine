@@ -1,4 +1,6 @@
 <?php
+    require_once('utils/phpfunctions.php');
+
     define('PROJECT_DESCRIPTION', 'descripcion_contenido');
     define('TECHNICAL_DESCRIPTION', 'descripcion_tecnica');
 
@@ -39,12 +41,10 @@
         global $connection;
 
         if (isset($albumId) || !empty($albumId)) {
-            $q = mysql_query(
-                "SELECT id, titulo, tipo, video_key, video_html, imagen1, imagen3 FROM imagenes_albums WHERE album_id=" . $albumId . " ORDER BY posicion ASC",
-                $connection
-            );
+            $q = "SELECT id, titulo, tipo, video_key, video_html, imagen1, imagen3 FROM imagenes_albums WHERE album_id=" . $albumId . " ORDER BY posicion ASC";
+            $r = phpMethods('query', $q);
 
-            return $q ? $q : [];
+            return $r ? $r : [];
         }
     }
 
@@ -52,12 +52,11 @@
         global $connection;
         global $album_id;
 
-        $r_imagen_contenido = mysql_query(
-            "SELECT album_id FROM imagenes_albums WHERE contenido_id = " . $contenido_id, 
-            $connection
+        $r_imagen_contenido = phpMethods('query',
+            "SELECT album_id FROM imagenes_albums WHERE contenido_id = " . $contenido_id
         );
 
-        if ($arr_img = mysql_fetch_array($r_imagen_contenido)) {
+        if ($arr_img = phphMethods('fetch', $r_imagen_contenido)) {
             $album_id = $arr_img['album_id'];
         }
     }
@@ -65,10 +64,9 @@
     function getEntryIdFromUrlTitle($title) {
         global $connection;
 
-        $query = mysql_fetch_array(
-            mysql_query(
-                "SELECT id, contenido_id FROM textos_contenidos WHERE titulo LIKE '%$title%'",
-                $connection
+        $query = phpMethods('fetch',
+            phpMethods('query',
+                "SELECT id, contenido_id FROM textos_contenidos WHERE titulo LIKE '%$title%'"
             )
         );
 
@@ -89,12 +87,11 @@
         $projectDescription = '';
         $tecnicalDescription = '';
 
-        $r_proy_txt = mysql_query(
-            "SELECT * FROM textos_contenidos WHERE contenido_id=" . $project_id . " AND idioma=" . $idioma . " ORDER BY id ASC",
-            $connection
+        $r_proy_txt = phpMethods('query',
+            "SELECT * FROM textos_contenidos WHERE contenido_id=" . $project_id . " AND idioma=" . $idioma . " ORDER BY id ASC"
         );
 
-        if (mysql_num_rows($r_proy_txt) >= 1) {
+        if (phpMethods('num-rpws', $r_proy_txt) >= 1) {
             while ($item = mysql_fetch_array($r_proy_txt)) {
                 $tipo = $item['tipo'];
                 $descriptionTextWithoutHTMLTags = strip_tags($item['contenido']);
@@ -159,10 +156,9 @@
     function getProjectQuery() {
         global $connection;
 
-        return mysql_fetch_array(
-            mysql_query(
+        return phpMethods('fetch',
+            phpMethods('query',
                 "SELECT * FROM contenidos WHERE id=" . getEntryIdFromUrlTitle(getUrlTitle()),
-                $connection
             )
         );
     }
@@ -188,6 +184,7 @@
 
             $dataList["project_image_small"] = $project['imagen1'];
             $dataList["project_image_large"] = $project['imagen3'];
+
             $dataList["installation"] = getInstallationItems(
                 getGalleryImages(
                     getAlbumId($project['id'])['installation'][0]
@@ -216,9 +213,8 @@
     function getAlbumIDS($projectId, $queryCondition) {
         global $connection;
 
-        return mysql_query(
-            "SELECT id, titulo FROM albumes WHERE contenido_id=" . $projectId . "{$queryCondition}",
-            $connection
+        return phpMethods('query', 
+            "SELECT id, titulo FROM albumes WHERE contenido_id=" . $projectId . "{$queryCondition}"
         );
     }
 
@@ -227,9 +223,13 @@
         $queryList = [ $typeEntries[0] => [], $typeEntries[1] => [] ];
 
         for ($i = 0; $i < count($typeEntries); $i++) {
-            array_push($queryList[$typeEntries[$i]], mysql_fetch_array(
-                    getAlbumIDS($projectId, getQueryCondition($i))
-                )['id']
+            $item = phpMethods('fetch', 
+                getAlbumIDS($projectId, getQueryCondition($i))
+            );
+   
+            array_push(
+                $queryList[$typeEntries[$i]], 
+                $item != NULL ? $item['id'] : ''
             );
         }
 
@@ -248,12 +248,11 @@
     function getAllProjectsId() {
         global $connection;
 
-        $r_todoslosproyectos = mysql_query(
-            'SELECT id, fecha, titulo FROM contenidos WHERE seccion_id = 3 AND contenido_id = 0 ORDER BY fecha',
-            $connection
+        $r_todoslosproyectos = phpMethods('query',
+            'SELECT id, fecha, titulo FROM contenidos WHERE seccion_id = 3 AND contenido_id = 0 ORDER BY fecha'
         );
 
-        while ($losp = mysql_fetch_array($r_todoslosproyectos)) {
+        while ($losp = phpMethods('fetch', $r_todoslosproyectos)) {
             $proy_arr[] = $losp['id'];
         }
 
@@ -265,8 +264,8 @@
             $arrcaract;
 
         if (!empty($proy_arr[$key])) {
-            $response = mysql_query('SELECT * FROM contenidos WHERE id = ' . $proy_arr[$key], $connection);
-            $text = mysql_fetch_array($response)['titulo'];
+            $response = phpMethods('query', 'SELECT * FROM contenidos WHERE id = ' . $proy_arr[$key], $connection);
+            $text = phpMethods('fetch', $response)['titulo'];
 
             $joined_text = str_replace(' ','-', $text);
             $title = str_replace(array_keys($arrcaract), array_values($arrcaract), $joined_text);
@@ -343,7 +342,7 @@
     function getAltText($connection, $altTextQuery, $imagenId) {
         $altText = '';
 
-        while ($text = mysql_fetch_array($altTextQuery)) {
+        while ($text = phpMethods('fetch', $altTextQuery)) {
             $altText = $text['img_id'] == $imagenId ? reemplazarCaracteres($text['texto']) : '';
         }
 
@@ -351,9 +350,8 @@
     }
 
     function getAltTextsQuery($connection, $idioma, $imagenId) {
-        return mysql_query(
-            "SELECT img_id, texto FROM img_entradas_textos WHERE img_id=" . $imagenId . " AND idioma = " . $idioma,
-            $connection
+        return phpMethods('query',
+            "SELECT img_id, texto FROM img_entradas_textos WHERE img_id=" . $imagenId . " AND idioma = " . $idioma
         );
     }
 
@@ -365,8 +363,8 @@
 		$img_arr = array();
         $i = 0;
 
-		if ($r_imagenes && mysql_num_rows($r_imagenes) >= 1) {
-			while ($imagen = mysql_fetch_array($r_imagenes)) {
+		if ($r_imagenes && phpMethods('num-rows', $r_imagenes) >= 1) {
+			while ($imagen = phpMethods('fetch', $r_imagenes)) {
                 $imagenId = $imagen['id'];
 
                 $img_arr[] = array(

@@ -3,6 +3,8 @@
 	$seccion = 5;
 	$idioma = isset($_GET['lang']) ? $_GET['lang'] : 0;
 	$hijo = true;
+
+	require_once('utils/phpfunctions.php');
 	require_once('requeridos/qs.php');
 	require_once('requeridos/elementos-arr.php');
     require_once('requeridos/modelos/modelo-proyecto.php');
@@ -116,7 +118,7 @@
 
 			<!--  GALERIA DE IMÁGENES -->
 			<?php if (!empty($albumId)) : ?>
-				<?php if (mysql_num_rows($r_imagenes) >= 1) : ?>
+				<?php if (phpMethods('num-rows', $r_imagenes) >= 1) : ?>
 					<div id="cnt_galeria" class="<?php echo $topGalleryPadding; ?> gallery-container">
 
 						<h2>

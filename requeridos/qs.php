@@ -1,4 +1,6 @@
 <?php
+	require_once('utils/phpfunctions.php');
+
     $idioma = isset($_GET['lang']) ? $_GET['lang'] : 0;
 
     function redirectFromFrench() {
@@ -28,33 +30,29 @@
     }
 
 	function piedefoto ($imagen_id) {
-		global $piedefoto;
-		global $connection;
-		global $filastexto;
-        global $idioma;
+		global $idioma;
 
-		$q_piedefoto  = " SELECT texto FROM img_entradas_textos WHERE img_id = ". $imagen_id;
-		$q_piedefoto .= " AND idioma = ". $idioma;
+		$q = phpMethods('query', 
+			'SELECT texto FROM img_entradas_textos WHERE img_id = ' . $imagen_id . ' AND idioma = ' . $idioma
+		);
 
-		if (mysql_query($q_piedefoto)) {
-			$r_piedefoto = mysql_query($q_piedefoto);
-			$piedefoto   = mysql_fetch_array($r_piedefoto);
-			$filastexto  = mysql_num_rows($r_piedefoto);
-		} else {
-			$piedefoto = NULL;
+		$r = NULL;
+
+		if ($q != NULL) {
+			$r = phpMethods('fetch', $q);
 		}
 
-		return $piedefoto['texto'];
+		return $r != NULL ? $r['texto'] : NULL;
 	}
 
 	function getImageId ($ruta_img) {
 		$q_idfoto  = " SELECT * FROM imagenes_albums WHERE imagen1 LIKE '%$ruta_img%'";
+		$r_idfoto = phpMethods('query', $q_idfoto);
 
-		if (mysql_query($q_idfoto)) {
-			$r_idfoto = mysql_query($q_idfoto);
-			$idfoto = mysql_fetch_array($r_idfoto);
+		if ($r_idfoto != NULL) {
+			$idfoto = phpMethods('fetch', $r_idfoto);
 		} else {
-			echo mysql_error();
+			echo phpMethods('error');
 		}
 
 		return $idfoto['id'];
@@ -78,9 +76,9 @@
 
         // Older contents have no 'type' field in the data base.
 
-        $r_title = mysql_query($q_title, $connection);
+        $r_title = phpMethods('query', $q_title);
 
-        while ($title = mysql_fetch_array($r_title)) {
+        while ($title = phpMethods('fetch', $r_title)) {
             $titles[] = $title['titulo'];
         }
 
@@ -193,10 +191,10 @@
 	if ($seccion == 2) {
 		// PROYECTOS / SELECCIONAR SOLO EL AÑO
 		$q_anos = 'SELECT fecha FROM contenidos WHERE seccion_id = 3 AND contenido_id = 0';
-		$r_anos = mysql_query($q_anos, $connection);
+		$r_anos = phpMethods('query', $q_anos);
 
 		// BUSQUEDA Y ECHO DE LOS AÑOS
-		while($anos = mysql_fetch_array($r_anos)){
+		while($anos = phpMethods('fetch', $r_anos)){
 			$exp_anos = explode('-', $anos['fecha']);
 			$los_anos[] = $exp_anos[0];
 		}
@@ -220,10 +218,10 @@
             $q_projects .= " AND contenido_id = 0";
             $q_projects .= " ORDER BY fecha DESC";
 
-            $r_projects = mysql_query($q_projects, $connection);
+            $r_projects = phpMethods('query', $q_projects);
 
             if ($r_projects) {
-                while ($project = mysql_fetch_array($r_projects)) {
+                while ($project = phpMethods('fetch', $r_projects)) {
                     array_push($proyectsList, array(
                             "id" => $project['id'],
                             "fecha" => $project['fecha'],
