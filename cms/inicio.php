@@ -1,6 +1,7 @@
 <?php 
 	require_once("includes/sesion.php");
 	require_once("includes/connection.php");
+	require_once("utils/phpfunctions.php");
 	require_once("includes/functions.php");
 
 	encontrar_seccion_y_contenido_seleccionados();
@@ -31,4 +32,4 @@
 		<?php include_once('includes/navegacion.php'); ?>
 	</body>
 </html>
-<?php if(isset($connection)){ mysql_close($connection); } ?>
+<?php if(isset($connection)){ phpMethods('close', $connection); } ?>

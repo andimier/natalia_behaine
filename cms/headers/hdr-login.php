@@ -1,4 +1,6 @@
 <?php 
+	require_once('../utils/phpfunctions.php');
+
 	if (!isset($_SESSION)) {
 		session_start();
 	} 
@@ -23,20 +25,25 @@
 			}
 		}
 
-		$username = trim(mysql_prep($_POST['usuario']));	
-		$password = trim(mysql_prep($_POST['contrasena']));	
+		$username = trim($_POST['usuario']);	
+		$password = trim($_POST['contrasena']);	
+		// $username = trim(mysql_prep($_POST['usuario']));	
+		// $password = trim(mysql_prep($_POST['contrasena']));	
 		//algoritmos de incriptacion
 		//$hashed_password = md5($password);
 		//$hashed_password = hash($password);
 		$hashed_password = sha1($password);
 
 		if (empty($errores)) {
-			$query = "SELECT id, username FROM usuarios WHERE username = '{$username}' AND hashed_password = '{$hashed_password}'";
-			$result = mysql_query($query, $connection);
+			$result = phpMethods(
+				'query',
+				"SELECT id, username FROM usuarios WHERE username = '{$username}' AND hashed_password = '{$hashed_password}'"
+			);
+
 			confirm_query($result);
-			//
-			if (mysql_num_rows($result) == 1) {
-				$usuario_encontrado = mysql_fetch_array($result);
+			
+			if (phpMethods('num-rows', $result) == 1) {
+				$usuario_encontrado = phpMethods('fetch', $result);
 				$_SESSION['user_id'] = $usuario_encontrado['id'];
 				$_SESSION['username'] = $usuario_encontrado['username'];
 				header("Location: inicio.php");

@@ -29,9 +29,9 @@
 	
 	function todas_las_secciones(){
 		global $connection;
-		$query = "SELECT * FROM secciones ORDER BY id ASC";
+		$query = 
 			
-		$grupo_secciones = mysql_query($query, $connection);
+		$grupo_secciones = phpMethods('query', "SELECT * FROM secciones ORDER BY id ASC");
 		confirm_query($grupo_secciones);
 		return $grupo_secciones;
 	}
@@ -40,12 +40,12 @@
 		global $connection;
 		$query = "SELECT * FROM secciones WHERE id=" . $seccion_id ." LIMIT 1";
 		
-		$result_set = mysql_query($query, $connection);
+		$result_set = phpMethods('query',$query);
 		confirm_query($result_set);
 	
-		if($seccion = mysql_fetch_array($result_set)){
+		if ($seccion = phpMethods('fetch', $result_set)) {
 			return $seccion;
-		}else{
+		} else {
 			return NULL;
 		}
 	}
@@ -151,18 +151,16 @@
 		global $connection;
 		$query = "SELECT * FROM contenidos WHERE id =" . $contenido_id ." LIMIT 1";
 		
-		$result_set = mysql_query($query, $connection);
+		$result_set = phpMethods('query', $query);
 		confirm_query($result_set);
 	
-		if($contenido = mysql_fetch_array($result_set)){
+		if ($contenido = phpMethods('fetch', $result_set)) {
 			return $contenido;
-		}else{
+		} else {
 			return NULL;
 		}
 	}
 	
-
-
 	//===============================  SECCION Y CONTENIDO SELECCIONADO ==========================//
 	
 	function encontrar_seccion_y_contenido_seleccionados(){
@@ -236,7 +234,7 @@
 	
 		$grupo_secciones = todas_las_secciones();
 	
-		while($seccion = mysql_fetch_array($grupo_secciones)){
+		while ($seccion = phpMethods('fetch', $grupo_secciones)) {
 			
 			if($seccion['indice'] == 0){
 				echo "<div class=\"secciones1\"><a href=\"editar-seccion.php?seccion=" . $seccion['id'] . "\"> {$seccion['titulo']} </a></div>"; 

@@ -1,4 +1,6 @@
-<?php require_once("headers/hdr-login.php"); ?>
+<?php 
+	require_once("headers/hdr-login.php"); 
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -35,4 +37,4 @@
 		<div id="cabezote"></div>
 	</body>
 </html>
-<?php if(isset($connection)) { mysql_close($connection); } ?>
+<?php if(isset($connection)) { phpMethods('close', $connection); } ?>

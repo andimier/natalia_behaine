@@ -1,4 +1,8 @@
-<?php include_once('headers/hdr-editar-contenido.php'); ?>
+<?php 
+	require_once("includes/sesion.php");
+	require_once("utils/phpfunctions.php");
+	include_once('headers/hdr-editar-contenido.php'); 
+?>
 
 <!DOCTYPE html">
 <html>
@@ -62,7 +66,7 @@
                         </li>
                     <?php endif; ?>
 
-                    <?php while($sub = mysql_fetch_array($r_sub)): ?>
+                    <?php while($sub = phpMethods('fetch', $r_sub)): ?>
                         <li>
                             <a href="editar-subcontenido.php?contenido_id=<?php echo $sub['id']; ?>" >
                                 <?php echo $sub['titulo']; ?>
@@ -113,7 +117,8 @@
 
 							<form enctype="multipart/form-data" method="post">
 								<input type="hidden" name="kontenido_id" value="<?php echo $contenido_seleccionado['id']; ?>" />
-								<?php while ($albumcontenido = mysql_fetch_array($r_albumescontenido)): ?>
+
+								<?php while ($albumcontenido = phpMethods('fetch', $r_albumescontenido)): ?>
 									<div class="albumcontenido">
 										<input type="radio" name="visible" value="<?php echo $albumcontenido['id']; ?>" <?php if ($albumcontenido['visible'] == 1) { echo 'checked'; } ?> />
 										<?php echo $albumcontenido['titulo']; ?>
@@ -144,4 +149,4 @@
 		<?php include_once('includes/navegacion.php'); ?>
 	</body>
 </html>
-<?php if (isset($connection)) { mysql_close($connection); } ?>
+<?php if (isset($connection)) { phpMethods('close', $connection); } ?>

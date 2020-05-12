@@ -53,21 +53,20 @@
 
 	if ($seccion == 3 || $seccion == 4) {
 		$q_albumescontenido = "SELECT * FROM albumes WHERE contenido_id = " . $contenido_seleccionado['id'];
-		$r_albumescontenido = mysql_query($q_albumescontenido, $connection);
+		$r_albumescontenido = phpMethods('query', $q_albumescontenido);
 
-		if (mysql_num_rows($r_albumescontenido)>0) {
-			$filas = 1;
-		}else{
-			$filas = 0;
-		}
+		$filas = (phpMethods('num-rows', $r_albumescontenido) > 0) ? 1 : 0;
 	}
 
-	$q_textos = "SELECT * FROM textos_contenidos WHERE contenido_id =" . $contenido_seleccionado['id'] . " AND idioma = 0";
-	$r_textos = mysql_query($q_textos, $connection);
+	$r_textos = phpMethods(
+        'query',
+        "SELECT * FROM textos_contenidos WHERE contenido_id =" . $contenido_seleccionado['id'] . " AND idioma = 0"
+    );
 
-	$q_sub = "SELECT * FROM contenidos WHERE contenido_id =" . $contenido_seleccionado['id'];
-	$r_sub = mysql_query($q_sub, $connection);
-
+	$r_sub = phpMethods(
+        'query', 
+        "SELECT * FROM contenidos WHERE contenido_id =" . $contenido_seleccionado['id']
+    );
 
     function getContentSubContents($contentId) {
         global $connection;
@@ -203,10 +202,9 @@
         $albumsList['installationTitle'] = '';
         $albumsList['installationId'] = '';
 
-        $query = "SELECT * FROM albumes WHERE contenido_id = " . $contentId;
-        $result = mysql_query($query, $connection);
+        $result = phpMethods('query', "SELECT * FROM albumes WHERE contenido_id = " . $contentId);
 
-        while ($album = mysql_fetch_array($result)) {
+        while ($album = phpMethods('fetch', $result)) {
             if ($album['tipo'] != $INSTALLATION_TYPE) {
                 $albumsList['mainAlbumTitle'] = $album['titulo'];
                 $albumsList['mainAlbumId'] = $album['id'];
@@ -214,7 +212,6 @@
                 $albumsList['installationTitle'] = $album['titulo'];
                 $albumsList['installationId'] = $album['id'];
             }
-
         }
 
         return $albumsList;

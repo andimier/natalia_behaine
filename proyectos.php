@@ -43,7 +43,7 @@
 						<a href="<?php echo reemplazarAcentos($arrcaract, $gn_arr, $seccion, $idioma, $proyecto['titulo']); ?>">
 							<div class="tarjeta_prg">
 								<div class="img_prg">
-									<img class="prg-img" src="<?php echo 'cms/' . $proyecto['imagen']; ?>" />
+									<img class="prg-img" src="<?php echo 'http://www.nataliabehaine.com/cms/' . $proyecto['imagen']; ?>" />
 								</div>
 
 								<div class="cnt_txt_prg">

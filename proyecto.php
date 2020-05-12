@@ -14,9 +14,9 @@
 <html>
 	<head>
 		<?php require_once('requeridos/tags.php'); ?>
-		<link href="estilos/proyectos-gr2.css" rel="stylesheet" type="text/css"  media="screen"/>
-		<link href="estilos/proyectos-md.css"  rel="stylesheet" type="text/css"  media="only screen and (min-width:481px) and (max-width:800px)"  />
-		<link href="estilos/proyectos-pq.css"  rel="stylesheet" type="text/css"  media="only screen and (min-width:50px) and (max-width:480px)"  />
+		<link href="../estilos/proyectos-gr2.css" rel="stylesheet" type="text/css"  media="screen"/>
+		<link href="../estilos/proyectos-md.css"  rel="stylesheet" type="text/css"  media="only screen and (min-width:481px) and (max-width:800px)"  />
+		<link href="../estilos/proyectos-pq.css"  rel="stylesheet" type="text/css"  media="only screen and (min-width:50px) and (max-width:480px)"  />
 		<?php include('requeridos/tags-galeria.php'); ?>
 	</head>
 
@@ -27,7 +27,7 @@
 			<div class="tarjeta_prg">
 				<div class="img_prg f-box-gallery">
 					<a class="f-box f-box-main-image" href="cms/<?php echo $largeImage; ?>" img-id="<?php echo $imageId; ?>" title="" texto="<?php echo piedefoto($imageId); ?>">
-						<img id="prg-img" class="fbox-over" src="cms/<?php echo $largeImage; ?>" alt="<?php echo piedefoto($imageId); ?>" />
+						<img id="prg-img" class="fbox-over" src="http://www.nataliabehaine.com/cms/<?php echo $largeImage; ?>" alt="<?php echo piedefoto($imageId); ?>" />
 					</a>
 				</div>
 
@@ -140,7 +140,7 @@
 												href="<?php echo 'cms/' . $img_arr[$i]['imagen3']; ?>"
 												title="<?php echo $img_arr[$i]['alt']; ?>"
 											>
-												<img class="foto-img" src="<?php echo 'cms/' . $img_arr[$i]['imagen1']; ?>" alt="<?php echo $img_arr[$i]['alt']; ?>" />
+												<img class="foto-img" src="<?php echo 'http://www.nataliabehaine.com/cms/' . $img_arr[$i]['imagen1']; ?>" alt="<?php echo $img_arr[$i]['alt']; ?>" />
 											</a>
 
                                     </div>

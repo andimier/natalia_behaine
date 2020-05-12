@@ -16,9 +16,6 @@
 				case 'num-rows':
 					return mysql_num_rows($param);
 					break;
-				case 'close':
-					return mysql_close($connection);
-					break;
 			}
 		} 
 		else {
@@ -34,9 +31,6 @@
 					break;
 				case 'num-rows':
 					return mysqli_num_rows($param);
-					break;
-				case 'close':
-					return mysqli_close($connection);
 					break;
 			}
 		}
