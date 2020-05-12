@@ -11,7 +11,7 @@
 		}
     }
 
-    function createInstallationGallery($contentId, $contentTitle) {
+    function createInstallationGallery($contentId, $contentTitle, $type) {
         global $connection;
         
         $IMAGE_ASSET_SMALL = 'imagenes/pequenas/photo.png';
@@ -44,7 +44,7 @@
             '{$IMAGE_ASSET_SMALL}', 
             '{$IMAGE_ASSET_LARGE}', 
             '{$IMAGE_ASSET_MEDIUM}',
-            'instalacion'
+            '{$type}'
         )";
 
         mysql_query($query, $connection);
@@ -63,6 +63,6 @@
         require_once("../includes/connection.php");
 
 
-        createInstallationGallery($_GET['contentId'], $_GET['contentTitle']);
+        createInstallationGallery($_GET['contentId'], $_GET['contentTitle'], $_GET['type']);
     }
 ?>

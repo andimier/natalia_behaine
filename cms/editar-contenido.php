@@ -81,21 +81,7 @@
                         </a>
 
                         <!-- GALERIA INSTALACION -->
-                        <?php if (!empty($installationTitle)): ?>
-                            <a href="editar-album.php?album_id=<?php echo $installationId; ?>&tipo=instalacion" >
-                                <li>
-                                    <div class="list-title">Editar Galería de Videos:</div>
-                                    <div class="list-parent-title"><?php echo $installationTitle; ?></div>
-                                </li>
-                            </a>
-                        <?php else: ?>
-                            <a href="edicion/create-installation-gallery.php?contentId=<?php echo $contenido_seleccionado['id']; ?>&contentTitle=<?php echo $contenido_seleccionado['titulo']; ?>">
-                                <li>
-                                    <div class="list-parent-title">Crear Galería de Videos</div>
-                                </li>
-                            </a>
-                        <?php endif; ?>
-
+                        <?php require_once('partials/galleries.php'); ?>
                     <?php endif; ?>
 
                     <?php if (!empty($mainAlbumTitle)): ?>

@@ -195,22 +195,22 @@
 
     function getAlbums($contentId) {
         global $connection;
+        $VIDEO_TYPE = 'videos';
         $INSTALLATION_TYPE = 'instalacion';
         $albumsList = [];
-        $albumsList['mainAlbumTitle'] = '';
-        $albumsList['mainAlbumId'] = '';
-        $albumsList['installationTitle'] = '';
-        $albumsList['installationId'] = '';
 
         $result = phpMethods('query', "SELECT * FROM albumes WHERE contenido_id = " . $contentId);
 
         while ($album = phpMethods('fetch', $result)) {
-            if ($album['tipo'] != $INSTALLATION_TYPE) {
-                $albumsList['mainAlbumTitle'] = $album['titulo'];
-                $albumsList['mainAlbumId'] = $album['id'];
+            if ($album['tipo'] == $VIDEO_TYPE) {
+                $albumsList += ['videoAlbumTitle' => $album['titulo']];
+                $albumsList += ['videoAlbumId' => $album['id']];
+            } else if ($album['tipo'] == $INSTALLATION_TYPE) {
+                $albumsList += ['installationTitle' => $album['titulo']];
+                $albumsList += ['installationId' => $album['id']];
             } else {
-                $albumsList['installationTitle'] = $album['titulo'];
-                $albumsList['installationId'] = $album['id'];
+                $albumsList += ['mainAlbumTitle' => $album['titulo']];
+                $albumsList += ['mainAlbumId' => $album['id']];
             }
         }
 
@@ -223,8 +223,6 @@
     $albums = getAlbums($contenido_seleccionado['id']);
     $mainAlbumId = $albums['mainAlbumId'];
     $mainAlbumTitle = $albums['mainAlbumTitle'];  
-    $installationId = $albums['installationId'];
-    $installationTitle = $albums['installationTitle'];
 
     //print("<pre>" . print_r($selectedContentData, true) . "</pre>");
     //print("<pre>" . print_r(buidSelectedContentLinksList($selectedContentData), true) . "</pre>");
