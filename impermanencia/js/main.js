@@ -31,12 +31,14 @@ function toggleSelectedDateHours (date, datePicker) {
     });
 
     selectedHours = _selectedHours;
-
 }
 
 function selectDate(date, datePicker) {
     document.querySelector('.summary-date').innerHTML = '';
     document.querySelector('.summary-hour').innerHTML = '';
+
+    document.querySelector('.submit-order').classList.add('hidden');
+
     toggleSelectedDateHours (date, datePicker);
 }
 
@@ -51,6 +53,8 @@ function selectDateAndHour(e) {
 
     document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + dataElement.dataset.date;
     document.querySelector('.summary-hour').innerHTML = 'Hora seleccinada: ' + dataElement.dataset.hour;
+
+    document.querySelector('.submit-order').classList.remove('hidden');
 }
 
 function setEvents() {
