@@ -14,7 +14,6 @@
 
         <section class="date-picker-wrapper">
             <div class="calendar-wrapper">
-
                 <div id="datepicker"></div>
             </div>
 
@@ -39,15 +38,34 @@
                     <div class="hour-wrapper hidden" data-date="2020-05-30" data-hour="18:00">
                         <p class="hour">18:00</p>
                     </div>
+
+                    <div class="hour-wrapper hidden" data-date="2020-06-03" data-hour="13:00">
+                        <p class="hour">13:00</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section>
             <h2>Resumen de tu cita</h2>
-            <p>Producto: Yoguita hoy</p>
+            <p>Producto: Clases grupales diarias de Meditación</p>
             <p class="summary-date"></p>
             <p class="summary-hour"></p>
+
+            <div class="payer-info">
+                <label class="payer-input payer-name">
+                    Tu nombre:
+                    <input type="input" name="payer-name" />
+                </label>
+                <label class="payer-input payer-email">
+                    Tu correo electrónico:
+                    <input type="input" name="payer-email" />
+                </label>
+                <label class="payer-input payer-phone">
+                    Tu teléfono:
+                    <input type="input" name="payer-phone" />
+                </label>
+            </div>
 
             <form class="submit-order hidden">
                 <input type="hidden" />
