@@ -9,7 +9,7 @@ $( "#datepicker" ).datepicker({
     onSelect: selectDate
 });
 
-var selectedDate = '';
+var selectedDateAndHour = [];
 var selectedHours = [];
 
 function toggleSelectedDateHours (date, datePicker) {
@@ -35,7 +35,26 @@ function toggleSelectedDateHours (date, datePicker) {
 }
 
 function selectDate(date, datePicker) {
-   toggleSelectedDateHours (date, datePicker);
+    document.querySelector('.summary-date').innerHTML = '';
+    document.querySelector('.summary-hour').innerHTML = '';
+    toggleSelectedDateHours (date, datePicker);
+}
+
+function selectDateAndHour(e) {
+    var selectedElement = e.target;
+    var dataElement = selectedElement.parentElement;
+
+    selectedDateAndHour = [
+        dataElement.dataset.date,
+        dataElement.dataset.hour
+    ];
+
+    document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + dataElement.dataset.date;
+    document.querySelector('.summary-hour').innerHTML = 'Hora seleccinada: ' + dataElement.dataset.hour;
+}
+
+function setEvents() {
+    document.querySelector('.hours-wrapper').addEventListener('click', selectDateAndHour);
 }
 
 function pad(number) {
@@ -60,5 +79,7 @@ function pad(number) {
     }).join('-');
 
     selectDate(parsedDate, {});
+
+    setEvents();
 })();
 
