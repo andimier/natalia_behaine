@@ -1,3 +1,7 @@
+<?php 
+    require_once('crud/r-schedule.php'); 
+    $timeSlots = getContentTitle(); 
+?>
 <!doctype html>
 <html lang="en">
     <head>
