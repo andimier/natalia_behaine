@@ -2,15 +2,18 @@
     require_once('required/cnx.php');
     require_once('utils/phpfunctions.php');
 
-    function getContentTitle () {
+    function getTimeSlots () {
         global $connection;
+        $hours = [];
 
         $r = phpMethods('query', "SELECT * FROM time_slots");
 
         while ($h = phpMethods('fetch', $r)) {
-            $hours[] = $h['date'];
-            $hours[] = $h['hour'];
-            $hours[] = $h['state'];
+            array_push($hours, [
+                'date' => $h['date'],
+                'hour' => $h['hour'],
+                'state' => $h['state']
+            ]);
         }
 
         return $hours;

@@ -1,6 +1,6 @@
 <?php 
     require_once('crud/r-schedule.php'); 
-    $timeSlots = getContentTitle(); 
+    $timeSlots = getTimeSlots(); 
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,25 +27,16 @@
                 </h3>
 
                 <div class="hours-wrapper">
-                    <div class="hour-wrapper hidden" data-date="2020-05-23" data-hour="12:00">
-                        <p class="hour">12:00</p>
-                    </div>
-
-                    <div class="hour-wrapper hidden" data-date="2020-05-23" data-hour="14:00">
-                        <p class="hour">14:00</p>
-                    </div>
-
-                    <div class="hour-wrapper hidden" data-date="2020-05-30" data-hour="16:00">
-                        <p class="hour">16:00</p>
-                    </div>
-
-                    <div class="hour-wrapper hidden" data-date="2020-05-30" data-hour="18:00">
-                        <p class="hour">18:00</p>
-                    </div>
-
-                    <div class="hour-wrapper hidden" data-date="2020-06-03" data-hour="13:00">
-                        <p class="hour">13:00</p>
-                    </div>
+                    <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
+                        <div class="hour-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
+                            date-hour-state="<?php echo $timeSlots[$i]['state']?>"
+                            data-date="<?php echo $timeSlots[$i]['date']?>" 
+                            data-hour="<?php echo $timeSlots[$i]['hour']?>">
+                            <p class="hour">
+                                <?php echo $timeSlots[$i]['hour']?>
+                            </p>
+                        </div>
+                    <?php endfor;?>
                 </div>
             </div>
         </section>
