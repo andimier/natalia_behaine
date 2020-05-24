@@ -29,6 +29,7 @@
                 <div class="hours-wrapper">
                     <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
                         <div class="hour-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
+                            data-slot-id="<?php echo $timeSlots[$i]['id']?>"
                             date-hour-state="<?php echo $timeSlots[$i]['state']?>"
                             data-date="<?php echo $timeSlots[$i]['date']?>" 
                             data-hour="<?php echo $timeSlots[$i]['hour']?>">
@@ -64,7 +65,7 @@
 
             <form class="submit-order hidden">
                 <input type="hidden" />
-                <input type="submit" />
+                <input type="submit" name="make-purchase" value="Comprar"/>
             </form>
         </section class="summary">
 
