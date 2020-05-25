@@ -28,15 +28,17 @@
 
                 <div class="hours-wrapper">
                     <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
-                        <div class="time-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
-                            data-slot-id="<?php echo $timeSlots[$i]['id']?>"
-                            data-slot-state="<?php echo $timeSlots[$i]['state']?>"
-                            data-slot-date="<?php echo $timeSlots[$i]['date']?>" 
-                            data-slot-time="<?php echo $timeSlots[$i]['time']?>">
-                            <p class="time">
-                                <?php echo $timeSlots[$i]['time']?>
-                            </p>
-                        </div>
+                        <?php if ($timeSlots[$i]['state'] != 'blocked'): ?>
+                            <div class="time-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
+                                data-slot-id="<?php echo $timeSlots[$i]['id']?>"
+                                data-slot-state="<?php echo $timeSlots[$i]['state']?>"
+                                data-slot-date="<?php echo $timeSlots[$i]['date']?>" 
+                                data-slot-time="<?php echo $timeSlots[$i]['time']?>">
+                                <p class="time">
+                                    <?php echo $timeSlots[$i]['time']?>
+                                </p>
+                            </div>
+                        <? endif; ?>
                     <?php endfor;?>
                 </div>
             </div>

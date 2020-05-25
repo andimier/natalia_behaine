@@ -21,8 +21,6 @@
             $transactionState = 'blocked';
         }
     }
-
-    require_once('gate.html');
 ?>
 
 <html>
