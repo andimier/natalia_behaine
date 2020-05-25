@@ -1,11 +1,39 @@
 $( "#datepicker" ).datepicker({
     currentText: "Now",
     dateFormat: "yy-mm-dd",
-    showWeek: true,
-    dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
-    dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
-    monthNames: [ "Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December" ],
-    showButtonPanel: true,
+    showWeek: false,
+    dayNames: [ 
+        "Domingo", 
+        "Lunes", 
+        "Martes", 
+        "Miércoles", 
+        "Jueves", 
+        "Viernes", 
+        "Sábado" 
+    ],
+    dayNamesMin: [ 
+        "Do", 
+        "Lu", 
+        "Ma", 
+        "Mi", 
+        "Ju", 
+        "Vi", 
+        "Sá" 
+    ],
+    monthNames: [ 
+        "Enero", 
+        "Febrero", 
+        "Marzo", 
+        "Abril", 
+        "Mayo", 
+        "Junio", 
+        "Julio", 
+        "Agosto", 
+        "Septiembre", 
+        "Octubre", 
+        "Noviembre", 
+        "Diciembre" 
+    ],
     onSelect: selectDate
 });
 
