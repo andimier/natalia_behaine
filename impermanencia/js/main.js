@@ -53,10 +53,16 @@ function toggleSelectedDateHours (date, datePicker) {
     var selectedDayHours = document.querySelectorAll('.time-wrapper[data-slot-date="' + date + '"]');
     var _selectedHours = Array.from(selectedDayHours);
 
-    _selectedHours.forEach(function(item) {
-        item.classList.remove('hidden');
-        item.classList.add('selected');
-    });
+    if (!_selectedHours.length) {
+        document.querySelector('.slots-error-message').classList.remove('hidden');
+    } else {
+        document.querySelector('.slots-error-message').classList.add('hidden');
+
+        _selectedHours.forEach(function(item) {
+            item.classList.remove('hidden');
+            item.classList.add('selected');
+        });
+    }
 
     selectedHours = _selectedHours;
 }
@@ -73,6 +79,7 @@ function selectDate(date, datePicker) {
 function selectDateAndHour(e) {
     var selectedElement = e.target;
     var dataElement = selectedElement.parentElement;
+    var selectedType = dataElement.dataset.slotType
     var selectedId = dataElement.dataset.slotId
     var selectedDate = dataElement.dataset.slotDate
     var selectedTime = dataElement.dataset.slotTime;
@@ -85,6 +92,8 @@ function selectDateAndHour(e) {
 
     document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + selectedDate;
     document.querySelector('.summary-time').innerHTML = 'Hora seleccinada: ' + selectedTime;
+
+    document.querySelector('.slot-data[name="slot-type"]').value = selectedType;
     document.querySelector('.slot-data[name="slot-id"]').value = selectedId;
     document.querySelector('.slot-data[name="slot-date"]').value = selectedDate;
     document.querySelector('.slot-data[name="slot-time"]').value = selectedTime;

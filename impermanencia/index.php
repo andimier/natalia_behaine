@@ -1,6 +1,8 @@
 <?php 
-    require_once('crud/r-schedule.php'); 
-    $timeSlots = getTimeSlots(); 
+    require_once('crud/r-schedule.php');
+    if (isset($_GET['product-code'])) {
+        $timeSlots = getTimeSlots($_GET['product-code']); 
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,19 +29,27 @@
                 </h3>
 
                 <div class="hours-wrapper">
-                    <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
-                        <?php if ($timeSlots[$i]['state'] != 'blocked'): ?>
-                            <div class="time-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
-                                data-slot-id="<?php echo $timeSlots[$i]['id']?>"
-                                data-slot-state="<?php echo $timeSlots[$i]['state']?>"
-                                data-slot-date="<?php echo $timeSlots[$i]['date']?>" 
-                                data-slot-time="<?php echo $timeSlots[$i]['time']?>">
-                                <p class="time">
-                                    <?php echo $timeSlots[$i]['time']?>
-                                </p>
-                            </div>
-                        <? endif; ?>
-                    <?php endfor;?>
+                    <div class="slots-error-message <?php echo empty($timeSlots) ? '' : 'hidden' ?>">
+                        ¡No encontramos citas disponibles para este servicio!
+                    </div>
+                    
+                    <div class="slots-wrapper <?php echo empty($timeSlots) ? 'hidden' : '' ?>">
+                        <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
+                            <?php if ($timeSlots[$i]['state'] != 'blocked'): ?>
+                                <div class="time-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
+                                    data-product-code="<?php echo $timeSlots[$i]['product_code']?>"
+                                    data-slot-type="<?php echo $timeSlots[$i]['type']?>"
+                                    data-slot-id="<?php echo $timeSlots[$i]['id']?>"
+                                    data-slot-state="<?php echo $timeSlots[$i]['state']?>"
+                                    data-slot-date="<?php echo $timeSlots[$i]['date']?>" 
+                                    data-slot-time="<?php echo $timeSlots[$i]['time']?>">
+                                    <p class="time">
+                                        <?php echo $timeSlots[$i]['time']?>
+                                    </p>
+                                </div>
+                            <? endif; ?>
+                        <?php endfor;?>
+                    </div>
                 </div>
             </div>
         </section>
@@ -47,32 +57,36 @@
         <section>
             <h2>Resumen de tu cita</h2>
             <p>Producto: Clases grupales diarias de Meditación</p>
-            <p class="summary-date"></p>
-            <p class="summary-time"></p>
 
-            <div class="payer-info">
-                <label class="payer-input payer-name">
-                    Tu nombre:
-                    <input type="input" name="payer-name" />
-                </label>
-                <label class="payer-input payer-email">
-                    Tu correo electrónico:
-                    <input type="input" name="payer-email" />
-                </label>
-                <label class="payer-input payer-phone">
-                    Tu teléfono:
-                    <input type="input" name="payer-phone" />
-                </label>
-            </div>
+            <?php if (!empty($timeSlots)): ?>
+                <p class="summary-date"></p>
+                <p class="summary-time"></p>
 
-            <form action="purchase-gate.php" class="submit-order hidden" method="POST">
-                <input class="slot-data" type="hidden" name="slot-id" value=""/>
-                <input class="slot-data" type="hidden" name="slot-time" value=""/>
-                <input class="slot-data" type="hidden" name="slot-date" value=""/>
-         
-                <input type="submit" name="make-purchase" value="Comprar"/>
-            </form>
-        </section class="summary">
+                <div class="payer-info">
+                    <label class="payer-input payer-name">
+                        Tu nombre:
+                        <input type="input" name="payer-name" />
+                    </label>
+                    <label class="payer-input payer-email">
+                        Tu correo electrónico:
+                        <input type="input" name="payer-email" />
+                    </label>
+                    <label class="payer-input payer-phone">
+                        Tu teléfono:
+                        <input type="input" name="payer-phone" />
+                    </label>
+                </div>
+
+                <form action="purchase-gate.php" class="submit-order hidden" method="POST">
+                    <input class="slot-data" type="hidden" name="slot-type" value=""/>
+                    <input class="slot-data" type="hidden" name="slot-id" value=""/>
+                    <input class="slot-data" type="hidden" name="slot-time" value=""/>
+                    <input class="slot-data" type="hidden" name="slot-date" value=""/>
+            
+                    <input type="submit" name="make-purchase" value="Comprar"/>
+                </form>
+            <?php endif; ?>
+        </section>
 
         <script src="js/main.js"></script>
     </body>

@@ -2,14 +2,16 @@
     require_once('required/cnx.php');
     require_once('utils/phpfunctions.php');
 
-    function getTimeSlots () {
+    function getTimeSlots ($productCode) {
         global $connection;
         $hours = [];
 
-        $r = phpMethods('query', "SELECT * FROM time_slots");
+        $r = phpMethods('query', "SELECT * FROM time_slots WHERE product_code = " . $productCode . " AND state = 'free'");
 
         while ($h = phpMethods('fetch', $r)) {
             array_push($hours, [
+                'product_code' => $h['product_code'],
+                'type' => $h['type'],
                 'id' => $h['id'],
                 'date' => $h['date'],
                 'time' => $h['time'],
