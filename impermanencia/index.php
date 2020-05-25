@@ -63,7 +63,7 @@
                 </label>
             </div>
 
-            <form class="submit-order hidden">
+            <form action="purchase-gate.php" class="submit-order hidden" method="POST">
                 <input class="slot-data" type="hidden" name="slot-id" value=""/>
                 <input class="slot-data" type="hidden" name="slot-time" value=""/>
                 <input class="slot-data" type="hidden" name="slot-date" value=""/>

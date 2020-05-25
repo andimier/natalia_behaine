@@ -20,22 +20,22 @@
         return $hours;
     }
 
-    function getSelectedSlot ($id) {
+    function getSelectedSlotState ($id) {
         global $connection;
-        $time = '';
+        $state = '';
 
         $r = phpMethods('query', "SELECT * FROM time_slots WHERE id = " . $id . " LIMIT 1");
 
         while ($h = phpMethods('fetch', $r)) {
-            $time =  $h['state'];
+            $state =  $h['state'];
         }
 
-        return $hours;
+        return $state;
     }
 
     function blockSlot ($id) {
         global $connection;
 
-        $r = phpMethods('query', "UPDATE time_slots SET state = 'blocked' WHERE id = ");
+        $r = phpMethods('query', "UPDATE time_slots SET state = 'blocked' WHERE id =" . $id);
     }
 ?>
