@@ -28,13 +28,13 @@
 
                 <div class="hours-wrapper">
                     <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
-                        <div class="hour-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
+                        <div class="time-wrapper hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
                             data-slot-id="<?php echo $timeSlots[$i]['id']?>"
-                            date-hour-state="<?php echo $timeSlots[$i]['state']?>"
-                            data-date="<?php echo $timeSlots[$i]['date']?>" 
-                            data-hour="<?php echo $timeSlots[$i]['hour']?>">
-                            <p class="hour">
-                                <?php echo $timeSlots[$i]['hour']?>
+                            data-slot-state="<?php echo $timeSlots[$i]['state']?>"
+                            data-slot-date="<?php echo $timeSlots[$i]['date']?>" 
+                            data-slot-time="<?php echo $timeSlots[$i]['time']?>">
+                            <p class="time">
+                                <?php echo $timeSlots[$i]['time']?>
                             </p>
                         </div>
                     <?php endfor;?>
@@ -46,7 +46,7 @@
             <h2>Resumen de tu cita</h2>
             <p>Producto: Clases grupales diarias de Meditación</p>
             <p class="summary-date"></p>
-            <p class="summary-hour"></p>
+            <p class="summary-time"></p>
 
             <div class="payer-info">
                 <label class="payer-input payer-name">
@@ -64,7 +64,10 @@
             </div>
 
             <form class="submit-order hidden">
-                <input type="hidden" />
+                <input class="slot-data" type="hidden" name="slot-id" value=""/>
+                <input class="slot-data" type="hidden" name="slot-time" value=""/>
+                <input class="slot-data" type="hidden" name="slot-date" value=""/>
+         
                 <input type="submit" name="make-purchase" value="Comprar"/>
             </form>
         </section class="summary">

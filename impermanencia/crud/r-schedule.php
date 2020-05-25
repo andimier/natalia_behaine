@@ -12,7 +12,7 @@
             array_push($hours, [
                 'id' => $h['id'],
                 'date' => $h['date'],
-                'hour' => $h['hour'],
+                'time' => $h['time'],
                 'state' => $h['state']
             ]);
         }
@@ -22,14 +22,20 @@
 
     function getSelectedSlot ($id) {
         global $connection;
-        $hour = '';
+        $time = '';
 
         $r = phpMethods('query', "SELECT * FROM time_slots WHERE id = " . $id . " LIMIT 1");
 
         while ($h = phpMethods('fetch', $r)) {
-            $hour =  $h['state'];
+            $time =  $h['state'];
         }
 
         return $hours;
+    }
+
+    function blockSlot ($id) {
+        global $connection;
+
+        $r = phpMethods('query', "UPDATE time_slots SET state = 'blocked' WHERE id = ");
     }
 ?>

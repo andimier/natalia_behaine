@@ -22,7 +22,7 @@ function toggleSelectedDateHours (date, datePicker) {
         });
     }
     
-    var selectedDayHours = document.querySelectorAll('.hour-wrapper[data-date="' + date + '"]');
+    var selectedDayHours = document.querySelectorAll('.time-wrapper[data-slot-date="' + date + '"]');
     var _selectedHours = Array.from(selectedDayHours);
 
     _selectedHours.forEach(function(item) {
@@ -35,7 +35,7 @@ function toggleSelectedDateHours (date, datePicker) {
 
 function selectDate(date, datePicker) {
     document.querySelector('.summary-date').innerHTML = '';
-    document.querySelector('.summary-hour').innerHTML = '';
+    document.querySelector('.summary-time').innerHTML = '';
 
     document.querySelector('.submit-order').classList.add('hidden');
 
@@ -45,14 +45,21 @@ function selectDate(date, datePicker) {
 function selectDateAndHour(e) {
     var selectedElement = e.target;
     var dataElement = selectedElement.parentElement;
+    var selectedId = dataElement.dataset.slotId
+    var selectedDate = dataElement.dataset.slotDate
+    var selectedTime = dataElement.dataset.slotTime;
 
     selectedDateAndHour = [
-        dataElement.dataset.date,
-        dataElement.dataset.hour
+        selectedDate,
+        selectedTime
+
     ];
 
-    document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + dataElement.dataset.date;
-    document.querySelector('.summary-hour').innerHTML = 'Hora seleccinada: ' + dataElement.dataset.hour;
+    document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + selectedDate;
+    document.querySelector('.summary-time').innerHTML = 'Hora seleccinada: ' + selectedTime;
+    document.querySelector('.slot-data[name="slot-id"]').value = selectedId;
+    document.querySelector('.slot-data[name="slot-date"]').value = selectedDate;
+    document.querySelector('.slot-data[name="slot-time"]').value = selectedTime;
 
     document.querySelector('.submit-order').classList.remove('hidden');
 }
