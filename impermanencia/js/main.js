@@ -92,7 +92,7 @@ function selectDateAndHour(e) {
 
     document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + selectedDate;
     document.querySelector('.summary-time').innerHTML = 'Hora seleccinada: ' + selectedTime;
-
+    
     document.querySelector('.slot-data[name="slot-type"]').value = selectedType;
     document.querySelector('.slot-data[name="slot-id"]').value = selectedId;
     document.querySelector('.slot-data[name="slot-date"]').value = selectedDate;

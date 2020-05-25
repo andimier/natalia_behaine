@@ -2,6 +2,9 @@
     require_once('crud/r-schedule.php');
     if (isset($_GET['product-code'])) {
         $timeSlots = getTimeSlots($_GET['product-code']); 
+        $product = 'Clases grupales diarias de Meditación';
+        $price = 50000;
+        $productType = $_GET['product-type'];
     }
 ?>
 <!doctype html>
@@ -55,29 +58,34 @@
         </section>
 
         <section>
-            <h2>Resumen de tu cita</h2>
-            <p>Producto: Clases grupales diarias de Meditación</p>
+            <h3>Resumen de tu cita</h3>
+            <h2>Producto: <?php echo $product; ?></h2>
 
             <?php if (!empty($timeSlots)): ?>
+                <pclass="summary-product-price">$ <?php echo $price; ?></p>
+                <p class="summary-product-type">Esta es una clase <?php echo $productType === 'single' ? 'personalizada' : 'grupal'; ?></p>
                 <p class="summary-date"></p>
                 <p class="summary-time"></p>
 
-                <div class="payer-info">
-                    <label class="payer-input payer-name">
-                        Tu nombre:
-                        <input type="input" name="payer-name" />
-                    </label>
-                    <label class="payer-input payer-email">
-                        Tu correo electrónico:
-                        <input type="input" name="payer-email" />
-                    </label>
-                    <label class="payer-input payer-phone">
-                        Tu teléfono:
-                        <input type="input" name="payer-phone" />
-                    </label>
-                </div>
-
                 <form action="purchase-gate.php" class="submit-order hidden" method="POST">
+                    <div class="payer-info">
+                        <label class="payer-input payer-name">
+                            Tu nombre:
+                            <input type="input" name="payer-name" />
+                        </label>
+                        <label class="payer-input payer-email">
+                            Tu correo electrónico:
+                            <input type="input" name="payer-email" />
+                        </label>
+                        <label class="payer-input payer-phone">
+                            Tu teléfono:
+                            <input type="input" name="payer-phone" />
+                        </label>
+                    </div>
+
+                    <input class="slot-data" type="hidden" name="product" value="<?php echo $product; ?>"/>
+                    <input class="slot-data" type="hidden" name="price" value="<?php echo $price; ?>"/>
+
                     <input class="slot-data" type="hidden" name="slot-type" value=""/>
                     <input class="slot-data" type="hidden" name="slot-id" value=""/>
                     <input class="slot-data" type="hidden" name="slot-time" value=""/>
