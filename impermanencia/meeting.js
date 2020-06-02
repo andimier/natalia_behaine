@@ -1,5 +1,4 @@
 document.querySelector('html').dataset.slotInfo
-debugger
 
 // var data = JSON.stringify({
 //     "action": "create",
@@ -30,8 +29,20 @@ var xhr = new XMLHttpRequest();
 xhr.addEventListener("readystatechange", function () {
     if (this.readyState === this.DONE) {
         console.log('Esta es la respuesta: ', this.responseText);
+        var data = JSON.parse(this.responseText)
+        document.write(JSON.stringify(data));
+        console.log()
     }
 });
 
-xhr.open("POST", "test.php?t=andres");
-xhr.send({});
+// var formatData = new FormData();
+// formatData.append('slot-id', 2);
+
+var formatData = JSON.parse('{"a": 2}');
+
+
+xhr.open("POST", "test.php");
+xhr.setRequestHeader("content-type", "application/json");
+// xhr.setRequestHeader("slot-id", "2");
+// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.send(formatData);
