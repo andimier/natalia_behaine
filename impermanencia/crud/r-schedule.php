@@ -35,6 +35,21 @@
         return $state;
     }
 
+    function getSelectedSlotData ($id) {
+        global $connection;
+        $data = [];
+
+        $r = phpMethods('query', "SELECT * FROM time_slots WHERE id = " . $id . " LIMIT 1");
+
+        while ($h = phpMethods('fetch', $r)) {
+            $data += ['state' => $h['state']];
+            $data += ['type' => $h['type']];
+            $data += ['meeting_id' => $h['meeting_id']];
+        }
+
+        return $data;
+    }
+
     function blockSlot ($id) {
         global $connection;
 

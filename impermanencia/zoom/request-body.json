@@ -1,0 +1,143 @@
+{
+    "topic": "api test",
+    "type": "Scheduled meeting",
+    "start_time": "2020-05-30T22:00:00Z",
+    "duration": 30,
+    "schedule_for": "nataliabehaine@gmail.com",
+    "timezone": "America/Gogota",
+    "password": "string",
+    "agenda": "string",
+    "settings": {
+        "host_video": true,
+        "participant_video": true,
+        "cn_meeting": false,
+        "in_meeting": false,
+        "join_before_host": true,
+        "mute_upon_entry": false,
+        "watermark": false,
+        "use_pmi": false,
+        "approval_type": false,
+        "registration_type": "integer",
+        "audio": true,
+        "registrants_email_notification": true
+    }
+}
+
+
+users/{userId}/meetings
+YBHIWwITTjKnvjQrHcl9Rw
+DlXwHBRDGEYmnrsCAERJ2wu9G4HBm22A
+
+Documentación
+https://marketplace.zoom.us/docs/guides/auth/oauth
+https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate
+
+1.
+https://zoom.us/oauth/authorize?response_type=code&client_id=YBHIWwITTjKnvjQrHcl9Rw&redirect_uri=http://www.andimier.com/zoom-test.html
+- Enviart una petición de autorización con el parámetro redirect_url, que va a recibir el código.
+- Esta url de respuesta tiene que estar registrada en zoom en : Whitelist URL
+- https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users
+- Poner especial atención a los scopes que tiene que estar habilitados
+Ej respuesta: http://www.andimier.com/zoom-test.html?code=1o8wDngi7S_q2jGIzNcQoW4kJIsBRhOOQ
+
+
+2.
+https://zoom.us/oauth/token?grant_type=authorization_code&code=1o8wDngi7S_q2jGIzNcQoW4kJIsBRhOOQ&redirect_uri=http://www.andimier.com/zoom-test.html
+- La petición anterior genera un código en la url. 
+- Este código se tiene que enviar como valor de "code" en la url de la nueva petición.
+- Y en el header de la petición enviar -> Authorization: Basic CLIENT_ID:CLIENT_SECRET.
+- usar esta url para codificarlo:https://www.base64encode.org/
+
+RESPUESTA
+{
+    "access_token": "eyJhbGciOiJIUzUxMiIsInYiOiIyLjAiLCJraWQiOiJkZjY3MzllYy0xYzJhLTRkMGEtODg0OC1iM2IxYWVkZTk1NTIifQ.eyJ2ZXIiOiI2IiwiY2xpZW50SWQiOiJZQkhJV3dJVFRqS252alFySGNsOVJ3IiwiY29kZSI6IjFvOHdEbmdpN1NfcTJqR0l6TmNRb1c0a0pJc0JSaE9PUSIsImlzcyI6InVybjp6b29tOmNvbm5lY3Q6Y2xpZW50aWQ6WUJISVd3SVRUaktudmpRckhjbDlSdyIsImF1dGhlbnRpY2F0aW9uSWQiOiJiMjk5NzIxZjg5ODE5MDQ1MzY3MmViMDJmNDY3YzAxYyIsInVzZXJJZCI6InEyakdJek5jUW9XNGtKSXNCUmhPT1EiLCJncm91cE51bWJlciI6MCwiYXVkIjoiaHR0cHM6Ly9vYXV0aC56b29tLnVzIiwiYWNjb3VudElkIjoibEZmQkppTFBRVkcwMHV1a0d4bGZMZyIsIm5iZiI6MTU5MDkwMDQzMywiZXhwIjoxNTkwOTA0MDMzLCJ0b2tlblR5cGUiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE1OTA5MDA0MzMsImp0aSI6ImQ0NDViMmU3LTA1YzgtNDk0Yi04YTM4LTc0ZTBiZjZhMDJhMyIsInRvbGVyYW5jZUlkIjowfQ.VbTiD3LaH2zrjR3uJbv8pkJYXFOeGP14cFlFBV14EmQauIIamRcOwdKiMq-NGJC_A03VCCFeT0T6Edg7E2MV9Q",
+    "token_type": "bearer",
+    "refresh_token": "eyJhbGciOiJIUzUxMiIsInYiOiIyLjAiLCJraWQiOiIzYWQ3ODI5My1iYTA0LTRmM2ItODkwOC01ZjM0N2I4NGMzY2UifQ.eyJ2ZXIiOiI2IiwiY2xpZW50SWQiOiJZQkhJV3dJVFRqS252alFySGNsOVJ3IiwiY29kZSI6IjFvOHdEbmdpN1NfcTJqR0l6TmNRb1c0a0pJc0JSaE9PUSIsImlzcyI6InVybjp6b29tOmNvbm5lY3Q6Y2xpZW50aWQ6WUJISVd3SVRUaktudmpRckhjbDlSdyIsImF1dGhlbnRpY2F0aW9uSWQiOiJiMjk5NzIxZjg5ODE5MDQ1MzY3MmViMDJmNDY3YzAxYyIsInVzZXJJZCI6InEyakdJek5jUW9XNGtKSXNCUmhPT1EiLCJncm91cE51bWJlciI6MCwiYXVkIjoiaHR0cHM6Ly9vYXV0aC56b29tLnVzIiwiYWNjb3VudElkIjoibEZmQkppTFBRVkcwMHV1a0d4bGZMZyIsIm5iZiI6MTU5MDkwMDQzMywiZXhwIjoyMDYzOTQwNDMzLCJ0b2tlblR5cGUiOiJyZWZyZXNoX3Rva2VuIiwiaWF0IjoxNTkwOTAwNDMzLCJqdGkiOiJjZDc5MmMwYi03N2NjLTRjMDgtYTc5YS1jNzQwMDFlNjg0ZjMiLCJ0b2xlcmFuY2VJZCI6MH0.ty3iIzjGpqQP1xDHcQ9X718oY-Bv0eOjxY4fMy9EG9pW9zQiCtJUGK6Q5-l_i4EfMT8P-daGq87qdR4gjuQYrw",
+    "expires_in": 3599,
+    "scope": "meeting:write:admin user:write:admin"
+  }
+
+
+3. 
+Traer los usuarios en: https://api.zoom.us/v2/users/
+- La apetición anterior entrega el accesss_token.
+- Este accesss_token se tiene que pasar en el header: Authorization: Bearer access_token
+
+RESPUESTA
+{
+    "page_count": 1,
+    "page_number": 1,
+    "page_size": 30,
+    "total_records": 1,
+    "users": [
+      {
+        "id": "q2jGIzNcQoW4kJIsBRhOOQ",
+        "first_name": "Andres",
+        "last_name": "Montaña Mier",
+        "email": "andimier@gmail.com",
+        "type": 1,
+        "pmi": 6815900892,
+        "timezone": "America/Bogota",
+        "verified": 0,
+        "created_at": "2020-04-04T02:38:21Z",
+        "last_login_time": "2020-05-30T19:59:06Z",
+        "last_client_version": "4.5.374815.0324(linux)",
+        "pic_url": "https://lh3.googleusercontent.com/a-/AOh14Gi7N3NypSMbk8YSjH-OSAeY-dpPMO4HYtyTQE5-snQ",
+        "language": "",
+        "phone_number": "",
+        "status": "active"
+      }
+    ]
+  }
+
+
+4. Crear la reunión en: https://api.zoom.us/v2/users/{userId}}/meetings
+- La apetición del punto 2, entrega el accesss_token.
+- Este se tiene que pasar en el header-> Authorization: Bearer access_token
+- *userId no es el mismo client_id. 
+- Es necesario traer la lista de los usuarios, ahí está el id.
+
+
+RESPUESTA DE LA CREACIÓN DE LA REUNIÓN
+** Es necesario que se envíe un usuario registrado para crear la reunión
+
+{
+    "uuid": "VOFhUFwYSUGaVbnv/G9J4w==",
+    "id": 74238273577,
+    "host_id": "q2jGIzNcQoW4kJIsBRhOOQ",
+    "topic": "api test",
+    "type": 2,
+    "status": "waiting",
+    "start_time": "2020-05-31T22:01:00Z",
+    "duration": 30,
+    "timezone": "America/Bogota",
+    "agenda": "esto es una prueba",
+    "created_at": "2020-05-31T04:53:00Z",
+    "start_url": "https://us04web.zoom.us/s/74238273577?zak=eyJ6bV9za20iOiJ6bV9vMm0iLCJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjbGllbnQiLCJ1aWQiOiJxMmpHSXpOY1FvVzRrSklzQlJoT09RIiwiaXNzIjoid2ViIiwic3R5IjoxLCJ3Y2QiOiJ1czA0IiwiY2x0IjowLCJzdGsiOiJjWUx5RVZtUlRxdTROaFpLZGZvQ0ZwZ1pSVlVocTVsb3ZGTWZPeEtFbzA0LkVnSUFBQUZ5YVJOdXdRQUFIQ0FnYW14U2JVdHFiRlZrVVhWM055dFhLMkYzYmpCM0szUXJTbTV1Wm5sd1lXWUFERE5EUWtGMWIybFpVek56UFFSMWN6QTAiLCJleHAiOjE1OTA5MDc5ODAsImlhdCI6MTU5MDkwMDc4MCwiYWlkIjoibEZmQkppTFBRVkcwMHV1a0d4bGZMZyIsImNpZCI6IiJ9.fLmcRcGtEDTrjRmdsFE2NKoFCwn3vZXdzHtVrhFkUTk",
+    "join_url": "https://us04web.zoom.us/j/74238273577?pwd=amdiVUUzdS9hb1JYNVlWcWpzbittdz09",
+    "password": "0BzKnQ",
+    "h323_password": "806821",
+    "pstn_password": "806821",
+    "encrypted_password": "amdiVUUzdS9hb1JYNVlWcWpzbittdz09",
+    "settings": {
+      "host_video": false,
+      "participant_video": false,
+      "cn_meeting": false,
+      "in_meeting": false,
+      "join_before_host": false,
+      "mute_upon_entry": false,
+      "watermark": false,
+      "use_pmi": false,
+      "approval_type": 2,
+      "audio": "voip",
+      "auto_recording": "none",
+      "enforce_login": false,
+      "enforce_login_domains": "",
+      "alternative_hosts": "",
+      "close_registration": false,
+      "registrants_confirmation_email": true,
+      "waiting_room": true,
+      "registrants_email_notification": true,
+      "meeting_authentication": false
+    }
+  }

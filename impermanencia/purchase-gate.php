@@ -29,13 +29,13 @@
             "number" => $product_data['payer-phone']
         );
 
-        $preference->back_urls = array(
-            "success" => "http://www.impermanencia.com/successful-purchase.php?" . $product_data['slot-id'],
-            "failure" => "http://www.impermanencia.com/canceled-purchase.php?slot-id=" . $product_data['slot-id'],
-            "pending" => "http://www.impermanencia.com/pending-purchae.php?" . $product_data['slot-id']
-        );
+        // $preference->back_urls = array(
+        //     "success" => "http://www.impermanencia.com/successful-purchase.php?slot-id=" . $product_data['slot-id'],
+        //     "failure" => "http://www.impermanencia.com/canceled-purchase.php?slot-id=" . $product_data['slot-id'],
+        //     "pending" => "http://www.impermanencia.com/pending-purchae.php?slot-id=" . $product_data['slot-id']
+        // );
 
-        $preference->auto_return = "approved";
+        // $preference->auto_return = "approved";
 
         $preference->payer = $payer;
         $preference->items = array($item);
