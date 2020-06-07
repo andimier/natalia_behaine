@@ -14,8 +14,8 @@ var Meeting = function() {
     this.data = null;
     this.slotId = getParamVal('slot-id');
 
-    this.redirectCrateMeetingUrl = "http://www.nataliabehaine.com/impermanencia/meeting/cm.html";
-    this.redirectIncludeInMeetingUrl = "http://www.nataliabehaine.com/impermanencia/meeting/im.html";
+    this.redirectCrateMeetingUrl = "http://www.nataliabehaine.com/impermanencia/api/meetings/cm.html";
+    this.redirectIncludeInMeetingUrl = "http://www.nataliabehaine.com/impermanencia/api/meetings/im.html";
 
     this.testRedirectCrateMeetingUrl = "http://www.andimier.com/apitests/meetings/cm.html";
     this.testRedirectIncludeInMeetingUrl = "http://www.andimier.com/apitests/meetings/im.html";
@@ -72,9 +72,9 @@ Meeting.prototype.createMeeting = function() {
         "response_type=code",
         "client_id=" + this.clientId,
         "redirect_uri=" + redirectUri
-    ];
+    ].join('&');
     
-    var url = "https://zoom.us/oauth/authorize?" + params.join('&');
+    var url = "https://zoom.us/oauth/authorize?" + params;
     
     console.log('Redirigiendo a: ', url);
     window.location = url;
