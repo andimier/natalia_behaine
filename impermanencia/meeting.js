@@ -54,11 +54,11 @@ Meeting.prototype.getSlotEntry = function() {
 }
 
 Meeting.prototype.includeInMeeting = function() {
+    var redirectUri = this.testRedirectIncludeInMeetingUrl + "&state=" + JSON.stringify({'slot-id':this.slotId});
     var params = [
         "response_type=code",
-        "client_id="+this.clientId,
-        "redirect_uri="+this.testRedirectIncludeInMeetingUrl,
-        "slot_id=" + this.slotId
+        "client_id=" + this.clientId,
+        "redirect_uri=" + redirectUri
     ];
 
     var url = "https://zoom.us/oauth/authorize?" + params.join('&');
@@ -67,16 +67,17 @@ Meeting.prototype.includeInMeeting = function() {
 }
 
 Meeting.prototype.createMeeting = function() {
+    var redirectUri = this.testRedirectIncludeInMeetingUrl + "&state=" + JSON.stringify({'slot-id':this.slotId});
     var params = [
         "response_type=code",
         "client_id=" + this.clientId,
-        "redirect_uri=" + this.testRedirectCrateMeetingUrl,
-        "slot_id=" + this.slotId
+        "redirect_uri=" + redirectUri
     ];
     
     var url = "https://zoom.us/oauth/authorize?" + params.join('&');
     
     console.log('Redirigiendo a: ', url);
+    window.location = url;
 }
 
 Meeting.prototype.requestAuth = function(data) {
