@@ -1,48 +1,115 @@
-document.querySelector('html').dataset.slotInfo
+function getParamVal(param) {
+    var search = window.location.search && window.location.search.replace(/\?/, '');
 
-// var data = JSON.stringify({
-//     "action": "create",
-//     "user_info": {
-//       "email": "dhjdfkghdskjf@fgkjfdlgjfkd.gh",
-//       "type": 1,
-//       "first_name": "Terry",
-//       "last_name": "Jones"
-//     }
-//   });
-  
-//   var xhr = new XMLHttpRequest();
-//   xhr.withCredentials = true;
-  
-//   xhr.addEventListener("readystatechange", function () {
-//     if (this.readyState === this.DONE) {
-//       console.log(this.responseText);
-//     }
-//   });
-  
-//   xhr.open("POST", "https://api.zoom.us/v2/users");
-//   xhr.setRequestHeader("content-type", "application/json");
-//   xhr.setRequestHeader("authorization", "Bearer eyJhbGciOiJIUzUxMiIsInYiOiIyLjAiLCJraWQiOiI1MzM2NDAxYS1iNWRlLTQ0YzEtYmFhYi1hZWNkOTA0MTk5YmUifQ.eyJ2ZXIiOiI2IiwiY2xpZW50SWQiOiJZQkhJV3dJVFRqS252alFySGNsOVJ3IiwiY29kZSI6Ijg4TXBGVE5aZGZfcTJqR0l6TmNRb1c0a0pJc0JSaE9PUSIsImlzcyI6InVybjp6b29tOmNvbm5lY3Q6Y2xpZW50aWQ6WUJISVd3SVRUaktudmpRckhjbDlSdyIsImF1dGhlbnRpY2F0aW9uSWQiOiIwNjM1MWU3YmQ5NzFkZGU3YTNkYjFlNGU3ODA5NDI2ZSIsInVzZXJJZCI6InEyakdJek5jUW9XNGtKSXNCUmhPT1EiLCJncm91cE51bWJlciI6MCwiYXVkIjoiaHR0cHM6Ly9vYXV0aC56b29tLnVzIiwiYWNjb3VudElkIjoibEZmQkppTFBRVkcwMHV1a0d4bGZMZyIsIm5iZiI6MTU5MDg5ODQyMiwiZXhwIjoxNTkwOTAyMDIyLCJ0b2tlblR5cGUiOiJhY2Nlc3NfdG9rZW4iLCJpYXQiOjE1OTA4OTg0MjIsImp0aSI6ImRhNjMwODBjLTA5YjEtNDZhMy1hNWNlLWYxZjM3YzFmMWM1ZCIsInRvbGVyYW5jZUlkIjowfQ.y7isXULWDNhHrxLIXGtOXIZ1kCJNIg-vHawJ8zm3FUAt78vKq4g-cCvbxv-Cv8rFlPClVYiuA8aPgYYGLdOU9g");
-  
-//   xhr.send(data);
+    if (search && search.includes(param)) {
+        var param = search.split('=');
 
-var xhr = new XMLHttpRequest();
-xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === this.DONE) {
-        console.log('Esta es la respuesta: ', this.responseText);
-        var data = JSON.parse(this.responseText)
-        document.write(JSON.stringify(data));
-        console.log()
+        return param[1];
     }
-});
 
-// var formatData = new FormData();
-// formatData.append('slot-id', 2);
+    return;
+}
 
-var formatData = JSON.parse('{"a": 2}');
+var Meeting = function() {
+    this.data = null;
+    this.slotId = getParamVal('slot-id');
 
+    this.redirectCrateMeetingUrl = "http://www.nataliabehaine.com/impermanencia/meeting/cm.html";
+    this.redirectIncludeInMeetingUrl = "http://www.nataliabehaine.com/impermanencia/meeting/im.html";
 
-xhr.open("POST", "test.php");
-xhr.setRequestHeader("content-type", "application/json");
-// xhr.setRequestHeader("slot-id", "2");
-// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-xhr.send(formatData);
+    this.testRedirectCrateMeetingUrl = "http://www.andimier.com/apitests/meetings/cm.html";
+    this.testRedirectIncludeInMeetingUrl = "http://www.andimier.com/apitests/meetings/im.html";
+
+    this.clientId = "YBHIWwITTjKnvjQrHcl9Rw";
+}
+
+Meeting.prototype.getSlotEntry = function() {
+    var _this = this;
+    var xhr = new XMLHttpRequest();
+    
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            var response = this.responseText;
+
+            if (response) {
+                var data = JSON.parse(response);
+                console.log('Esta es la respuesta: ', data);
+
+            _this.requestAuth(data);
+
+            } else {
+                console.warn('invalid data');
+            }
+        }
+    });
+
+    if (this.slotId) {
+        var formatData = new FormData();
+        formatData.append('slot-id', this.slotId);
+    
+        xhr.open("POST", "test.php");
+        // xhr.setRequestHeader("content-type", "application/json");
+        xhr.send(formatData);
+    }
+}
+
+Meeting.prototype.includeInMeeting = function() {
+    var params = [
+        "response_type=code",
+        "client_id="+this.clientId,
+        "redirect_uri="+this.testRedirectIncludeInMeetingUrl,
+        "slot_id=" + this.slotId
+    ];
+
+    var url = "https://zoom.us/oauth/authorize?" + params.join('&');
+    
+    console.log('Redirigiendo a: ', url);
+}
+
+Meeting.prototype.createMeeting = function() {
+    var params = [
+        "response_type=code",
+        "client_id=" + this.clientId,
+        "redirect_uri=" + this.testRedirectCrateMeetingUrl,
+        "slot_id=" + this.slotId
+    ];
+    
+    var url = "https://zoom.us/oauth/authorize?" + params.join('&');
+    
+    console.log('Redirigiendo a: ', url);
+}
+
+Meeting.prototype.requestAuth = function(data) {
+    
+    var utl;
+    
+
+    /**
+     * Es grupal
+     * consultar si ya existe el id de la reunión en la bd
+     * si ya existe un id, enviar query param createMeeting = false o, redirigir a /meeting/cmf
+     * si no existe un id, enviar query param createMeeting = true o, redirigir a /meeting/cmv
+     * */
+
+    if (data.state === 'blocked') {
+        console.warn('Meeting is blocked');
+        return;
+    }
+
+    if (data.type === 'group' && data.meeting_id.length) {
+        this.includeInMeeting();
+    } else {
+        /**
+         * Si no es grupal:
+         * Crear la reunión: redirigir a z/auth/cmv
+         */
+        this.createMeeting();
+
+    }
+}
+
+var initiMettingFlow = (function () {
+    var meeting = new Meeting();
+    meeting.getSlotEntry();
+})();
+
