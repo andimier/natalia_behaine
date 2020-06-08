@@ -67,7 +67,7 @@ Meeting.prototype.includeInMeeting = function() {
 }
 
 Meeting.prototype.createMeeting = function() {
-    var redirectUri = this.testRedirectIncludeInMeetingUrl + "&state=" + JSON.stringify({'slot-id':this.slotId});
+    var redirectUri = this.testRedirectCrateMeetingUrl + "&state=" + JSON.stringify({'slot-id':this.slotId});
     var params = [
         "response_type=code",
         "client_id=" + this.clientId,
