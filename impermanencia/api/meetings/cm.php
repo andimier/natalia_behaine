@@ -22,7 +22,7 @@
             return $userData;
         }
 
-        public function getData() {
+        private function getTokenData() {
             $queryParams = [
                 "grant_type=authorization_code",
                 "code=".$this->getCode(),
@@ -33,23 +33,39 @@
     
             try {
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-                curl_setopt($ch, CURLOPT_POST, 1); 
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " . $this->keyAndSecret)); 
+                // curl_setopt($ch, CURLOPT_URL, $url);
+                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                // curl_setopt($ch, CURLOPT_POST, 1); 
+                // curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " . $this->keyAndSecret)); 
 
-                $data = curl_exec($ch);
-                echo $data;
+                // $data = curl_exec($ch);
+                // echo $data;
 
-                curl_close($ch);
+                // curl_close($ch);
 
-                // $data = "Datos de prueba";
+                $data = file_get_contents('success-responde-mock.json', true);
 
                 return $data;
 
             } catch (Exception $e) {
                 echo 'Excepción capturada: ',  $e->getMessage(), "\n";
             }
+        }
+
+        public function getData() {
+            $data = $this->getTokenData();
+
+            if ($data != NULL) {
+                $parsedData = json_decode($data);
+
+                if (isset($parsedData->{'erro'})) {
+                    return $parsedData->{'erro'};
+                }
+
+                return $parsedData->{'access_token'};
+            }
+
+            return NULL;
         }
     }
 
@@ -69,8 +85,5 @@
 
     <div id="data-container" data-request-data="<?php echo $data; ?>"></div>
 
-    <script>
-        debugger
-    </script>
-    <!-- <script src="cm.js"></script> -->
+    <script src="cm.js"></script>
 </html>

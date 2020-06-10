@@ -60,10 +60,6 @@ TokenAuth.prototype.getToken = function() {
     // xhr.setRequestHeader("Access-Control-Allow-Origin", this.testRedirectIncludeInMeetingUrl);
 
     xhr.send('token');
-
-    // http://www.andimier.com/apitests/meetings/cm.html?
-    // code=jsbfs0P1RI_q2jGIzNcQoW4kJIsBRhOOQ
-    // &state={%22slot-id%22:%222%22}
 }
 
 TokenAuth.prototype.apiTokenCallbak = function(response) {
@@ -73,9 +69,20 @@ TokenAuth.prototype.apiTokenCallbak = function(response) {
     }
 }
 
-var initApiToken = (function() {
-    var tokenAuth = new TokenAuth();
-    var toke = tokenAuth.getToken();
+var initApiToken = (function() {debugger
+    var dataContainer = document.querySelector('#data-container');
+
+    if (dataContainer) {
+        var data = dataContainer.dataset.requestData && data.length > 0;
+
+        if ($data === 'invalid_request') {
+            console.warn('invalid_request');
+            return 
+        } else {
+            // make request
+        }
+    }
+    
 })();
 
 
