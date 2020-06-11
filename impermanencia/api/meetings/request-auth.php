@@ -108,5 +108,5 @@
         </ul>
     </div>
 
-    <script src="cm.js"></script>
+    <script src="request-meeting.js"></script>
 </html>

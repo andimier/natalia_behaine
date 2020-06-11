@@ -14,10 +14,8 @@ var Meeting = function() {
     this.data = null;
     this.slotId = getParamVal('slot-id');
 
-    this.redirectCrateMeetingUrl = "http://www.nataliabehaine.com/impermanencia/api/meetings/cm.html";
-
-    this.testRedirectCrateMeetingUrl = "http://www.andimier.com/apitests/meetings/cm.html";
-    this.testRedirectIncludeInMeetingUrl = "http://www.andimier.com/apitests/meetings/im.html";
+    this.redirectCrateMeetingUrl = "http://www.nataliabehaine.com/impermanencia/api/meetings/request-auth.php";
+    this.testRedirectCrateMeetingUrl = "http://www.andimier.com/apitests/meetings/request-auth.html";
 
     this.clientId = "YBHIWwITTjKnvjQrHcl9Rw";
 }
@@ -71,8 +69,7 @@ Meeting.prototype.requestAuth = function(data) {
         return;
     }
 
-    //this.tryCreateMeeting();
-
+    this.tryCreateMeeting();
 }
 
 var initiMettingFlow = (function () {
