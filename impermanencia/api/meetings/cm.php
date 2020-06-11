@@ -1,4 +1,8 @@
 <?php
+    require_once('../../required/cnx.php');
+    require_once('../../utils/phpfunctions.php');
+    require_once('../../crud/r-schedule.php');
+
     class Token {
 
         function __construct() {
@@ -12,14 +16,16 @@
             return $_GET['code'];
         }
 
-        private function getSlotId() {
-            $userData = null;
-
+        private function getSlotInfo() {
             if (isset($_GET['state'])) {
-                $userData = $_GET['state'];
+                $slotInfo = explode(',', $_GET['state']);
+                $slotId = explode(':', $slotInfo[0]);
+
+                // get db info
+                return getSelectedSlotData($slotId[1]);
             }
 
-            return $userData;
+            return null;
         }
 
         private function getTokenData() {
@@ -54,6 +60,7 @@
 
         public function getData() {
             $data = $this->getTokenData();
+            $slotData = $this->getSlotInfo();
 
             if ($data != NULL) {
                 $parsedData = json_decode($data);
@@ -62,7 +69,10 @@
                     return $parsedData->{'erro'};
                 }
 
-                return $parsedData->{'access_token'};
+                return [
+                    $parsedData->{'access_token'},
+                    $slotData
+                ];
             }
 
             return NULL;
@@ -72,8 +82,7 @@
     if (isset($_GET['code'])) {
         $token = new Token();
         $data = $token->getData();
-
-        echo $data;
+        $slotInfo = $data[1];
     }
 ?>
 
@@ -83,7 +92,14 @@
         Creando la reunión en Zoom...
     </div>
 
-    <div id="data-container" data-request-data="<?php echo $data; ?>"></div>
+    <div id="data-container" data-request-data="<?php echo $data[0]; ?>">
+        <ul>
+            <li>Meeting slot state: <?php echo $slotInfo['state']; ?></li>
+            <li>Meeting type: <?php echo $slotInfo['type']; ?></li>
+            <!-- <li>Your name: <?php echo $slotInfo['name']; ?></li>
+            <li>Your email: <?php echo $slotInfo['email']; ?></li> -->
+        </ul>
+    </div>
 
     <script src="cm.js"></script>
 </html>

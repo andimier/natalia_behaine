@@ -15,6 +15,32 @@ function getParamVal(param) {
     return;
 }
 
+var User = function(data) {
+    this.host = "https://api.zoom.us/v2/users/";
+    this.access_token = data;
+}
+
+User.prototype.getUserId = function() {
+    var xhr = new XMLHttpRequest();
+
+    // xhr.addEventListener("readystatechange", this.setUser);
+    // xhr.open("POST", this.url);
+    // xhr.setRequestHeader("content-type", "application/json");
+    // xhr.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    // xhr.send('token');
+debugger
+    setTimeout(function() {
+        return 'completada';
+    }, 3000)
+}
+
+User.prototype.setUser = function() {
+    if (this.readyState === this.DONE) {
+        debugger
+        console.log(this.responseText);
+    }
+}
+
 var TokenAuth = function() {
     this.urlHost = "https://zoom.us/oauth/token?";
     this.clientID = "YBHIWwITTjKnvjQrHcl9Rw";
@@ -64,22 +90,43 @@ TokenAuth.prototype.getToken = function() {
 
 TokenAuth.prototype.apiTokenCallbak = function(response) {
     if (this.readyState === this.DONE) {
-        debugger
         console.log(this.responseText);
     }
 }
 
-var initApiToken = (function() {debugger
+var initApiToken = (function() {
     var dataContainer = document.querySelector('#data-container');
+    var data = dataContainer && dataContainer.dataset.requestData;
 
-    if (dataContainer) {
-        var data = dataContainer.dataset.requestData && data.length > 0;
-
-        if ($data === 'invalid_request') {
+    if (data.length) {debugger
+         if (data === 'invalid_request') {
             console.warn('invalid_request');
             return 
         } else {
-            // make request
+            // get userId
+            var setMeeting = new Promise(function(resolve, reject) {
+                debugger
+                var user = new User();
+                var users = user.getUserId(data);
+
+                if (users) {
+                    resolve(users);
+                }
+            })
+            
+            setMeeting.then(function(val) {
+                debugger
+            })
+            
+            setMeeting.catch(function(reason) {
+                debugger
+                console.log(reason);
+            });
+            
+
+            // make request, make meeting
+
+
         }
     }
     

@@ -54,7 +54,7 @@ Meeting.prototype.getSlotEntry = function() {
 }
 
 Meeting.prototype.includeInMeeting = function() {
-    var redirectUri = this.testRedirectIncludeInMeetingUrl + "&state=" + JSON.stringify({'slot-id':this.slotId});
+    var redirectUri = this.testRedirectIncludeInMeetingUrl + "&state=slot-id:" + this.slotId;
     var params = [
         "response_type=code",
         "client_id=" + this.clientId,
