@@ -60,7 +60,6 @@ var TokenAuth = function() {
 
 TokenAuth.prototype.getToken = function() {
     var _this = this;
-    // var code = getParamVal('code');
     var code = "SU7udLm5ql_q2jGIzNcQoW4kJIsBRhOOQ";
 
     params = [
