@@ -1,4 +1,6 @@
 <?php 
+    require_once('required/cnx.php');
+    require_once('utils/phpfunctions.php');
     require_once('crud/r-schedule.php');
 
     $transactionState = 'error';

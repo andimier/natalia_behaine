@@ -1,5 +1,8 @@
 <?php 
+    require_once('required/cnx.php');
+    require_once('utils/phpfunctions.php');
     require_once('crud/r-schedule.php');
+
     if (isset($_GET['product-code'])) {
         $timeSlots = getTimeSlots($_GET['product-code']); 
         $product = 'Clases grupales diarias de Meditación';
@@ -7,6 +10,7 @@
         $productType = $_GET['product-type'];
     }
 ?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -67,19 +71,20 @@
                 <p class="summary-date"></p>
                 <p class="summary-time"></p>
 
-                <form action="purchase-gate.php" class="submit-order hidden" method="POST">
-                    <div class="payer-info">
+                <!-- <form action="purchase-gate.php" id="submit-order" class="hidden" method="POST"> -->
+                <form action="" id="submit-order" class="hidden" method="POST">
+                    <div id="payer-info">
                         <label class="payer-input payer-name">
                             Tu nombre:
-                            <input type="input" name="payer-name" />
+                            <input type="input" class="payer-info-field" name="payer-name" />
                         </label>
                         <label class="payer-input payer-email">
                             Tu correo electrónico:
-                            <input type="input" name="payer-email" />
+                            <input type="input" class="payer-info-field" name="payer-email" />
                         </label>
                         <label class="payer-input payer-phone">
                             Tu teléfono:
-                            <input type="input" name="payer-phone" />
+                            <input type="input" class="payer-info-field" name="payer-phone" />
                         </label>
                     </div>
 
@@ -91,7 +96,7 @@
                     <input class="slot-data" type="hidden" name="slot-time" value=""/>
                     <input class="slot-data" type="hidden" name="slot-date" value=""/>
             
-                    <input type="submit" name="make-purchase" value="Comprar"/>
+                    <input type="submit" id="buy-slot" name="make-purchase" value="Comprar"/>
                 </form>
             <?php endif; ?>
         </section>

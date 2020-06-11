@@ -71,7 +71,7 @@ function selectDate(date, datePicker) {
     document.querySelector('.summary-date').innerHTML = '';
     document.querySelector('.summary-time').innerHTML = '';
 
-    document.querySelector('.submit-order').classList.add('hidden');
+    document.querySelector('#submit-order').classList.add('hidden');
 
     toggleSelectedDateHours (date, datePicker);
 }
@@ -87,7 +87,6 @@ function selectDateAndHour(e) {
     selectedDateAndHour = [
         selectedDate,
         selectedTime
-
     ];
 
     document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + selectedDate;
@@ -98,11 +97,44 @@ function selectDateAndHour(e) {
     document.querySelector('.slot-data[name="slot-date"]').value = selectedDate;
     document.querySelector('.slot-data[name="slot-time"]').value = selectedTime;
 
-    document.querySelector('.submit-order').classList.remove('hidden');
+    document.querySelector('#submit-order').classList.remove('hidden');
+}
+
+function validateInfo(e) {
+    var items = Array.from(e.target.querySelectorAll('.payer-info-field'));
+    var errors = [];
+    var hasEmailCharacters = false;
+
+    items.forEach(function(el) {
+        console.log(el.className + ': ' +el.value);
+
+        if (!el.value.length || !el.value) {
+            errors.push(el.className);
+        }
+
+        // strip html tags
+        var str = el.value;
+        var validStr = str.replace(/(<([^>]+)>)/ig,"");
+        el.value = validStr;
+
+        if (el.name === 'payer-email') {
+            hasEmailCharacters = el.value.includes('.') && el.value.includes('@'); 
+        }
+    });
+
+    if (errors.length || !hasEmailCharacters) {
+        event.preventDefault();
+
+        var message = errors.length ? 'Los datos están incompletos.' : '';
+        message = (!hasEmailCharacters) ? message + ' El correo ingresado no es válido' : message;
+
+        alert(message);
+    }
 }
 
 function setEvents() {
     document.querySelector('.hours-wrapper').addEventListener('click', selectDateAndHour);
+    document.querySelector('#submit-order').addEventListener('submit', validateInfo);
 }
 
 function pad(number) {

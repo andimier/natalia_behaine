@@ -1,7 +1,4 @@
 <?php
-    // require_once('required/cnx.php');
-    // require_once('utils/phpfunctions.php');
-
     function getTimeSlots ($productCode) {
         global $connection;
         $hours = [];
