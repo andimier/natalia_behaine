@@ -76,15 +76,15 @@
                     <div id="payer-info">
                         <label class="payer-input payer-name">
                             Tu nombre:
-                            <input type="input" class="payer-info-field" name="payer-name" />
+                            <input type="input" class="payer-info-field" name="payerName" />
                         </label>
                         <label class="payer-input payer-email">
                             Tu correo electrónico:
-                            <input type="input" class="payer-info-field" name="payer-email" />
+                            <input type="input" class="payer-info-field" name="payerEmail" />
                         </label>
                         <label class="payer-input payer-phone">
                             Tu teléfono:
-                            <input type="input" class="payer-info-field" name="payer-phone" />
+                            <input type="input" class="payer-info-field" name="payerPhone" />
                         </label>
                     </div>
 

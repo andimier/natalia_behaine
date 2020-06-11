@@ -1,17 +1,25 @@
 <?php
-    require_once('../required/cnx.php');
-    require_once('../utils/phpfunctions.php');
-    require_once('r-schedule.php');
-
-    class InserMeetingUser {
+    class MeetingUser {
         function __construct($data) {
-            $this->insertUser = $data['slotId'];
-            $this->userName = $data['userName'];
-            $this->userEmail = $data['userEmail'];
-            $this->userPhone = $data['userPhone'];
+            $this->slotId = $data['slot-id'];
+            $this->userName = $data['payerName'];
+            $this->userEmail = $data['payerEmail'];
+            $this->userPhone = $data['payerPhone'];
+            $this->userDetails = '';
+
+            if (isset($data['payerDetails'])) {
+                $this->userDetails = $data['payerDetails'];
+            }
         }
 
         public function insertUser() {
+            global $connection;
+
+            $q = "INSERT INTO slot_users (slot_id, name, email, phone, details) ";
+            $q .= "VALUES ({$this->slotId}, '{$this->userName}', '{$this->userEmail}', '{$this->userPhone}', '{$this->userDetails}')";
+
+            mysqli_query($connection, $q);
+
             echo 'creando usuario';
         }
     }
@@ -22,6 +30,8 @@
         }
 
         public function getSlotData() {
+            require_once('r-schedule.php');
+
             $body = $_REQUEST;
             $headers = getallheaders();
                     
@@ -38,16 +48,12 @@
 
         if (empty($_POST)) {
             echo 'Error: no slot value';
-        } else {
-            if (isset($_POST['slot-id'])) {
-                $slot = new DataSlot($_POST);
-                $slot->getSlotData();
-            }
+            return;
+        }
 
-            if (isset($_POST['insertUser'])) {
-                $insert = new InserMeetingUser($_POST);
-                $insert->insertUser();
-            }
+        if (isset($_POST['slot-id'])) {
+            $slot = new DataSlot($_POST);
+            $slot->getSlotData();
         }
     }
 ?>

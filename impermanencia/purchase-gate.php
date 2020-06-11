@@ -2,6 +2,7 @@
     require_once('required/cnx.php');
     require_once('utils/phpfunctions.php');
     require_once('crud/r-schedule.php');
+    require_once('crud/rw-slot-data.php');
 
     $transactionState = 'error';
     $canMakePurchase = 'no';
@@ -24,11 +25,11 @@
         $item->unit_price = $price;
 
         $payer = new MercadoPago\Payer();
-        $payer->name = $product_data['payer-name'];
-        $payer->email = $product_data['payer-email'];
+        $payer->name = $product_data['payerName'];
+        $payer->email = $product_data['payerEmail'];
         $payer->phone = array(
             "area_code" => "",
-            "number" => $product_data['payer-phone']
+            "number" => $product_data['payerPhone']
         );
 
         // $preference->back_urls = array(
@@ -54,14 +55,17 @@
         
         if (isset($slotState)) {
             $slotType = $_POST['slot-type'];
+            $insert = new MeetingUser($_POST);
 
             if ($slotType == 'group') {
                 $transactionState = 'free';
+                $insert->insertUser();
                 echo 'Esta es una cita grupal y más gente puede reservar';
             }
 
             if ($slotType == 'single' && $slotState == 'free') {
                 echo 'Esta es una cita personalizada, se está reservando la hora';
+                $insert->insertUser();
 
                 // Block slot, update table
                 blockSlot($slotId);
