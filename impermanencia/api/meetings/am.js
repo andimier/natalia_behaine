@@ -15,7 +15,6 @@ var Meeting = function() {
     this.slotId = getParamVal('slot-id');
 
     this.redirectCrateMeetingUrl = "http://www.nataliabehaine.com/impermanencia/api/meetings/cm.html";
-    this.redirectIncludeInMeetingUrl = "http://www.nataliabehaine.com/impermanencia/api/meetings/im.html";
 
     this.testRedirectCrateMeetingUrl = "http://www.andimier.com/apitests/meetings/cm.html";
     this.testRedirectIncludeInMeetingUrl = "http://www.andimier.com/apitests/meetings/im.html";
@@ -53,21 +52,8 @@ Meeting.prototype.getSlotEntry = function() {
     }
 }
 
-Meeting.prototype.includeInMeeting = function() {
-    var redirectUri = this.testRedirectIncludeInMeetingUrl + "&state=slot-id:" + this.slotId;
-    var params = [
-        "response_type=code",
-        "client_id=" + this.clientId,
-        "redirect_uri=" + redirectUri
-    ];
-
-    var url = "https://zoom.us/oauth/authorize?" + params.join('&');
-    
-    console.log('Redirigiendo a: ', url);
-}
-
-Meeting.prototype.createMeeting = function() {
-    var redirectUri = this.testRedirectCrateMeetingUrl + "&state=" + JSON.stringify({'slot-id':this.slotId});
+Meeting.prototype.tryCreateMeeting = function() {
+    var redirectUri = this.testRedirectCrateMeetingUrl + "&state=slot-id':" + this.slotId;
     var params = [
         "response_type=code",
         "client_id=" + this.clientId,
@@ -82,31 +68,13 @@ Meeting.prototype.createMeeting = function() {
 
 Meeting.prototype.requestAuth = function(data) {
     
-    var utl;
-    
-
-    /**
-     * Es grupal
-     * consultar si ya existe el id de la reunión en la bd
-     * si ya existe un id, enviar query param createMeeting = false o, redirigir a /meeting/cmf
-     * si no existe un id, enviar query param createMeeting = true o, redirigir a /meeting/cmv
-     * */
-
     if (data.state === 'blocked') {
         console.warn('Meeting is blocked');
         return;
     }
 
-    if (data.type === 'group' && data.meeting_id.length) {
-        this.includeInMeeting();
-    } else {
-        /**
-         * Si no es grupal:
-         * Crear la reunión: redirigir a z/auth/cmv
-         */
-        this.createMeeting();
+    this.tryCreateMeeting();
 
-    }
 }
 
 var initiMettingFlow = (function () {

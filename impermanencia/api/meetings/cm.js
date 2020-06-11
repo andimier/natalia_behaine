@@ -15,29 +15,32 @@ function getParamVal(param) {
     return;
 }
 
-var User = function(data) {
+var APIUsers = function(data) {
     this.host = "https://api.zoom.us/v2/users/";
     this.access_token = data;
 }
 
-User.prototype.getUserId = function() {
-    var xhr = new XMLHttpRequest();
+APIUsers.prototype.getUserId = function() {
+    var _this = this;
+    return new Promise(function(resolve, reject) {
+        var xhr = new XMLHttpRequest();
 
-    // xhr.addEventListener("readystatechange", this.setUser);
-    // xhr.open("POST", this.url);
-    // xhr.setRequestHeader("content-type", "application/json");
-    // xhr.setRequestHeader("Authorization", "Bearer " + this.access_token);
-    // xhr.send('token');
-debugger
-    setTimeout(function() {
-        return 'completada';
-    }, 3000)
+        // xhr.addEventListener("readystatechange", _this.sendUserId);
+        // xhr.open("POST", this.url);
+        // xhr.setRequestHeader("content-type", "application/json");
+        // xhr.setRequestHeader("Authorization", "Bearer " + this.access_token);
+        // xhr.send('token');
+    
+        setTimeout(function() {
+            _this.sendUserId(resolve);
+        }, 3000);
+    });
 }
 
-User.prototype.setUser = function() {
+APIUsers.prototype.sendUserId = function(resolve) {
     if (this.readyState === this.DONE) {
-        debugger
         console.log(this.responseText);
+        resolve('completada');
     }
 }
 
@@ -66,7 +69,6 @@ TokenAuth.prototype.getToken = function() {
         "redirect_uri=" + this.testRedirectIncludeInMeetingUrl
     ].join('&');
 
-
     var url = this.urlHost + params;
 
     var xhr = new XMLHttpRequest();
@@ -83,7 +85,6 @@ TokenAuth.prototype.getToken = function() {
     // xhr.open("POST", url);
     xhr.setRequestHeader("content-type", "application/json");
     xhr.setRequestHeader("Authorization", "Basic WUJISVd3SVRUaktudmpRckhjbDlSdzpEbFh3SEJSREdFWW1ucnNDQUVSSjJ3dTlHNEhCbTIyQQ==");
-    // xhr.setRequestHeader("Access-Control-Allow-Origin", this.testRedirectIncludeInMeetingUrl);
 
     xhr.send('token');
 }
@@ -98,38 +99,27 @@ var initApiToken = (function() {
     var dataContainer = document.querySelector('#data-container');
     var data = dataContainer && dataContainer.dataset.requestData;
 
-    if (data.length) {debugger
+    if (data.length) {
          if (data === 'invalid_request') {
             console.warn('invalid_request');
-            return 
+            return;
         } else {
-            // get userId
-            var setMeeting = new Promise(function(resolve, reject) {
-                debugger
-                var user = new User();
-                var users = user.getUserId(data);
+            // si ya está creada, insertar usuario en reunión
 
-                if (users) {
-                    resolve(users);
-                }
+            // si no está creada
+            var users = new APIUsers();
+            var userId = users.getUserId(data);
+          
+            userId.then(function(val) {
+                debugger
+                // create meeting
             })
             
-            setMeeting.then(function(val) {
-                debugger
-            })
-            
-            setMeeting.catch(function(reason) {
-                debugger
-                console.log(reason);
+            userId.catch(function(reason) {
+                console.warn(reason);
             });
-            
-
-            // make request, make meeting
-
-
         }
     }
-    
 })();
 
 

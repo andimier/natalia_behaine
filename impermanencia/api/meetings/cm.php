@@ -9,7 +9,7 @@
             $this->redirectUri = "http://www.andimier.com/apitests/meetings/cm.html";
             $this->keyAndSecret = "WUJISVd3SVRUaktudmpRckhjbDlSdzpEbFh3SEJSREdFWW1ucnNDQUVSSjJ3dTlHNEhCbTIyQQ==";
             $this->apiHost = "https://zoom.us/oauth/token";
-            $this->localTestUrl = "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/api/meetings/cm.php?code=3964982734hbd293bd92";
+            $this->localTestUrl = "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/api/meetings/cm.php?code=3964982734hbd293bd92&state=slot-id:2";
         }
 
         private function getCode() {
@@ -83,6 +83,13 @@
         $token = new Token();
         $data = $token->getData();
         $slotInfo = $data[1];
+
+        /**
+         * Obligar al usuario a insertar sus datos antes de intentar crear la reunión
+         * En BD crear colomna meeting_url
+         * Pintar la url de de la reunión
+         * Validar en el js si ya está hecha la reunión para insertar usuario
+         */
     }
 ?>
 
