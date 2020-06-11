@@ -46,8 +46,7 @@ Meeting.prototype.getSlotEntry = function() {
         var formatData = new FormData();
         formatData.append('slot-id', this.slotId);
     
-        xhr.open("POST", "test.php");
-        // xhr.setRequestHeader("content-type", "application/json");
+        xhr.open("POST", "crud/rw-slot-data.php");
         xhr.send(formatData);
     }
 }

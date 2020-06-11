@@ -101,14 +101,13 @@ var initApiToken = (function() {
             console.warn('invalid_request');
             return;
         } else {
-            // si ya está creada, insertar usuario en reunión
-
-            // si no está creada
             var users = new APIUsers();
             var userId = users.getUserId(data);
           
             userId.then(function(val) {
-                // create meeting
+                // si ya está creada, insertar usuario en reunión
+
+                // si no está creada
             })
             
             userId.catch(function(reason) {

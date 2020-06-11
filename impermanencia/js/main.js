@@ -37,6 +37,66 @@ $( "#datepicker" ).datepicker({
     onSelect: selectDate
 });
 
+var UserInfo = function(data) {
+    this.slotId = data.slotId;
+    this.name = data.name;
+    this.email = data.email;
+    this.phone = data.phone;
+
+    if (this.details) {
+        this.details = data.details;
+    }
+}
+
+UserInfo.prototype.insertUser = function() {
+    var _this = this;
+
+    return new Promise(function(resolve, reject) {
+        
+        if (_this.slotId) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.addEventListener("readystatechange", function() {
+                if (this.readyState === this.DONE) {
+                    var response = this.responseText;
+            
+                    if (response) {
+                        resolve('User created correctly: ' + response);
+                    } else {
+                        reject("Could not crate user");
+                    }
+                }
+            });
+
+            var formatData = new FormData();
+            formatData.append('insertUser', 'true');
+            formatData.append('slotId', _this.slotId);
+            formatData.append('userName', _this.name );
+            formatData.append('userEmail', _this.email);
+            formatData.append('userPhone', _this.phone);
+
+            if (_this.details) {
+                formatData.append('userDetails', _this.details);
+            }
+    
+            xhr.open("POST", "crud/rw-slot-data.php");
+            xhr.send(formatData);
+        }
+    });
+}
+
+UserInfo.prototype.validateInsertion = function() {
+    if (this.readyState === this.DONE) {
+        var response = this.responseText;
+
+        if (response) {
+            console.log('User created correctly: ', response);
+        } else {
+            console.warn("Could not crate user");
+        }
+    }
+}
+
 var selectedDateAndHour = [];
 var selectedHours = [];
 
@@ -104,6 +164,9 @@ function validateInfo(e) {
     var items = Array.from(e.target.querySelectorAll('.payer-info-field'));
     var errors = [];
     var hasEmailCharacters = false;
+    var data = {};
+
+    event.preventDefault();
 
     items.forEach(function(el) {
         console.log(el.className + ': ' +el.value);
@@ -120,15 +183,28 @@ function validateInfo(e) {
         if (el.name === 'payer-email') {
             hasEmailCharacters = el.value.includes('.') && el.value.includes('@'); 
         }
+
+        data[el.name.split('-')[1]] = el.value;
     });
 
     if (errors.length || !hasEmailCharacters) {
-        event.preventDefault();
-
         var message = errors.length ? 'Los datos están incompletos.' : '';
         message = (!hasEmailCharacters) ? message + ' El correo ingresado no es válido' : message;
 
         alert(message);
+    } else {
+        data['slotId'] = e.target.querySelector("[name='slot-id'").value;
+
+        var userInfo = new UserInfo(data);
+        var insertedUser = userInfo.insertUser();
+
+        insertedUser.then(function(val) {
+            e.target.submit();
+        });
+
+        insertedUser.catch(function(reason) {
+            console.log(reason);
+        });
     }
 }
 
