@@ -71,8 +71,8 @@
                 <p class="summary-date"></p>
                 <p class="summary-time"></p>
 
-                <!-- <form action="purchase-gate.php" id="submit-order" class="hidden" method="POST"> -->
-                <form action="" id="submit-order" class="hidden" method="POST">
+                <form action="purchase-gate.php" id="submit-order" class="hidden" method="POST">
+                <!-- <form action="" id="submit-order" class="hidden" method="POST"> -->
                     <div id="payer-info">
                         <label class="payer-input payer-name">
                             Tu nombre:

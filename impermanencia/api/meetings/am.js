@@ -26,15 +26,14 @@ Meeting.prototype.getSlotEntry = function() {
     var _this = this;
     var xhr = new XMLHttpRequest();
     
-    xhr.addEventListener("readystatechange", function () {
+    xhr.addEventListener("readystatechange", function() {
         if (this.readyState === this.DONE) {
             var response = this.responseText;
 
             if (response) {
-                var data = JSON.parse(response);
-                console.log('Esta es la respuesta: ', data);
+                console.log('Esta es la respuesta: ', response);
 
-            _this.requestAuth(data);
+            _this.requestAuth(response);
 
             } else {
                 console.warn('invalid data');
@@ -72,7 +71,7 @@ Meeting.prototype.requestAuth = function(data) {
         return;
     }
 
-    this.tryCreateMeeting();
+    //this.tryCreateMeeting();
 
 }
 
