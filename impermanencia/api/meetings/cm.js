@@ -72,9 +72,8 @@ TokenAuth.prototype.getToken = function() {
     var url = this.urlHost + params;
 
     var xhr = new XMLHttpRequest();
-    var apiTokenCallbak = this.apiTokenCallbak;
-    // xhr.withCredentials = true;
-    // xhr.addEventListener("readystatechange", apiTokenCallbak);
+
+    xhr.withCredentials = true;
     xhr.addEventListener("readystatechange", function() {
         if (this.readyState === this.DONE) {
             debugger
@@ -82,7 +81,6 @@ TokenAuth.prototype.getToken = function() {
         }
     });
     xhr.open("POST", "https://zoom.us/oauth/token?grant_type=authorization_code&code=2xm7gFp2tx_q2jGIzNcQoW4kJIsBRhOOQ&redirect_uri=http://www.andimier.com/apitests/meetings/cm.html");
-    // xhr.open("POST", url);
     xhr.setRequestHeader("content-type", "application/json");
     xhr.setRequestHeader("Authorization", "Basic WUJISVd3SVRUaktudmpRckhjbDlSdzpEbFh3SEJSREdFWW1ucnNDQUVSSjJ3dTlHNEhCbTIyQQ==");
 
@@ -111,7 +109,6 @@ var initApiToken = (function() {
             var userId = users.getUserId(data);
           
             userId.then(function(val) {
-                debugger
                 // create meeting
             })
             
