@@ -122,16 +122,19 @@ function validateInfo(e) {
             hasEmailCharacters = el.value.includes('.') && el.value.includes('@'); 
         }
 
-        data[el.name.split('-')[1]] = el.value;
+        data[el.name] = el.value;
     });
 
     if (errors.length || !hasEmailCharacters) {
         event.preventDefault();
-
+        
         var message = errors.length ? 'Los datos están incompletos.' : '';
         message = (!hasEmailCharacters) ? message + ' El correo ingresado no es válido' : message;
-
+        
         alert(message);
+    } else {
+        // cache user
+          window.localStorage.setItem('nbUserData', JSON.stringify(data));
     }
 }
 
