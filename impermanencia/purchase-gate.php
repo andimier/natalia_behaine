@@ -61,17 +61,17 @@
         
         if (isset($slotState)) {
             $slotType = $_POST['slot-type'];
-            $insert = new MeetingUser($_POST);
+            $u = new MeetingUser($_POST);
 
             if ($slotType == 'group') {
                 $transactionState = 'free';
-                $insert->insertUser();
+                $u->insertUser();
                 echo 'Esta es una cita grupal y más gente puede reservar';
             }
 
             if ($slotType == 'single' && $slotState == 'free') {
                 echo 'Esta es una cita personalizada, se está reservando la hora';
-                $insert->insertUser();
+                $u->insertUser();
 
                 // Block slot, update table
                 blockSlot($slotId);
@@ -118,5 +118,4 @@
             <?php endif; ?>
         </div>
     </body>
-
 </html>

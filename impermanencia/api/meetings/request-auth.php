@@ -54,7 +54,6 @@
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " . $this->keyAndSecret)); 
 
                 $data = curl_exec($ch);
-                echo $data;
 
                 curl_close($ch);
 
@@ -89,17 +88,66 @@
         }
     }
 
+    class Users {
+        function __construct($token) {
+            $this->token = $token;
+        }
+
+        public function getData() {
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'https://api.zoom.us/v2/users/');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $this->token)); 
+
+                $data = curl_exec($ch);
+
+                curl_close($ch);
+
+                return $data;
+
+            } catch (Exception $e) {
+                echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            }
+        }
+
+        public function getUsersData() {
+            $data = $this->getData();
+
+            if ($data != NULL) {
+                $parsedData = json_decode($data);
+
+                if (isset($parsedData->{'error'})) {
+                    return $parsedData->{'error'};
+                }
+
+                return $parsedData->{'users'}[0];
+            }
+
+            return NULL;
+        }
+    }
+
+    class Meeting {
+
+    }
+
     if (isset($_GET['code'])) {
         $token = new Token();
-        $data = $token->getData();
-        // $slotInfo = $data[1];
+        $tokenData = $token->getData();
 
-        /**
-         * Obligar al usuario a insertar sus datos antes de intentar crear la reunión
-         * En BD crear colomna meeting_url
-         * Pintar la url de de la reunión
-         * Validar en el js si ya está hecha la reunión para insertar usuario
-         */
+        if (isset($tokenData[0]) && !empty($tokenData[0])) {
+            $allUsers = new Users($tokenData[0]);
+            $usersData = $allUsers->getUsersData();
+            $userId = $usersData->{'id'};
+        }
+
+        if (isset($userId) && !empty($userId)) {
+
+        }
+
+        // echo 'Usuario -> ' . $usersData;
+
     }
 ?>
 
@@ -109,7 +157,6 @@
         Creando la reunión en Zoom...
     </div>
 
-    <div id="data-container" data-request-data="<?php echo $data[0]; ?>">
         <ul>
             <!-- <li>Meeting slot state: <?php echo $slotInfo['state']; ?></li>
             <li>Meeting type: <?php echo $slotInfo['type']; ?></li> -->
@@ -118,5 +165,5 @@
         </ul>
     </div>
 
-    <script src="request-meeting.js"></script>
+    <!-- <script src="request-meeting.js"></script> -->
 </html>

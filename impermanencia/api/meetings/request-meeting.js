@@ -16,7 +16,7 @@ function getParamVal(param) {
 }
 
 var APIUsers = function(data) {
-    this.host = "https://api.zoom.us/v2/users/";
+    this.url = "https://api.zoom.us/v2/users/";
     this.access_token = data;
 }
 
@@ -28,17 +28,17 @@ APIUsers.prototype.getUserId = function() {
 
         // xhr.addEventListener("readystatechange", _this.sendUserId);
         xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
-                console.log(this.responseText);
-                
-                resolve('completada');
+            if (this.readyState === this.DONE) {debugger
+                resolve(this.responseText);
+            } else {
+                reject('no users data');
             }
         });
 
-        xhr.open("POST", this.url);
+        xhr.open("POST", _this.url);
         xhr.setRequestHeader("content-type", "application/json");
-        xhr.setRequestHeader("Authorization", "Bearer " + this.access_token);
-        xhr.send('token');
+        xhr.setRequestHeader("Authorization", "Bearer " + _this.access_token);
+        xhr.send(null);
     
         // setTimeout(function() {
         //     _this.sendUserId(resolve);
@@ -112,17 +112,18 @@ var initApiToken = (function() {
             return;
         }
 
-        var users = new APIUsers();
-        var userId = users.getUserId(data);
+        var users = new APIUsers(data);
+        var userId = users.getUserId();
         
-        userId.then(function(val) {
+        userId.then(function(val) {debugger
             document.write(val);
             // si ya está creada, insertar usuario en reunión
+            console.log('Petición a usuarios completada: ' + val);
 
             // si no está creada
         })
         
-        userId.catch(function(reason) {
+        userId.catch(function(reason) {debugger
             console.warn(reason);
         });
     }
