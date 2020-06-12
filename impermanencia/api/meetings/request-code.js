@@ -10,17 +10,21 @@ function getParamVal(param) {
     return;
 }
 
-var Meeting = function() {
+var RCode = function() {
     this.data = null;
     this.slotId = getParamVal('slot-id');
-
-    this.redirectCrateMeetingUrl = "http://www.nataliabehaine.com/impermanencia/api/meetings/request-auth.php";
-    this.testRedirectCrateMeetingUrl = "http://www.andimier.com/apitests/meetings/request-auth.html";
-
     this.clientId = "YBHIWwITTjKnvjQrHcl9Rw";
+    this.redirectUri = "http://www.nataliabehaine.com/impermanencia/api/meetings/request-auth.php";
+
+    /**
+     * Test options!!!
+     */
+    this.isTest = true;
+    this.testRedirectUri = "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/api/meetings/request-auth.php";
+    // this.testRedirectUri = "http://www.andimier.com/apitests/meetings/request-auth.php";
 }
 
-Meeting.prototype.getSlotEntry = function() {
+RCode.prototype.getSlotEntry = function() {
     var _this = this;
     var xhr = new XMLHttpRequest();
     
@@ -48,8 +52,26 @@ Meeting.prototype.getSlotEntry = function() {
     }
 }
 
-Meeting.prototype.tryCreateMeeting = function() {
-    var redirectUri = this.testRedirectCrateMeetingUrl + "&state=slot-id':" + this.slotId;
+RCode.prototype.requestAuth = function(data) {
+    
+    if (data.state === 'blocked') {
+        console.warn('Meeting is blocked');
+        return;
+    }
+
+    this.tryCreateMeeting();
+}
+
+RCode.prototype.tryCreateMeeting = function() {
+
+    var baseUri = this.redirectUri;
+
+    if (this.isTest) {
+        baseUri = this.testRedirectUri;
+    }
+
+    var redirectUri =  baseUri + "&state=slot-id:" + this.slotId;
+
     var params = [
         "response_type=code",
         "client_id=" + this.clientId,
@@ -62,18 +84,8 @@ Meeting.prototype.tryCreateMeeting = function() {
     window.location = url;
 }
 
-Meeting.prototype.requestAuth = function(data) {
-    
-    if (data.state === 'blocked') {
-        console.warn('Meeting is blocked');
-        return;
-    }
-
-    this.tryCreateMeeting();
-}
-
-var initiMettingFlow = (function () {
-    var meeting = new Meeting();
-    meeting.getSlotEntry();
+var initiCodeRequst = (function () {
+    var rCode = new RCode();
+    rCode.getSlotEntry();
 })();
 

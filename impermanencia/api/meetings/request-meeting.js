@@ -22,18 +22,27 @@ var APIUsers = function(data) {
 
 APIUsers.prototype.getUserId = function() {
     var _this = this;
+
     return new Promise(function(resolve, reject) {
         var xhr = new XMLHttpRequest();
 
         // xhr.addEventListener("readystatechange", _this.sendUserId);
-        // xhr.open("POST", this.url);
-        // xhr.setRequestHeader("content-type", "application/json");
-        // xhr.setRequestHeader("Authorization", "Bearer " + this.access_token);
-        // xhr.send('token');
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+                
+                resolve('completada');
+            }
+        });
+
+        xhr.open("POST", this.url);
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.setRequestHeader("Authorization", "Bearer " + this.access_token);
+        xhr.send('token');
     
-        setTimeout(function() {
-            _this.sendUserId(resolve);
-        }, 3000);
+        // setTimeout(function() {
+        //     _this.sendUserId(resolve);
+        // }, 3000);
     });
 }
 
@@ -99,21 +108,23 @@ var initApiToken = (function() {
     if (data.length) {
          if (data === 'invalid_request') {
             console.warn('invalid_request');
-            return;
-        } else {
-            var users = new APIUsers();
-            var userId = users.getUserId(data);
-          
-            userId.then(function(val) {
-                // si ya está creada, insertar usuario en reunión
 
-                // si no está creada
-            })
-            
-            userId.catch(function(reason) {
-                console.warn(reason);
-            });
+            return;
         }
+
+        var users = new APIUsers();
+        var userId = users.getUserId(data);
+        
+        userId.then(function(val) {
+            document.write(val);
+            // si ya está creada, insertar usuario en reunión
+
+            // si no está creada
+        })
+        
+        userId.catch(function(reason) {
+            console.warn(reason);
+        });
     }
 })();
 

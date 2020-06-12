@@ -134,7 +134,8 @@ function validateInfo(e) {
         alert(message);
     } else {
         // cache user
-          window.localStorage.setItem('nbUserData', JSON.stringify(data));
+        // event.preventDefault();
+        window.localStorage.setItem('nbUserData', JSON.stringify(data));
     }
 }
 

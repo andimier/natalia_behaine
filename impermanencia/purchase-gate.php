@@ -1,6 +1,5 @@
 <?php 
     require_once('required/cnx.php');
-    require_once('utils/phpfunctions.php');
     require_once('crud/r-schedule.php');
     require_once('crud/rw-slot-data.php');
 
@@ -35,8 +34,15 @@
         // $preference->back_urls = array(
         //     "success" => "http://www.impermanencia.com/successful-purchase.php?slot-id=" . $product_data['slot-id'],
         //     "failure" => "http://www.impermanencia.com/canceled-purchase.php?slot-id=" . $product_data['slot-id'],
-        //     "pending" => "http://www.impermanencia.com/pending-purchae.php?slot-id=" . $product_data['slot-id']
+        //     "pending" => "http://www.impermanencia.com/pending-purchase.php?slot-id=" . $product_data['slot-id']
         // );
+
+        // Test options!!!
+          $preference->back_urls = array(
+            "success" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/successful-purchase.html?slot-id=" . $product_data['slot-id'],
+            "failure" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/canceled-purchase.html?slot-id=" . $product_data['slot-id'],
+            "pending" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/pending-purchase.html?slot-id=" . $product_data['slot-id']
+        );
 
         // $preference->auto_return = "approved";
 
@@ -48,7 +54,7 @@
     }
     
     // validate the slot. Is it free?
-    if ($_POST['make-purchase']) {
+    if (isset($_POST['make-purchase'])) {
         $message = '';
         $slotId = $_POST['slot-id'];
         $slotState = getSelectedSlotState($slotId);
@@ -99,7 +105,6 @@
                 <h2>Lo sentimos. El lugar ya está reservado. Por favor vuelve y selecciona otro horario.</h2>
                 <a href="index.php">Volver</a>
             <? endif; ?>
-
 
             <?php if (isset($preference) && $canMakePurchase == 'yes'): ?> 
                 <p> Can make purchase: <?php echo$canMakePurchase; ?></p>

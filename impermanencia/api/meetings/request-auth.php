@@ -1,15 +1,24 @@
 <?php
     require_once('../../required/cnx.php');
-    require_once('../../utils/phpfunctions.php');
     require_once('../../crud/r-schedule.php');
 
     class Token {
 
         function __construct() {
+            // !!! TODO: cambiar por la de natalia
             $this->redirectUri = "http://www.andimier.com/apitests/meetings/cm.html";
+
+            // TEST OPTIONS!!!
+            $this->test = TRUE;
+            
+            if ($this->test == TRUE) {
+                $this->redirectUri = "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/api/meetings/request-auth.php";
+            }
+
+            // ****
+
             $this->keyAndSecret = "WUJISVd3SVRUaktudmpRckhjbDlSdzpEbFh3SEJSREdFWW1ucnNDQUVSSjJ3dTlHNEhCbTIyQQ==";
             $this->apiHost = "https://zoom.us/oauth/token";
-            $this->localTestUrl = "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/api/meetings/cm.php?code=3964982734hbd293bd92&state=slot-id:2";
         }
 
         private function getCode() {
@@ -39,17 +48,18 @@
     
             try {
                 $ch = curl_init();
-                // curl_setopt($ch, CURLOPT_URL, $url);
-                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-                // curl_setopt($ch, CURLOPT_POST, 1); 
-                // curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " . $this->keyAndSecret)); 
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                curl_setopt($ch, CURLOPT_POST, 1); 
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " . $this->keyAndSecret)); 
 
-                // $data = curl_exec($ch);
-                // echo $data;
+                $data = curl_exec($ch);
+                echo $data;
 
-                // curl_close($ch);
+                curl_close($ch);
 
-                $data = file_get_contents('success-responde-mock.json', true);
+                // TEST OPTION ***
+                // $data = file_get_contents('success-responde-mock.json', true);
 
                 return $data;
 
@@ -60,18 +70,18 @@
 
         public function getData() {
             $data = $this->getTokenData();
-            $slotData = $this->getSlotInfo();
+            // $slotData = $this->getSlotInfo();
 
             if ($data != NULL) {
                 $parsedData = json_decode($data);
 
-                if (isset($parsedData->{'erro'})) {
-                    return $parsedData->{'erro'};
+                if (isset($parsedData->{'error'})) {
+                    return $parsedData->{'error'};
                 }
 
                 return [
-                    $parsedData->{'access_token'},
-                    $slotData
+                    $parsedData->{'access_token'}
+                    // $slotData
                 ];
             }
 
@@ -82,7 +92,7 @@
     if (isset($_GET['code'])) {
         $token = new Token();
         $data = $token->getData();
-        $slotInfo = $data[1];
+        // $slotInfo = $data[1];
 
         /**
          * Obligar al usuario a insertar sus datos antes de intentar crear la reunión
@@ -101,8 +111,8 @@
 
     <div id="data-container" data-request-data="<?php echo $data[0]; ?>">
         <ul>
-            <li>Meeting slot state: <?php echo $slotInfo['state']; ?></li>
-            <li>Meeting type: <?php echo $slotInfo['type']; ?></li>
+            <!-- <li>Meeting slot state: <?php echo $slotInfo['state']; ?></li>
+            <li>Meeting type: <?php echo $slotInfo['type']; ?></li> -->
             <!-- <li>Your name: <?php echo $slotInfo['name']; ?></li>
             <li>Your email: <?php echo $slotInfo['email']; ?></li> -->
         </ul>
