@@ -2,10 +2,21 @@ function getParamVal(param) {
     var search = window.location.search && window.location.search.replace(/\?/, '');
 
     if (search && search.includes(param)) {
-        var params = search.split('=');
-        var index = params.indexOf(param);
+        var params = search.split('&');
 
-        return params[index];
+        return params.filter(function(el) {
+            return el.includes('slot-id');
+        })[0].split('=')[1];
+    }
+
+    return;
+}
+
+function getParams() {
+    var search = window.location.search;
+
+    if (search && search.length) {
+        return search.replace(/\?/, '').replace(/&/gi, ',').replace(/=/gi, ':');
     }
 
     return;
@@ -72,18 +83,16 @@ RCode.prototype.tryCreateMeeting = function() {
         baseUri = this.testRedirectUri;
     }
 
-    var redirectParams = [
-        "slot-id:" + this.slotId,
-        "payer-id:" + getParamVal('payer-id'),
-        "meeting-id:" + getParamVal('meeting-id')
-    ].join(',');
+    var redirectParams = getParams();
 
-    var redirectUri =  baseUri + "&state=slot-id:" + redirectParams;
+    if (redirectParams) {
+        baseUri = baseUri + "&state=" + redirectParams;
+    }
 
     var params = [
         "response_type=code",
         "client_id=" + this.clientId,
-        "redirect_uri=" + redirectUri
+        "redirect_uri=" + baseUri
     ].join('&');
     
     var url = "https://zoom.us/oauth/authorize?" + params;

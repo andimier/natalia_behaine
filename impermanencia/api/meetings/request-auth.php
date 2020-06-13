@@ -183,22 +183,20 @@
                 // get Zoom meeting
                 // insert user in meeting
                 // get and show meeting url from DB
+
+                echo 'INSERTANDO PAGADOR EN REUNIÓN';
             } 
             else {
                 // create meeting
                 // insert meeting_id in DB -> $_GET[slot-id]
                 // insert meeting url in DB
 
+                echo 'CREANDO REUNIÓN';
+
                 $meeting = new Meeting($userId);
                 $meetingData = $meeting->createMeeting();
             }
-
-            
-
         }
-
-        // echo 'Usuario -> ' . $usersData;
-
     }
 ?>
 

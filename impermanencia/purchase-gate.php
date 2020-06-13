@@ -52,6 +52,8 @@
          
         if ($slotData['state']== 'free') {
 
+            $transactionState = 'free';
+
             if ($slotData['type'] == 'single') {
                 // Block slot, update table
                 DataSlot::blockSlot($slotId);

@@ -76,10 +76,13 @@
             global $isTest;
             
             $query_params = [
-                "payer-id" . $payerId,
+                "payer-id=" . $payerId,
                 "slot-id=" . $slotId,
-                "meeting-id" . $meeting_id
             ];
+
+            if (isset($meeting_id) && !empty($meeting_id)) {
+                array_push($query_params, "meeting-id=" . $meeting_id);
+            }
 
             $back_urls = [
                 "success" => "http://www.impermanencia.com/successful-purchase.php?" . join('&', $query_params),
