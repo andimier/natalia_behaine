@@ -2,9 +2,10 @@ function getParamVal(param) {
     var search = window.location.search && window.location.search.replace(/\?/, '');
 
     if (search && search.includes(param)) {
-        var param = search.split('=');
+        var params = search.split('=');
+        var index = params.indexOf(param);
 
-        return param[1];
+        return params[index];
     }
 
     return;
@@ -46,6 +47,7 @@ RCode.prototype.getSlotEntry = function() {
     if (this.slotId) {
         var formatData = new FormData();
         formatData.append('slot-id', this.slotId);
+        formatData.append('rq-type', 'client');
     
         xhr.open("POST", "crud/rw-slot-data.php");
         xhr.send(formatData);
@@ -70,7 +72,13 @@ RCode.prototype.tryCreateMeeting = function() {
         baseUri = this.testRedirectUri;
     }
 
-    var redirectUri =  baseUri + "&state=slot-id:" + this.slotId;
+    var redirectParams = [
+        "slot-id:" + this.slotId,
+        "payer-id:" + getParamVal('payer-id'),
+        "meeting-id:" + getParamVal('meeting-id')
+    ].join(',');
+
+    var redirectUri =  baseUri + "&state=slot-id:" + redirectParams;
 
     var params = [
         "response_type=code",

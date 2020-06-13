@@ -1,10 +1,9 @@
 <?php 
     require_once('required/cnx.php');
-    require_once('utils/phpfunctions.php');
-    require_once('crud/r-schedule.php');
+    require_once('crud/rw-slot-data.php');
 
     if (isset($_GET['product-code'])) {
-        $timeSlots = getTimeSlots($_GET['product-code']); 
+        $timeSlots = DataSlot::getTimeSlots($_GET['product-code']); 
         $product = 'Clases grupales diarias de Meditación';
         $price = 50000;
         $productType = $_GET['product-type'];

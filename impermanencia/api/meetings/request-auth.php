@@ -1,17 +1,18 @@
 <?php
+    $isTest = TRUE;
+    
     require_once('../../required/cnx.php');
-    require_once('../../crud/r-schedule.php');
+    require_once('../../crud/rw-slot-data.php');
 
     class Token {
 
         function __construct() {
+            global $isTest;
             // !!! TODO: cambiar por la de natalia
             $this->redirectUri = "http://www.andimier.com/apitests/meetings/cm.html";
 
             // TEST OPTIONS!!!
-            $this->test = TRUE;
-            
-            if ($this->test == TRUE) {
+            if ($isTest == TRUE) {
                 $this->redirectUri = "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/api/meetings/request-auth.php";
             }
 
@@ -31,7 +32,7 @@
                 $slotId = explode(':', $slotInfo[0]);
 
                 // get db info
-                return getSelectedSlotData($slotId[1]);
+                return DataSlot::getSelectedSlotData($slotId[1]);
             }
 
             return null;
@@ -129,7 +130,41 @@
     }
 
     class Meeting {
+        function __construct($userId) {
+            $this->url = "https://api.zoom.us/v2/users/" . $userId . "/meetings";
+        }
 
+        private function getUserData() {
+
+        }
+
+        public function createMeeting() {
+            $payerData = [];
+
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payerData));
+                curl_setopt($ch, CURLOPT_URL, $this->url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                curl_setopt($ch, CURLOPT_POST, 1); 
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    "Authorization: Basic " . $this->keyAndSecret,
+                    "Content-Type: application/json"
+                )); 
+
+                $data = curl_exec($ch);
+
+                curl_close($ch);
+
+                // TEST OPTION ***
+                // $data = file_get_contents('success-responde-mock.json', true);
+
+                return $data;
+
+            } catch (Exception $e) {
+                echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            }
+        }
     }
 
     if (isset($_GET['code'])) {
@@ -143,6 +178,22 @@
         }
 
         if (isset($userId) && !empty($userId)) {
+
+            if (isset($_GET['meeting-id'])) {
+                // get Zoom meeting
+                // insert user in meeting
+                // get and show meeting url from DB
+            } 
+            else {
+                // create meeting
+                // insert meeting_id in DB -> $_GET[slot-id]
+                // insert meeting url in DB
+
+                $meeting = new Meeting($userId);
+                $meetingData = $meeting->createMeeting();
+            }
+
+            
 
         }
 

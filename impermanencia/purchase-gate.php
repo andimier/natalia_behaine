@@ -1,6 +1,8 @@
 <?php 
+    // *** TEST OPTION
+    $isTest = TRUE;
+
     require_once('required/cnx.php');
-    require_once('crud/r-schedule.php');
     require_once('crud/rw-slot-data.php');
 
     $transactionState = 'error';
@@ -31,55 +33,40 @@
             "number" => $product_data['payerPhone']
         );
 
-        // $preference->back_urls = array(
-        //     "success" => "http://www.impermanencia.com/successful-purchase.php?slot-id=" . $product_data['slot-id'],
-        //     "failure" => "http://www.impermanencia.com/canceled-purchase.php?slot-id=" . $product_data['slot-id'],
-        //     "pending" => "http://www.impermanencia.com/pending-purchase.php?slot-id=" . $product_data['slot-id']
-        // );
-
-        // Test options!!!
-          $preference->back_urls = array(
-            "success" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/successful-purchase.html?slot-id=" . $product_data['slot-id'],
-            "failure" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/canceled-purchase.html?slot-id=" . $product_data['slot-id'],
-            "pending" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/pending-purchase.html?slot-id=" . $product_data['slot-id']
-        );
-
-        // $preference->auto_return = "approved";
-
         $preference->payer = $payer;
         $preference->items = array($item);
         $preference->save();
 
         return $preference;
     }
-    
+
+   
     // validate the slot. Is it free?
     if (isset($_POST['make-purchase'])) {
+
         $message = '';
+        $redirect_url = '';
+
         $slotId = $_POST['slot-id'];
-        $slotState = getSelectedSlotState($slotId);
-        
-        if (isset($slotState)) {
-            $slotType = $_POST['slot-type'];
-            $u = new MeetingUser($_POST);
+        $slotData = DataSlot::getSelectedSlotData($slotId);
+         
+        if ($slotData['state']== 'free') {
 
-            if ($slotType == 'group') {
-                $transactionState = 'free';
-                $u->insertUser();
-                echo 'Esta es una cita grupal y más gente puede reservar';
-            }
-
-            if ($slotType == 'single' && $slotState == 'free') {
-                echo 'Esta es una cita personalizada, se está reservando la hora';
-                $u->insertUser();
-
+            if ($slotData['type'] == 'single') {
                 // Block slot, update table
-                blockSlot($slotId);
+                DataSlot::blockSlot($slotId);
                 $transactionState = 'reserved';
             }
             
             // Must not block the slot, more people can make the purchase
             // Build reference
+
+            $u = new MeetingPayer($_POST);
+            $u->insertPayerForSlot();
+
+            $payerId = $u->getInsertedPayerId();
+            $redirect_url = MeetingPayer::getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
+
             $message = 'redirigiendo a Mercado Pago';
             $preference = getPreference($_POST);
             $canMakePurchase = 'yes';
@@ -109,7 +96,7 @@
             <?php if (isset($preference) && $canMakePurchase == 'yes'): ?> 
                 <p> Can make purchase: <?php echo$canMakePurchase; ?></p>
 
-                <form action="/procesar-pago" method="POST">
+                <form action="<?php echo $redirect_url; ?>" method="POST">
                     <script
                         src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
                         data-preference-id="<?php echo $preference->id; ?>">
