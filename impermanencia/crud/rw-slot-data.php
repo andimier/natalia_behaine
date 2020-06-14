@@ -72,6 +72,23 @@
             return $this->payerId;
         }
 
+        public static function getPayerData($id) {
+            global $connection;
+            $data = [];
+    
+            $r = phpMethods('query', "SELECT * FROM slot_users WHERE id = " . $id . " LIMIT 1");
+    
+            while ($h = phpMethods('fetch', $r)) {
+                $data += ['name' => $h['name']];
+                $data += ['email' => $h['email']];
+                $data += ['phone' => $h['phone']];
+                $data += ['details' => $h['details']];
+                $data += ['slot_id' => $h['slot_id']];
+            }
+    
+            return $data;
+        }
+
         public static function getRediectUrl($payerId, $slotId, $meeting_id) {
             global $isTest;
             
@@ -122,7 +139,10 @@
             while ($h = phpMethods('fetch', $r)) {
                 $data += ['state' => $h['state']];
                 $data += ['type' => $h['type']];
-                $data += ['meeting_id' => $h['meeting_id']];
+                $data += ['date' => $h['date']];
+                $data += ['time' => $h['time']];
+                $data += ['duration' => $h['duration']];
+                $data += ['meeting_id' => $h['meeting_join_url']];
             }
     
             return $data;
@@ -181,6 +201,14 @@
             global $connection;
     
             $r = phpMethods('query', "UPDATE time_slots SET state = 'blocked' WHERE id =" . $id);
+        }
+
+        public static function updateMeetingId($slot_id, $meeting_id, $start_url, $join_url) {
+            $q = "UPDATE time_slots ";
+            $q .= "SET meeting_id= " . $meeting_id . ",meeting_start_url= " . $start_url . ",meeting_join_url= " . $join_url;
+            $q .= " WHERE id=" . $slot_id;
+
+            $r = phpMethods('query', $q);
         }
     }
 

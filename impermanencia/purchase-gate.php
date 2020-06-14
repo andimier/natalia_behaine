@@ -5,7 +5,7 @@
     require_once('required/cnx.php');
     require_once('crud/rw-slot-data.php');
 
-    $transactionState = 'error';
+    $transaction_state = 'error';
     $canMakePurchase = 'no';
 
     function getPreference($product_data) {
@@ -50,14 +50,14 @@
         $slotId = $_POST['slot-id'];
         $slotData = DataSlot::getSelectedSlotData($slotId);
          
-        if ($slotData['state']== 'free') {
+        if ($slotData['state'] == 'free') {
 
-            $transactionState = 'free';
+            $transaction_state = 'free';
 
             if ($slotData['type'] == 'single') {
                 // Block slot, update table
                 DataSlot::blockSlot($slotId);
-                $transactionState = 'reserved';
+                $transaction_state = 'reserved';
             }
             
             // Must not block the slot, more people can make the purchase
@@ -74,7 +74,7 @@
             $canMakePurchase = 'yes';
         } else {
             // Alert and redirect to last page
-            $transactionState = 'blocked';
+            $transaction_state = 'blocked';
         }
     }
 ?>
@@ -86,11 +86,11 @@
 
     <body>
         <div class="transaction-message">
-            <?php if ($transactionState == 'error'): ?>
+            <?php if ($transaction_state == 'error'): ?>
                 <h2>Lo sentimos. Parece que la página que buscas no existe.</h2>
             <? endif; ?>
 
-            <?php if ($transactionState == 'blocked'): ?>
+            <?php if ($transaction_state == 'blocked'): ?>
                 <h2>Lo sentimos. El lugar ya está reservado. Por favor vuelve y selecciona otro horario.</h2>
                 <a href="index.php">Volver</a>
             <? endif; ?>
