@@ -204,11 +204,15 @@
         }
 
         public static function updateMeetingId($slot_id, $meeting_id, $start_url, $join_url) {
-            $q = "UPDATE time_slots ";
-            $q .= "SET meeting_id= " . $meeting_id . ",meeting_start_url= " . $start_url . ",meeting_join_url= " . $join_url;
-            $q .= " WHERE id=" . $slot_id;
+            global $connection;
+
+            $q = "UPDATE time_slots SET meeting_id = " . $meeting_id . ", meeting_start_url = '{$start_url}', meeting_join_url = '{$join_url}' WHERE id = " . $slot_id;
 
             $r = phpMethods('query', $q);
+
+            if (mysqli_affected_rows($connection) < 1) {
+                echo 'Error: ' . mysqli_error($connection);
+            }
         }
     }
 

@@ -208,36 +208,26 @@
         private function getRequestBody() {
             $slot_info = $this->getSlotInfo();
 
-            $data = [];
-            
             $start_time = $slot_info['date'] . "T" . $slot_info['time'] . ":00Z";
-            $user_email = "nataliabehaine@gmail.com";
+            $user_email = "andimier@gmail.com";
 
-            // $data += ["topic" => "Sesión virtual taller con Natalia Behaine"];
-            // $data += ["type" => 2];
-            // $data += ["start_time" => $start_time];
-            // $data += ["duration" => $slot_info['duration']];
-            // $data += ["schedule_for" => $user_email];
-            // $data += ["timezone" => "America/Bogota"];
+            $data = (object)array(
+                "topic" => "Sesion virtual taller con Natalia Behaine",
+                "type" => 2,
+                "start_time" => $start_time,
+                "duration" => intval($slot_info['duration']),
+                "schedule_for" => $user_email,
+                "timezone" => "America/Bogota",
+                "agenda" => "Esta es una sesion de yoga en linea",
+                "settings" => ["registrants_email_notification" => TRUE]
+            );
 
-            $data = '{';
-            $data .= '"topic": "Sesión virtual taller con Natalia Behaine",';
-            $data .= '"type": 2,';
-            $data .= '"start_time":'. $start_time . ',';
-            $data .= '"duration":' . $slot_info['duration'] . ',';
-            $data .= '"schedule_for":' . $user_email . ',';
-            $data .= '"timezone": "America/Bogota",';
-            
-            $data .= '"settings": {"registrants_email_notification": true}';
-
-            $data .= '}';
-
-            return $data;
+            return json_encode($data);
         }
 
         public function createMeeting() {
             $payerData = $this->getRequestBody();
-            $body = json_encode($payerData);
+            $body = $payerData;
             
             try {
                 $ch = curl_init();
