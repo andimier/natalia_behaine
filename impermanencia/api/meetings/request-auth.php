@@ -150,7 +150,13 @@
                 $parsedData = json_decode($data);
 
                 if (isset($parsedData->{'error'})) {
-                    return $parsedData->{'error'};
+                    echo $parsedData->{'error'};
+                    return null;
+                }
+
+                if (isset($parsedData->{'message'})) {
+                    echo $parsedData->{'error'};
+                    return null;
                 }
 
                 return $parsedData->{'users'}[0];
@@ -164,8 +170,8 @@
         use Params;
 
         function __construct($userId, $token) {
-            // $this->url = "https://api.zoom.us/v2/users/" . $userId . "/meetings";
-            // $this->token = $token;
+            $this->url = "https://api.zoom.us/v2/users/" . $userId . "/meetings";
+            $this->token = $token;
         }
 
         public function addRegistrantToMeeting() {
@@ -207,16 +213,24 @@
             $start_time = $slot_info['date'] . "T" . $slot_info['time'] . ":00Z";
             $user_email = "nataliabehaine@gmail.com";
 
-            $data += ["topic" => "Sesión virtual Natalia Behaine"];
-            $data += ["type" => 2];
-            $data += ["start_time" => $start_time];
-            $data += ["duration" => $slot_info['duration']];
-            $data += ["schedule_for" => $user_email];
-            $data += ["timezone" => "America/Bogota"];
+            // $data += ["topic" => "Sesión virtual taller con Natalia Behaine"];
+            // $data += ["type" => 2];
+            // $data += ["start_time" => $start_time];
+            // $data += ["duration" => $slot_info['duration']];
+            // $data += ["schedule_for" => $user_email];
+            // $data += ["timezone" => "America/Bogota"];
 
-            $data += ["setings" => [
-                "registrants_email_notification" => true
-            ]];
+            $data = '{';
+            $data .= '"topic": "Sesión virtual taller con Natalia Behaine",';
+            $data .= '"type": 2,';
+            $data .= '"start_time":'. $start_time . ',';
+            $data .= '"duration":' . $slot_info['duration'] . ',';
+            $data .= '"schedule_for":' . $user_email . ',';
+            $data .= '"timezone": "America/Bogota",';
+            
+            $data .= '"settings": {"registrants_email_notification": true}';
+
+            $data .= '}';
 
             return $data;
         }
@@ -269,7 +283,10 @@
     if (isset($_GET['code'])) {
         $api_token = new Token();
         $token_data = $api_token->getData();
-        $token = $token_data[0];
+
+        if (isset($token_data)) {
+            $token = $token_data[0];
+        }
 
         if (isset($token) && !empty($token)) {
             $allUsers = new Users($token);
