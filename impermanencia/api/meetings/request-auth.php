@@ -29,7 +29,13 @@
         }
 
         public function getMeetingId() {
-            return $this->getParams()['meeting-id'];
+            $params = $this->getParams();
+
+            if (isset($params['meeting-id'])){
+                return $params['meeting-id'];
+            }
+
+            return null;
         }
 
         public function getSlotInfo() {
@@ -308,18 +314,18 @@
                 
                 echo 'CREANDO REUNIÓN <br>';
 
-                // $data = $meeting->createMeeting();
+                $data = $meeting->createMeeting();
 
-                // if (isset($data) && !empty($data) && !isset($data->{'code'})) {
-                //     var_dump($data);
+                if (isset($data) && !empty($data) && !isset($data->{'code'})) {
+                    var_dump($data);
 
-                //     $meeting->insertMeetingIdInSlot($data);
-
-                //     $registrant = $meeting->addRegistrantToMeeting($data->{'id'});
-                //     var_dump($registrant);
-                // } else {
-                //     echo "ERROR!!!";
-                // }
+                    $meeting->insertMeetingIdInSlot($data);
+                    $registrant = $meeting->addRegistrantToMeeting($data->{'id'});
+                    
+                    var_dump($registrant);
+                } else {
+                    echo "ERROR!!!";
+                }
             }
         }
     }
