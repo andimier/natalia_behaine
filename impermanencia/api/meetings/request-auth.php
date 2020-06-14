@@ -28,6 +28,10 @@
             return $this->getParams()['slot-id'];
         }
 
+        public function getMeetingId() {
+            return $this->getParams()['meeting-id'];
+        }
+
         public function getSlotInfo() {
             $slot_id = $this->getSlotId();
 
@@ -143,7 +147,7 @@
             }
         }
 
-        public function getUsersData() {
+        public function getSelectedUserData() {
             $data = $this->getData();
 
             if ($data != NULL) {
@@ -169,8 +173,9 @@
     class Meeting {
         use Params;
 
-        function __construct($userId, $token) {
+        function __construct($userId, $userEmail, $token) {
             $this->url = "https://api.zoom.us/v2/users/" . $userId . "/meetings";
+            $this->userEmail = $userEmail;
             $this->token = $token;
         }
 
@@ -178,7 +183,7 @@
             $slot_info = $this->getSlotInfo();
 
             $start_time = $slot_info['date'] . "T" . $slot_info['time'] . ":00Z";
-            $user_email = "andimier@gmail.com";
+            $user_email = $this->userEmail;
 
             $data = (object)array(
                 "topic" => "Sesion virtual taller con Natalia Behaine",
@@ -195,8 +200,7 @@
         }
 
         public function createMeeting() {
-            $payerData = $this->getRequestBody();
-            $body = $payerData;
+            $body = $this->getRequestBody();
             
             try {
                 $ch = curl_init();
@@ -238,9 +242,9 @@
             $payer_data = MeetingPayer::getPayerData($payer_id);
 
             $body = (object)array(
-                "email" => payer_data['email'],
-                "first_name" => payer_data['name'],
-                "phone" => payer_data['phone']
+                "email" => $payer_data['email'],
+                "first_name" => $payer_data['name'],
+                "phone" => $payer_data['phone']
             );
 
             try {
@@ -255,6 +259,7 @@
                     "Content-Type: application/json"
                 ));
 
+                // "{"code":200,"message":"Only available for paid users: q2jGIzNcQoW4kJIsBRhOOQ."}"
                 $data = curl_exec($ch);
                 curl_close($ch);
 
@@ -274,45 +279,47 @@
         $api_token = new Token();
         $token_data = $api_token->getData();
 
-        if (isset($token_data)) {
+        if (isset($token_data) && !empty($token_data)) {
             $token = $token_data[0];
         }
 
         if (isset($token) && !empty($token)) {
             $allUsers = new Users($token);
-            $usersData = $allUsers->getUsersData();
-            $userId = $usersData->{'id'};
+            $selectedUserData = $allUsers->getSelectedUserData();
         }
+        
+        if (isset($selectedUserData) && !empty($selectedUserData)) {
+            
+            $userId = $selectedUserData->{'id'};
+            $userEmail = $selectedUserData->{'email'};
+            $meeting = new Meeting($userId, $userEmail, $token);
+            $meeting_id = $meeting->getMeetingId();
 
-        if (isset($userId) && !empty($userId)) {
-
-            $meeting = new Meeting($userId, $token);
-
-            if (isset($_GET['meeting-id'])) {
+            if (isset($meeting_id)) {
                 // get Zoom meeting
                 // insert user in meeting
                 // get and show meeting url from DB
 
                 echo 'INSERTANDO PAGADOR EN REUNIÓN <br>';
-                $registrant = $meeting->addRegistrantToMeeting($_GET['meeting-id']);
+                $registrant = $meeting->addRegistrantToMeeting($meeting_id);
                 var_dump($registrant);
 
             } else {
                 
                 echo 'CREANDO REUNIÓN <br>';
 
-                $data = $meeting->createMeeting();
+                // $data = $meeting->createMeeting();
 
-                if (isset($data) && !empty($data) && !isset($data->{'code'})) {
-                    var_dump($data);
+                // if (isset($data) && !empty($data) && !isset($data->{'code'})) {
+                //     var_dump($data);
 
-                    $meeting->insertMeetingIdInSlot($data);
+                //     $meeting->insertMeetingIdInSlot($data);
 
-                    $registrant = $meeting->addRegistrantToMeeting($data->{'id'});
-                    var_dump($registrant);
-                } else {
-                    echo "ERROR!!!";
-                }
+                //     $registrant = $meeting->addRegistrantToMeeting($data->{'id'});
+                //     var_dump($registrant);
+                // } else {
+                //     echo "ERROR!!!";
+                // }
             }
         }
     }

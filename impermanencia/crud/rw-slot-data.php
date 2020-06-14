@@ -142,7 +142,8 @@
                 $data += ['date' => $h['date']];
                 $data += ['time' => $h['time']];
                 $data += ['duration' => $h['duration']];
-                $data += ['meeting_id' => $h['meeting_join_url']];
+                $data += ['meeting_id' => $h['meeting_id']];
+                $data += ['meeting_join_url' => $h['meeting_join_url']];
             }
     
             return $data;
