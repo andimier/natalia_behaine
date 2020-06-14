@@ -164,8 +164,8 @@
         use Params;
 
         function __construct($userId, $token) {
-            $this->url = "https://api.zoom.us/v2/users/" . $userId . "/meetings";
-            $this->token = $token;
+            // $this->url = "https://api.zoom.us/v2/users/" . $userId . "/meetings";
+            // $this->token = $token;
         }
 
         public function addRegistrantToMeeting() {
