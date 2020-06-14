@@ -174,37 +174,6 @@
             $this->token = $token;
         }
 
-        public function addRegistrantToMeeting() {
-            $payer_id = $this->getPayerId();
-            $data = MeetingPayer::getPayerData($payer_id);
-
-            try {
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $this->url);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-                curl_setopt($ch, CURLOPT_POST, 1);
-
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                    "Authorization: Bearer " . $this->token,
-                    "Content-Type: application/json"
-                ));
-
-                $data = curl_exec($ch);
-
-                curl_close($ch);
-
-                // TEST OPTION ***
-                // $data = file_get_contents('success-responde-mock.json', true);
-
-                return json_decode($data);
-
-            } catch (Exception $e) {
-                echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-            }
-
-        }
-
         private function getRequestBody() {
             $slot_info = $this->getSlotInfo();
 
@@ -242,11 +211,7 @@
                 ));
 
                 $data = curl_exec($ch);
-
                 curl_close($ch);
-
-                // TEST OPTION ***
-                // $data = file_get_contents('success-responde-mock.json', true);
 
                 return json_decode($data);
 
@@ -263,6 +228,41 @@
             $slot_id = $this->getSlotId();
 
             DataSlot::updateMeetingId($slot_id, $meeting_id, $start_url, $join_url);
+        }
+
+        public function addRegistrantToMeeting($meeting_id) {
+       
+            $registrant_url = "https://api.zoom.us/v2/meetings/" . $meeting_id . "/registrants";
+
+            $payer_id = $this->getPayerId();
+            $payer_data = MeetingPayer::getPayerData($payer_id);
+
+            $body = (object)array(
+                "email" => payer_data['email'],
+                "first_name" => payer_data['name'],
+                "phone" => payer_data['phone']
+            );
+
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $registrant_url);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                curl_setopt($ch, CURLOPT_POST, 1);
+
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    "Authorization: Bearer " . $this->token,
+                    "Content-Type: application/json"
+                ));
+
+                $data = curl_exec($ch);
+                curl_close($ch);
+
+                return json_decode($data);
+
+            } catch (Exception $e) {
+                echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            }
         }
     }
 
@@ -286,22 +286,30 @@
 
         if (isset($userId) && !empty($userId)) {
 
+            $meeting = new Meeting($userId, $token);
+
             if (isset($_GET['meeting-id'])) {
                 // get Zoom meeting
                 // insert user in meeting
                 // get and show meeting url from DB
 
-                echo 'INSERTANDO PAGADOR EN REUNIÓN';
-            } 
-            else {
-                echo 'CREANDO REUNIÓN';
+                echo 'INSERTANDO PAGADOR EN REUNIÓN <br>';
+                $registrant = $meeting->addRegistrantToMeeting($_GET['meeting-id']);
+                var_dump($registrant);
 
-                $meeting = new Meeting($userId, $token);
+            } else {
+                
+                echo 'CREANDO REUNIÓN <br>';
+
                 $data = $meeting->createMeeting();
 
                 if (isset($data) && !empty($data) && !isset($data->{'code'})) {
-                    print_r($data);
+                    var_dump($data);
+
                     $meeting->insertMeetingIdInSlot($data);
+
+                    $registrant = $meeting->addRegistrantToMeeting($data->{'id'});
+                    var_dump($registrant);
                 } else {
                     echo "ERROR!!!";
                 }
