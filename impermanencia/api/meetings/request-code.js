@@ -102,9 +102,6 @@ RCode.prototype.tryCreateMeeting = function() {
 }
 
 var initiCodeRequst = (function () {
-    var redirectParams = getParams();
-
     var rCode = new RCode();
     rCode.getSlotEntry();
 })();
-

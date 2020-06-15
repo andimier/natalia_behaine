@@ -43,17 +43,28 @@
     }
 
     trait RedirectUrls {
-        public $prod_urls = [
-            "success" => "http://www.impermanencia.com/successful-purchase.html",
-            "failure" => "http://www.impermanencia.com/canceled-purchase.html",
-            "pending" => "http://www.impermanencia.com/pending-purchase.html"
-        ];
+        private $prod_base_url ="http://www.impermanencia.com/";
+        private $test_base_url = "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/";
 
-        public $test_urls = [
-            "success" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/successful-purchase.html",
-            "failure" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/canceled-purchase.html",
-            "pending" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/pending-purchase.htm",
-        ];
+        private function getBaseUrls($test) {
+            $base = isset($test) ? $this->test_base_url : $this->prod_base_url;
+
+            return [
+                "success" => $base . "successful-purchase.html",
+                "failure" => $base . "canceled-purchase.html",
+                "pending" => $base . "pending-purchase.html"
+            ];
+        }
+
+        private function getBaseNoMeetingUrls($test) {
+            $base = isset($test) ? $this->test_base_url : $this->prod_base_url;
+
+            return [
+                "success" => $base . "purchase-completed.html",
+                "failure" => $base . "purchase-canceled.html",
+                "pending" => $base . "purchase-pending.html"
+            ];
+        }
     }
 
     class MeetingPayer {
@@ -117,11 +128,7 @@
                 array_push($query_params, "meeting-id=" . $meeting_id);
             }
 
-            if ($isTest == TRUE) {
-                $redirect_urls = $this->test_urls;
-            } else {
-                $redirect_urls = $this->prod_urls;
-            }
+            $redirect_urls = $this->getBaseUrls($isTest);
             
             $success_url = $redirect_urls['success'] . "?" . join('&', $query_params);
             $failure_url = $redirect_urls['failure'] . "?" . join('&', $query_params);
@@ -136,11 +143,7 @@
         public function getNoMeetingReservationRedirectUrl() {
             global $isTest;
 
-            if ($isTest == TRUE) {
-                $redirect_urls = $this->test_urls;
-            } else {
-                $redirect_urls = $this->prod_urls;
-            }
+            $redirect_urls = $this->getBaseNoMeetingUrls($isTest);
             
             $success_url = $redirect_urls['success'] . "?no-reservation=true";
             $failure_url = $redirect_urls['failure'] . "?no-reservation=true";
