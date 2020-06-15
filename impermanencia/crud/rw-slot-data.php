@@ -42,7 +42,23 @@
         }
     }
 
+    trait RedirectUrls {
+        public $prod_urls = [
+            "success" => "http://www.impermanencia.com/successful-purchase.html",
+            "failure" => "http://www.impermanencia.com/canceled-purchase.html",
+            "pending" => "http://www.impermanencia.com/pending-purchase.html"
+        ];
+
+        public $test_urls = [
+            "success" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/successful-purchase.html",
+            "failure" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/canceled-purchase.html",
+            "pending" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/pending-purchase.htm",
+        ];
+    }
+
     class MeetingPayer {
+        use RedirectUrls;
+
         function __construct($data) {
             $this->slotId = $data['slot-id'];
             $this->userName = $data['payerName'];
@@ -89,7 +105,7 @@
             return $data;
         }
 
-        public static function getRediectUrl($payerId, $slotId, $meeting_id) {
+        public function getRediectUrl($payerId, $slotId, $meeting_id) {
             global $isTest;
             
             $query_params = [
@@ -101,27 +117,36 @@
                 array_push($query_params, "meeting-id=" . $meeting_id);
             }
 
-            $back_urls = [
-                "success" => "http://www.impermanencia.com/successful-purchase.php?" . join('&', $query_params),
-                "failure" => "http://www.impermanencia.com/canceled-purchase.php?" . join('&', $query_params),
-                "pending" => "http://www.impermanencia.com/pending-purchase.php?" . join('&', $query_params)
-            ];
-
-            $url = $back_urls['success'];
-            // $preference->auto_return = "approved";
-
-            // Test options!!!
-            $test_back_urls = [
-                "success" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/successful-purchase.html?" . join('&', $query_params),
-                "failure" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/canceled-purchase.html?" . join('&', $query_params),
-                "pending" => "http://localhost/nataliabehaine/dev-nataliabehaine/impermanencia/pending-purchase.html?" . join('&', $query_params)
-            ];
-            
             if ($isTest == TRUE) {
-                $url = $test_back_urls['success'];
+                $redirect_urls = $this->test_urls;
+            } else {
+                $redirect_urls = $this->prod_urls;
             }
+            
+            $success_url = $redirect_urls['success'] . "?" . join('&', $query_params);
+            $failure_url = $redirect_urls['failure'] . "?" . join('&', $query_params);
+            $pending_url = $redirect_urls['pending'] . "?" . join('&', $query_params);
+            
+            $url = $success_url;
 
+            // $preference->auto_return = "approved";
             return $url;
+        }
+
+        public function getNoMeetingReservationRedirectUrl() {
+            global $isTest;
+
+            if ($isTest == TRUE) {
+                $redirect_urls = $this->test_urls;
+            } else {
+                $redirect_urls = $this->prod_urls;
+            }
+            
+            $success_url = $redirect_urls['success'] . "?no-reservation=true";
+            $failure_url = $redirect_urls['failure'] . "?no-reservation=true";
+            $pending_url = $redirect_urls['pending'] . "?no-reservation=true";
+            
+            return $success_url;
         }
     }
 

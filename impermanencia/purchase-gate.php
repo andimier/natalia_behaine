@@ -54,24 +54,39 @@
 
             $transaction_state = 'free';
 
+            $u = new MeetingPayer($_POST);
+            $u->insertPayerForSlot();
+            $payerId = $u->getInsertedPayerId();
+
             if ($slotData['type'] == 'single') {
                 // Block slot, update table
                 DataSlot::blockSlot($slotId);
                 $transaction_state = 'reserved';
+                $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
             }
-            
-            // Must not block the slot, more people can make the purchase
-            // Build reference
 
-            $u = new MeetingPayer($_POST);
-            $u->insertPayerForSlot();
+            if ($slotData['type'] == 'group') {
+                $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
+            }
 
-            $payerId = $u->getInsertedPayerId();
-            $redirect_url = MeetingPayer::getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
+            if ($slotData['type'] == 'event') {
+                // ** No zoom
+                // ** Esta ya debería tener un id de reunión y urls
+                // TODO?: Mostrar la url de la reunión o llevar hasta Zoom para actualizarla?
+                // Incluir a las grupales??
+                $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
+            }
 
-            $message = 'redirigiendo a Mercado Pago';
+            if ($slotData['type'] == 'course') {
+                // No zoom
+                $redirect_url = $u->getNoMeetingReservationRedirectUrl();
+            }
+
+            $message = 'Redirigiendo a Mercado Pago';
             $preference = getPreference($_POST);
             $canMakePurchase = 'yes';
+
+            echo 'URL de Redireccionamiento: ' . $redirect_url; 
         } else {
             // Alert and redirect to last page
             $transaction_state = 'blocked';
