@@ -5,7 +5,7 @@
     if (isset($_GET['product-code'])) {
         $timeSlots = DataSlot::getTimeSlots($_GET['product-code']); 
         $product = 'Clases grupales diarias de Meditación';
-        $price = 50000;
+        $price = $_GET['price'];
         $productType = $_GET['product-type'];
     }
 ?>

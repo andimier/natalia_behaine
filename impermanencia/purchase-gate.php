@@ -73,7 +73,7 @@
                 // ** No zoom
                 // ** Esta ya debería tener un id de reunión y urls
                 // TODO?: Mostrar la url de la reunión o llevar hasta Zoom para actualizarla?
-                // Incluir a las grupales??
+                // Incluir a las grupales ya reservadas??
                 $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
             }
 

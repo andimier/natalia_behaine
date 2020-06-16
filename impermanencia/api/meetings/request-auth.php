@@ -179,6 +179,14 @@
     class Meeting {
         use Params;
 
+        private const SUCCESS_OUTPUT_MESSAGE =  'REUNION CREADA CORRECTAMENTE';
+        private const CREATING_ZOOM_MEETING = 'CREANDO REUNIÓN';
+        private const UPDATING_ZOOM_MEETING = 'INSERTANDO PAGADOR EN REUNIÓN';
+        private const ERROR_MESSAGE = 'HA OCURRIDO UN ERROR';
+
+        private $message = '';
+        private $meeting_data = NULL;
+
         function __construct($userId, $userEmail, $token) {
             $this->url = "https://api.zoom.us/v2/users/" . $userId . "/meetings";
             $this->userEmail = $userEmail;
@@ -205,7 +213,7 @@
             return json_encode($data);
         }
 
-        public function createMeeting() {
+        private function createMeeting() {
             $body = $this->getRequestBody();
             
             try {
@@ -240,7 +248,7 @@
             DataSlot::updateMeetingId($slot_id, $meeting_id, $start_url, $join_url);
         }
 
-        public function addRegistrantToMeeting($meeting_id) {
+        private function addRegistrantToMeeting($meeting_id) {
        
             $registrant_url = "https://api.zoom.us/v2/meetings/" . $meeting_id . "/registrants";
 
@@ -275,6 +283,32 @@
                 echo 'Excepción capturada: ',  $e->getMessage(), "\n";
             }
         }
+
+        public function proccessMeeting() {
+            $meeting_id = $this->getMeetingId();
+            $data = $this->createMeeting();
+
+            if (!isset($meeting_id)) {
+                $this->message = self::CREATING_ZOOM_MEETING;
+
+                if (isset($data) && !empty($data) && !isset($data->{'code'})) {
+                    $this->insertMeetingIdInSlot($data);
+
+                    $this->meeting_data = $data;
+                    $this->message = self::SUCCESS_OUTPUT_MESSAGE;
+                }
+            }
+
+            if (isset($meeting_id) || isset($this->meeting_data)) {
+                $this->message = self::UPDATING_ZOOM_MEETING;
+                // $registrant = $this->addRegistrantToMeeting($data->{'id'});
+                $this->message = self::SUCCESS_OUTPUT_MESSAGE;
+            }
+        }
+
+        public function getMeetingData() {
+            return $this->meeting_data;
+        }
     }
 
     // *** PRUEBAS
@@ -298,35 +332,11 @@
             
             $userId = $selectedUserData->{'id'};
             $userEmail = $selectedUserData->{'email'};
+
             $meeting = new Meeting($userId, $userEmail, $token);
-            $meeting_id = $meeting->getMeetingId();
+            $meeting->proccessMeeting();
 
-            if (isset($meeting_id)) {
-                // get Zoom meeting
-                // insert user in meeting
-                // get and show meeting url from DB
-
-                echo 'INSERTANDO PAGADOR EN REUNIÓN <br>';
-                $registrant = $meeting->addRegistrantToMeeting($meeting_id);
-                var_dump($registrant);
-
-            } else {
-                
-                echo 'CREANDO REUNIÓN <br>';
-
-                $data = $meeting->createMeeting();
-
-                if (isset($data) && !empty($data) && !isset($data->{'code'})) {
-                    var_dump($data);
-
-                    $meeting->insertMeetingIdInSlot($data);
-                    $registrant = $meeting->addRegistrantToMeeting($data->{'id'});
-                    
-                    var_dump($registrant);
-                } else {
-                    echo "ERROR!!!";
-                }
-            }
+            $meeting_data = $meeting->getMeetingData();
         }
     }
 ?>
@@ -338,10 +348,11 @@
     </div>
 
         <ul>
-            <!-- <li>Meeting slot state: <?php echo $slotInfo['state']; ?></li>
-            <li>Meeting type: <?php echo $slotInfo['type']; ?></li> -->
-            <!-- <li>Your name: <?php echo $slotInfo['name']; ?></li>
-            <li>Your email: <?php echo $slotInfo['email']; ?></li> -->
+            <?php isset($meeting_data) ? var_dump($meeting_data) : 'ERROR'; ?>
+            <!-- <li>Meeting slot state: <?php //echo $slotInfo['state']; ?></li>
+            <li>Meeting type: <?php //echo $slotInfo['type']; ?></li> -->
+            <!-- <li>Your name: <?php //echo $slotInfo['name']; ?></li>
+            <li>Your email: <?php //echo $slotInfo['email']; ?></li> -->
         </ul>
     </div>
 
