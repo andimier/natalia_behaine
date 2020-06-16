@@ -1,47 +1,23 @@
 <?php
+    class ConfirmationMails {
+        private const SENDER_EMAIL = "nataliabehaine@gmail.com";
+        private const SENDER_EMAIL_SUBJECT = "Nueva compra de sesión";
+        private const PAYER_EMAIL_SUBJECT = 'Tu compra hecha en Impermanencia';
+        private const SENDER = 'Natalia Behaine | impermanencia';
 
-	$mensaje2 = "";
-	$message = "";
+        private $recipient_email = '';
 
-	if(isset($_POST['enviar'])) {
-		
+         private function getHeader($mail) {
+            $headers  = "From: <{$mail}>\r\n";
+			$headers .= "X-Mailer: PHP/" .phpversion(). "\r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+            
+            return $headers;
+        }
 
-		$errores = array();
-		$required_fields = array('nombre','email', 'mensaje');
-		
-		foreach($required_fields as $fieldname){
-			
-			if(!isset($_POST[$fieldname]) || (empty($_POST[$fieldname])  && !is_numeric($_POST[$fieldname]))){
-				$errores[] = $fieldname;	
-			}else{
-				//echo count($errores);
-			}
-			
-		}
-		
-		if(empty($errores)){
-		
-			$to = "nataliabehaine@gmail.com";
-			//$to = "andimier@gmail.com";
-			
-			$subject = "Web Info Contacto";
-			
-			$nombre  = $_POST['nombre'];
-			$mail    = $_POST['email'];
-			//$tel     = $_POST['telefono'];
-			$mensaje = $_POST['mensaje'];
-			
-			
-			//===== INSERCION DEL CONTACTO EN BD=====================================//
-			
-			//$query = "INSERT INTO contactos (nombre, mail) VALUES ('$nombre', '$mail')";
-			//$resultado = mysql_query($query, $connection);
-			
-			
-			//====== Envio de datos ===============================================//
-			
-			
-			$body  = "<html>";
+        private function getBodyDirectedToPayer() {
+            $body  = "<html>";
 			$body .= "<body>";
 			$body .= "<strong>INFO DE CONTACTO DESDE EL SITIO WEB</strong>";
 			$body .= "<br />";
@@ -51,25 +27,76 @@
 			$body .= "<br /><br />";
        		$body .= "<strong>Mensaje:</strong> $mensaje";
 			$body .= "</body>";
-			$body .= "</html>";
-			
+            $body .= "</html>";
+            
+            return $body;
+        }
 
-			
-			$message = "Tus datos han sido enviados correctamente!";
+        private function getSlodInfoText($slot_data) {
+            $time_slot_data = "<li>Esta es la información de la sesión";
+            $time_slot_data .= "<li>Duración: " . $slot_data['duration'] . "</li>";
+            $time_slot_data .= "<li>Tipo: " . $slot_data['type'] . "</li>";
+            $time_slot_data .= "<li>Fecha: " . $slot_data['date'] ."</li>";
+            $time_slot_data .= "<li>Hora: " . $slot_data['time'] . "</li>";
+            $time_slot_data .= "<li>URL: " . $slot_data['meeting_join_url'] . "</li>";
 
-			$headers  = "From: <{$mail}>\r\n";
-			$headers .= "X-Mailer: PHP/" .phpversion(). "\r\n";
-			$headers .= "MIME-Version: 1.0\r\n";
-			$headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+            return $time_slot_data;
+        }
 
-			mail($to, $subject, $body, $headers);
+        private function getBodyDirectedToSender($payer_info, $slot_data, $isPayer) {
+            $body_title = $isPayer == TRUE ? 'Muchas gracias por tu compar' : 'Compra hecha por:';
 
-			
+            $body  = "<html>";
+			$body .= "<body>";
+			$body .= "<h2>" . $body_title . "</h2>";
+            $body .= "<br />";
+            
+			$body .= "<div>";
+			$body .= "<h3>" . $payer_info['name'] . "</h3>";
+			$body .= "<p>" . $payer_info['mail'] . "</p>";
+            $body .= "</div>";
+            
+			$body .= "<ul>";
+			$body .= $this->getSlodInfoText($slot_data);
+			$body .= "</ul>";
+ 
+			$body .= "</body>";
+            $body .= "</html>";
+            
+            return $body;
+        }
+        
+        function sendMails() {
+            $payer_info = MeetingPater::getPayerData($_GET['payer-id']);
+            $slot_data = DataSlot::getSelectedSlotData($_GET['slot-id']);
+            
+            // send to Natalia
+            mail(
+                self::SENDER_EMAIL, 
+                self::SENDER_EMAIL_SUBJECT, 
+                $this->getBodyDirectedToPayer($payer_info, $slot_data, FALSE), 
+                $this->getHeader(self::SENDER)
+            );
 
-		}else{
-			$message = "Datos incompletos, por favor llena los campos e intenta de nuevo!";
-		}
-	}
+            // send to payer
+            mail(
+                $payer_info['email'], 
+                self::PAYER_EMAIL_SUBJECT,
+                $this->getBodyDirectedToPayer($payer_info, $slot_data, TRUE), 
+                $this->getHeader(self::SENDER)
+            );
+        }
+    }
 
+    if (isset($_GET['slot-id'])) {
+        $mail = new ConfirmationMails();
+        // $mail->sendMails();
+    }
 ?>
+
+<!doctype html>
+<html>
+    <head></head>
+    <body></body>
+</html>
 

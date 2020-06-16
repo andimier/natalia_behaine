@@ -40,8 +40,6 @@
         return $preference;
     }
 
-   
-    // validate the slot. Is it free?
     if (isset($_POST['make-purchase'])) {
 
         $message = '';
@@ -49,48 +47,25 @@
 
         $slotId = $_POST['slot-id'];
         $slotData = DataSlot::getSelectedSlotData($slotId);
-         
-        if ($slotData['state'] == 'free') {
+        $canZoomMakeMeeting = $slotData['type'] != 'course' || $slotData['type'] != 'event';
 
-            $transaction_state = 'free';
-
-            $u = new MeetingPayer($_POST);
-            $u->insertPayerForSlot();
-            $payerId = $u->getInsertedPayerId();
-
-            if ($slotData['type'] == 'single') {
-                // Block slot, update table
-                DataSlot::blockSlot($slotId);
-                $transaction_state = 'reserved';
-                $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
-            }
-
-            if ($slotData['type'] == 'group') {
-                $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
-            }
-
-            if ($slotData['type'] == 'event') {
-                // ** No zoom
-                // ** Esta ya debería tener un id de reunión y urls
-                // TODO?: Mostrar la url de la reunión o llevar hasta Zoom para actualizarla?
-                // Incluir a las grupales ya reservadas??
-                $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
-            }
-
-            if ($slotData['type'] == 'course') {
-                // No zoom
-                $redirect_url = $u->getNoMeetingReservationRedirectUrl();
-            }
-
-            $message = 'Redirigiendo a Mercado Pago';
-            $preference = getPreference($_POST);
-            $canMakePurchase = 'yes';
-
-            echo 'URL de Redireccionamiento: ' . $redirect_url; 
-        } else {
-            // Alert and redirect to last page
-            $transaction_state = 'blocked';
+        if ($slotData['type'] == 'single' && $slotData['state'] == 'free') {
+            DataSlot::blockSlot($slotId); // Block slot, update table
+            $transaction_state = 'reserved';
         }
+
+        if ($canZoomMakeMeeting && !isset($slotData['meeting_id'])) {
+            // Crear reunión en Zoom
+            $redirect_url = $u->getRediectUrl($payerId, $slotId, $slotData['meeting_id']);
+        } else {
+            $redirect_url = $u->getNoMeetingReservationRedirectUrl($payerId, $slotId);
+        }
+
+        $message = 'Redirigiendo a Mercado Pago';
+        $preference = getPreference($_POST);
+        $canMakePurchase = 'yes';
+
+        echo 'URL de Redireccionamiento: ' . $redirect_url; 
     }
 ?>
 

@@ -60,9 +60,9 @@
             $base = isset($test) ? $this->test_base_url : $this->prod_base_url;
 
             return [
-                "success" => $base . "purchase-completed.html",
-                "failure" => $base . "purchase-canceled.html",
-                "pending" => $base . "purchase-pending.html"
+                "success" => $base . "purchase-completed.php",
+                "failure" => $base . "purchase-canceled.php",
+                "pending" => $base . "purchase-pending.php"
             ];
         }
     }
@@ -140,14 +140,19 @@
             return $url;
         }
 
-        public function getNoMeetingReservationRedirectUrl() {
+        public function getNoMeetingReservationRedirectUrl($payerId) {
             global $isTest;
+
+            $query_params = [
+                "payer-id=" . $payerId,
+                "slot-id=" . $slotId
+            ];
 
             $redirect_urls = $this->getBaseNoMeetingUrls($isTest);
             
-            $success_url = $redirect_urls['success'] . "?no-reservation=true";
-            $failure_url = $redirect_urls['failure'] . "?no-reservation=true";
-            $pending_url = $redirect_urls['pending'] . "?no-reservation=true";
+            $success_url = $redirect_urls['success'] . "?" . join('&', $query_params);;
+            $failure_url = $redirect_urls['failure'] . "?" . join('&', $query_params);;
+            $pending_url = $redirect_urls['pending'] . "?" . join('&', $query_params);;
             
             return $success_url;
         }
