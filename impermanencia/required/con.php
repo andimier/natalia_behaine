@@ -12,7 +12,7 @@
 			$headers .= "X-Mailer: PHP/" .phpversion(). "\r\n";
 			$headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
-            
+
             return $headers;
         }
 
@@ -28,7 +28,7 @@
        		$body .= "<strong>Mensaje:</strong> $mensaje";
 			$body .= "</body>";
             $body .= "</html>";
-            
+
             return $body;
         }
 
@@ -50,39 +50,39 @@
 			$body .= "<body>";
 			$body .= "<h2>" . $body_title . "</h2>";
             $body .= "<br />";
-            
+
 			$body .= "<div>";
 			$body .= "<h3>" . $payer_info['name'] . "</h3>";
 			$body .= "<p>" . $payer_info['mail'] . "</p>";
             $body .= "</div>";
-            
+
 			$body .= "<ul>";
 			$body .= $this->getSlodInfoText($slot_data);
 			$body .= "</ul>";
- 
+
 			$body .= "</body>";
             $body .= "</html>";
-            
+
             return $body;
         }
-        
+
         function sendMails() {
             $payer_info = MeetingPater::getPayerData($_GET['payer-id']);
             $slot_data = DataSlot::getSelectedSlotData($_GET['slot-id']);
-            
+
             // send to Natalia
             mail(
-                self::SENDER_EMAIL, 
-                self::SENDER_EMAIL_SUBJECT, 
-                $this->getBodyDirectedToPayer($payer_info, $slot_data, FALSE), 
+                self::SENDER_EMAIL,
+                self::SENDER_EMAIL_SUBJECT,
+                $this->getBodyDirectedToPayer($payer_info, $slot_data, FALSE),
                 $this->getHeader(self::SENDER)
             );
 
             // send to payer
             mail(
-                $payer_info['email'], 
+                $payer_info['email'],
                 self::PAYER_EMAIL_SUBJECT,
-                $this->getBodyDirectedToPayer($payer_info, $slot_data, TRUE), 
+                $this->getBodyDirectedToPayer($payer_info, $slot_data, TRUE),
                 $this->getHeader(self::SENDER)
             );
         }

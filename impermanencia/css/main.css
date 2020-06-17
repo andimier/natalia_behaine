@@ -14,12 +14,37 @@ main {
     max-width: 700px;
 }
 
+header {
+    padding-top: 50px;
+}
+
 section {
     margin: 40px 0;
+    padding-top: 25px;
+}
+
+nav {
+    padding-top: 45px;
+}
+
+nav li {
+    letter-spacing: 5px;
 }
 
 h1 {
-    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
+
+h2 {
+    padding-bottom: 25px;
+
+}
+
+h2, header h4 {
+    letter-spacing: 3px;
 }
 
 h3 {
@@ -43,13 +68,15 @@ ul {
     list-style: none;
 }
 
-.service {
+#description p {
+}
+
+.service:not(:nth-child(1)) {
     padding: 50px 0;
 }
 
 .service .service-cost {
     padding-top: 20px;
-
 }
 
 .service .service-cost span {
@@ -69,7 +96,7 @@ ul {
 
 .service-description-wrapper p {
     flex-basis: 35%;
-    padding: 25px 35px 0 0; 
+    padding: 25px 35px 0 0;
 }
 
 .hidden {
