@@ -110,3 +110,13 @@ ul {
 .payer-input {
     display: block;
 }
+
+.time-slot {
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    padding: 25px;
+}
+
+.time-slot:hover {
+    background-color: #eefcb3;
+}

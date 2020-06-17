@@ -95,39 +95,41 @@
     </head>
 
     <body>
-        <header>
-            <h1>impermanencia</h1>
-            <h4>Natalia Behaine</h4>
+        <main>
+            <header>
+                <h1>impermanencia</h1>
+                <h4>Natalia Behaine</h4>
 
-            <section id="description">
-                <h2>Resumen de compra</h2>
+                <section id="description">
+                    <h2>Resumen de compra</h2>
+                </section>
+            </header>
+
+            <section>
+                <h3>Muchas gracias por tu compra.</h3>
+                <p>Este es el resumen de tu compra:</p>
+                <p>Tambien hemos enviado un correo con los detalles</p>
             </section>
-        </header>
 
-        <section>
-            <h3>Muchas gracias por tu compra.</h3>
-            <p>Este es el resumen de tu compra:</p>
-            <p>Tambien hemos enviado un correo con los detalles</p>
-        </section>
+            <section id="summary">
+                <h4>Tus datos:</h4>
+                <ul>
+                    <li><?php echo $payer_info['name']; ?></li>
+                    <li><?php echo $payer_info['email']; ?></li>
+                    <li><?php echo $payer_info['phone']; ?></li>
+                    <li><?php echo $payer_info['details']; ?></li>
+                </ul>
 
-        <section id="summary">
-            <h4>Tus datos:</h4>
-            <ul>
-                <li><?php echo $payer_info['name']; ?></li>
-                <li><?php echo $payer_info['email']; ?></li>
-                <li><?php echo $payer_info['phone']; ?></li>
-                <li><?php echo $payer_info['details']; ?></li>
-            </ul>
-
-            <h4>Datos de la reunión:</h4>
-            <ul>
-                <li><?php echo $slot_data['type']; ?></li>
-                <li><?php echo $slot_data['date']; ?></li>
-                <li><?php echo $slot_data['time']; ?></li>
-                <li><?php echo $slot_data['duration']; ?></li>
-                <li><?php echo $slot_data['meeting_join_url']; ?></li>
-            </ul>
-        </section>
+                <h4>Datos de la reunión:</h4>
+                <ul>
+                    <li><?php echo $slot_data['type']; ?></li>
+                    <li><?php echo $slot_data['date']; ?></li>
+                    <li><?php echo $slot_data['time']; ?></li>
+                    <li><?php echo $slot_data['duration']; ?></li>
+                    <li><?php echo $slot_data['meeting_join_url']; ?></li>
+                </ul>
+            </section>
+        </main>
 
         <footer>
 

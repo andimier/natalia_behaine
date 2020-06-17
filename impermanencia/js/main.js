@@ -2,46 +2,47 @@ $( "#datepicker" ).datepicker({
     currentText: "Now",
     dateFormat: "yy-mm-dd",
     showWeek: false,
-    dayNames: [ 
-        "Domingo", 
-        "Lunes", 
-        "Martes", 
-        "Miércoles", 
-        "Jueves", 
-        "Viernes", 
-        "Sábado" 
+    dayNames: [
+        "Domingo",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado"
     ],
-    dayNamesMin: [ 
-        "Do", 
-        "Lu", 
-        "Ma", 
-        "Mi", 
-        "Ju", 
-        "Vi", 
-        "Sá" 
+    dayNamesMin: [
+        "Do",
+        "Lu",
+        "Ma",
+        "Mi",
+        "Ju",
+        "Vi",
+        "Sá"
     ],
-    monthNames: [ 
-        "Enero", 
-        "Febrero", 
-        "Marzo", 
-        "Abril", 
-        "Mayo", 
-        "Junio", 
-        "Julio", 
-        "Agosto", 
-        "Septiembre", 
-        "Octubre", 
-        "Noviembre", 
-        "Diciembre" 
+    monthNames: [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
     ],
     onSelect: selectDate
 });
 
 var selectedDateAndHour = [];
 var selectedHours = [];
+var messageWrapper = document.querySelector('.selected-day');
 
 function toggleSelectedDateHours (date, datePicker) {
-    
+
     if (selectedHours.length) {
         // Hide selected hors
         selectedHours.forEach(function(item) {
@@ -49,27 +50,32 @@ function toggleSelectedDateHours (date, datePicker) {
             item.classList.remove('selected');
         });
     }
-    
-    var selectedDayHours = document.querySelectorAll('.time-wrapper[data-slot-date="' + date + '"]');
+
+    var selectedDayHours = document.querySelectorAll('.time-slot[data-slot-date="' + date + '"]');
     var _selectedHours = Array.from(selectedDayHours);
 
     if (!_selectedHours.length) {
-        document.querySelector('.slots-error-message').classList.remove('hidden');
+        document.querySelector('.slots-message').classList.remove('hidden');
     } else {
-        document.querySelector('.slots-error-message').classList.add('hidden');
+        document.querySelector('.slots-message').classList.add('hidden');
 
         _selectedHours.forEach(function(item) {
             item.classList.remove('hidden');
             item.classList.add('selected');
         });
+
+        var message = messageWrapper.innerHTML;
+
+        messageWrapper.innerHTML = message + "<p>horas disponibles | available time slots:</p>"
     }
 
     selectedHours = _selectedHours;
 }
 
+
 function selectDate(date, datePicker) {
-    document.querySelector('.summary-date').innerHTML = '';
-    document.querySelector('.summary-time').innerHTML = '';
+
+    messageWrapper.innerHTML = date.split('-').reverse().join(' / ');
 
     document.querySelector('#submit-order').classList.add('hidden');
 
@@ -89,9 +95,6 @@ function selectDateAndHour(e) {
         selectedTime
     ];
 
-    document.querySelector('.summary-date').innerHTML = 'Día seleccionado: ' + selectedDate;
-    document.querySelector('.summary-time').innerHTML = 'Hora seleccinada: ' + selectedTime;
-    
     document.querySelector('.slot-data[name="slot-type"]').value = selectedType;
     document.querySelector('.slot-data[name="slot-id"]').value = selectedId;
     document.querySelector('.slot-data[name="slot-date"]').value = selectedDate;
@@ -119,7 +122,7 @@ function validateInfo(e) {
         el.value = validStr;
 
         if (el.name === 'payerEmail') {
-            hasEmailCharacters = el.value.includes('.') && el.value.includes('@'); 
+            hasEmailCharacters = el.value.includes('.') && el.value.includes('@');
         }
 
         data[el.name] = el.value;
@@ -127,10 +130,10 @@ function validateInfo(e) {
 
     if (errors.length || !hasEmailCharacters) {
         event.preventDefault();
-        
+
         var message = errors.length ? 'Los datos están incompletos.' : '';
         message = (!hasEmailCharacters) ? message + ' El correo ingresado no es válido' : message;
-        
+
         alert(message);
     } else {
         // cache user
@@ -155,7 +158,7 @@ function pad(number) {
     var date = new Date();
     var selectedDate = [
         date.getFullYear(),
-        date.getMonth(), 
+        date.getMonth(),
         date.getDate()
     ];
 
