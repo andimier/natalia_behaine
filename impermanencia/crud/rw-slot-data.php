@@ -20,7 +20,7 @@
                     return mysql_close($connection);
                     break;
             }
-        } 
+        }
         else {
             switch ($method) {
                 case 'query':
@@ -102,9 +102,9 @@
         public static function getPayerData($id) {
             global $connection;
             $data = [];
-    
+
             $r = phpMethods('query', "SELECT * FROM slot_users WHERE id = " . $id . " LIMIT 1");
-    
+
             while ($h = phpMethods('fetch', $r)) {
                 $data += ['name' => $h['name']];
                 $data += ['email' => $h['email']];
@@ -112,13 +112,13 @@
                 $data += ['details' => $h['details']];
                 $data += ['slot_id' => $h['slot_id']];
             }
-    
+
             return $data;
         }
 
         public function getRediectUrl($payerId, $slotId, $meeting_id) {
             global $isTest;
-            
+
             $query_params = [
                 "payer-id=" . $payerId,
                 "slot-id=" . $slotId,
@@ -129,18 +129,18 @@
             }
 
             $redirect_urls = $this->getBaseUrls($isTest);
-            
+
             $success_url = $redirect_urls['success'] . "?" . join('&', $query_params);
             $failure_url = $redirect_urls['failure'] . "?" . join('&', $query_params);
             $pending_url = $redirect_urls['pending'] . "?" . join('&', $query_params);
-            
+
             $url = $success_url;
 
             // $preference->auto_return = "approved";
             return $url;
         }
 
-        public function getNoMeetingReservationRedirectUrl($payerId) {
+        public function getNoMeetingReservationRedirectUrl($payerId, $slotId) {
             global $isTest;
 
             $query_params = [
@@ -149,11 +149,11 @@
             ];
 
             $redirect_urls = $this->getBaseNoMeetingUrls($isTest);
-            
+
             $success_url = $redirect_urls['success'] . "?" . join('&', $query_params);;
             $failure_url = $redirect_urls['failure'] . "?" . join('&', $query_params);;
             $pending_url = $redirect_urls['pending'] . "?" . join('&', $query_params);;
-            
+
             return $success_url;
         }
     }
@@ -166,9 +166,9 @@
         public static function getSelectedSlotData($id) {
             global $connection;
             $data = [];
-    
+
             $r = phpMethods('query', "SELECT * FROM time_slots WHERE id = " . $id . " LIMIT 1");
-    
+
             while ($h = phpMethods('fetch', $r)) {
                 $data += ['state' => $h['state']];
                 $data += ['type' => $h['type']];
@@ -178,14 +178,14 @@
                 $data += ['meeting_id' => $h['meeting_id']];
                 $data += ['meeting_join_url' => $h['meeting_join_url']];
             }
-    
+
             return $data;
         }
 
         public function getSlotData() {
             $body = $_REQUEST;
             $headers = getallheaders();
-                    
+
             $id = $this->data['slot-id'];
             $slot_data = self::getSelectedSlotData($id);
             $data = json_encode($slot_data);
@@ -200,9 +200,9 @@
         public static function getTimeSlots ($productCode) {
             global $connection;
             $hours = [];
-    
+
             $r = phpMethods('query', "SELECT * FROM time_slots WHERE product_code = " . $productCode . " AND state = 'free'");
-    
+
             while ($h = phpMethods('fetch', $r)) {
                 array_push($hours, [
                     'product_code' => $h['product_code'],
@@ -214,26 +214,26 @@
                     'meeting_id' => $h['meeting_id']
                 ]);
             }
-    
+
             return $hours;
         }
-    
+
         public static function getSelectedSlotState($id) {
             global $connection;
             $state = '';
-    
+
             $r = phpMethods('query', "SELECT * FROM time_slots WHERE id = " . $id . " LIMIT 1");
-    
+
             while ($h = phpMethods('fetch', $r)) {
                 $state =  $h['state'];
             }
-    
+
             return $state;
         }
-    
+
         public static function blockSlot ($id) {
             global $connection;
-    
+
             $r = phpMethods('query', "UPDATE time_slots SET state = 'blocked' WHERE id =" . $id);
         }
 

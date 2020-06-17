@@ -7,6 +7,11 @@
 
         private $recipient_email = '';
 
+        function __construct($payer_info, $slot_data) {
+            $this->payer_info = $payer_info;
+            $this->slot_data = $slot_data;
+        }
+
          private function getHeader($mail) {
             $headers  = "From: <{$mail}>\r\n";
 			$headers .= "X-Mailer: PHP/" .phpversion(). "\r\n";
@@ -14,22 +19,6 @@
             $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
 
             return $headers;
-        }
-
-        private function getBodyDirectedToPayer() {
-            $body  = "<html>";
-			$body .= "<body>";
-			$body .= "<strong>INFO DE CONTACTO DESDE EL SITIO WEB</strong>";
-			$body .= "<br />";
-			$body .= "<br />";
-			$body .= "<strong>Nombre:</strong> $nombre <br />";
-			$body .= "<strong>Correo:</strong> $mail ";
-			$body .= "<br /><br />";
-       		$body .= "<strong>Mensaje:</strong> $mensaje";
-			$body .= "</body>";
-            $body .= "</html>";
-
-            return $body;
         }
 
         private function getSlodInfoText($slot_data) {
@@ -43,7 +32,7 @@
             return $time_slot_data;
         }
 
-        private function getBodyDirectedToSender($payer_info, $slot_data, $isPayer) {
+        private function getBody($isPayer) {
             $body_title = $isPayer == TRUE ? 'Muchas gracias por tu compar' : 'Compra hecha por:';
 
             $body  = "<html>";
@@ -52,12 +41,12 @@
             $body .= "<br />";
 
 			$body .= "<div>";
-			$body .= "<h3>" . $payer_info['name'] . "</h3>";
-			$body .= "<p>" . $payer_info['mail'] . "</p>";
+			$body .= "<h3>" . $this->payer_info['name'] . "</h3>";
+			$body .= "<p>" . $this->payer_info['mail'] . "</p>";
             $body .= "</div>";
 
 			$body .= "<ul>";
-			$body .= $this->getSlodInfoText($slot_data);
+			$body .= $this->getSlodInfoText($this->slot_data);
 			$body .= "</ul>";
 
 			$body .= "</body>";
@@ -67,36 +56,82 @@
         }
 
         function sendMails() {
-            $payer_info = MeetingPater::getPayerData($_GET['payer-id']);
-            $slot_data = DataSlot::getSelectedSlotData($_GET['slot-id']);
 
             // send to Natalia
-            mail(
-                self::SENDER_EMAIL,
-                self::SENDER_EMAIL_SUBJECT,
-                $this->getBodyDirectedToPayer($payer_info, $slot_data, FALSE),
-                $this->getHeader(self::SENDER)
-            );
+            // mail(
+            //     self::SENDER_EMAIL,
+            //     self::SENDER_EMAIL_SUBJECT,
+            //     $this->getBodyDirectedToPayer(FALSE),
+            //     $this->getHeader(self::SENDER)
+            // );
 
-            // send to payer
-            mail(
-                $payer_info['email'],
-                self::PAYER_EMAIL_SUBJECT,
-                $this->getBodyDirectedToPayer($payer_info, $slot_data, TRUE),
-                $this->getHeader(self::SENDER)
-            );
+            // // send to payer
+            // mail(
+            //     $payer_info['email'],
+            //     self::PAYER_EMAIL_SUBJECT,
+            //     $this->getBody(TRUE),
+            //     $this->getHeader(self::SENDER)
+            // );
         }
     }
 
     if (isset($_GET['slot-id'])) {
-        $mail = new ConfirmationMails();
-        // $mail->sendMails();
+        $payer_info = MeetingPayer::getPayerData($_GET['payer-id']);
+        $slot_data = DataSlot::getSelectedSlotData($_GET['slot-id']);
+
+        $mail = new ConfirmationMails($payer_info, $slot_data);
+        $mail->sendMails();
     }
 ?>
 
 <!doctype html>
 <html>
-    <head></head>
-    <body></body>
+    <head>
+    <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Arsenal&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@100;&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>impermanencia</h1>
+            <h4>Natalia Behaine</h4>
+
+            <section id="description">
+                <h2>Resumen de compra</h2>
+            </section>
+        </header>
+
+        <section>
+            <h3>Muchas gracias por tu compra.</h3>
+            <p>Este es el resumen de tu compra:</p>
+            <p>Tambien hemos enviado un correo con los detalles</p>
+        </section>
+
+        <section id="summary">
+            <h4>Tus datos:</h4>
+            <ul>
+                <li><?php echo $payer_info['name']; ?></li>
+                <li><?php echo $payer_info['email']; ?></li>
+                <li><?php echo $payer_info['phone']; ?></li>
+                <li><?php echo $payer_info['details']; ?></li>
+            </ul>
+
+            <h4>Datos de la reunión:</h4>
+            <ul>
+                <li><?php echo $slot_data['type']; ?></li>
+                <li><?php echo $slot_data['date']; ?></li>
+                <li><?php echo $slot_data['time']; ?></li>
+                <li><?php echo $slot_data['duration']; ?></li>
+                <li><?php echo $slot_data['meeting_join_url']; ?></li>
+            </ul>
+        </section>
+
+        <footer>
+
+        </footer>
+    </body>
 </html>
 

@@ -1,5 +1,5 @@
 <?php
-    require_once('crud/cnx.php');
+    require_once('required/cnx.php');
     require_once('crud/rw-slot-data.php');
     require_once('required/con.php');
 ?>
