@@ -11,7 +11,7 @@ body {
 
 main {
     margin: auto;
-    max-width: 700px;
+    max-width: 750px;
 }
 
 header {
@@ -19,7 +19,7 @@ header {
 }
 
 section {
-    margin: 40px 0;
+    margin: 20px 0;
     padding-top: 25px;
 }
 
@@ -28,19 +28,20 @@ nav {
 }
 
 nav li {
+    display: inline;
     letter-spacing: 5px;
 }
 
 h1 {
     font-family: 'Roboto', sans-serif;
-    font-size: 45px;
+    font-size: 50px;
     text-transform: uppercase;
     letter-spacing: 10px;
 }
 
 h2 {
+    font-size: 40px;
     padding-bottom: 25px;
-
 }
 
 h2, header h4 {
@@ -49,7 +50,7 @@ h2, header h4 {
 
 h3 {
     font-family: 'Roboto', sans-serif;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 p {
@@ -68,11 +69,17 @@ ul {
     list-style: none;
 }
 
-#description p {
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-top: 15px;
+    text-decoration: underline;
+    text-underline-position: under;
 }
 
-.service:not(:nth-child(1)) {
-    padding: 50px 0;
+.service {
+    padding: 15px 0 20px;
 }
 
 .service .service-cost {
@@ -85,6 +92,7 @@ ul {
 
 .service .service-purchase-link {
     border: 1px solid black;
+    display: inline-block;
     font-size: 13px;
     padding: 10px 30px;
 }
@@ -94,13 +102,21 @@ ul {
 }
 
 .service-description-wrapper {
-    display: flex;
-    padding: 20px 0 55px 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: height 1s ease;
 }
 
-.service-description-wrapper p {
-    flex-basis: 35%;
-    padding: 25px 35px 0 0;
+.visible {
+    height: 200px;
+    opacity: 1;
+    visibility: visible;
+    transition: height 1s ease, opacity 2s ease;
+}
+
+.service-description-wrapper > * {
+    padding-bottom: 15px;
 }
 
 .hidden {
