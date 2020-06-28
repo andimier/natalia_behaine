@@ -24,12 +24,17 @@ section {
 }
 
 nav {
-    padding-top: 45px;
+    padding-top: 20px;
 }
 
 nav li {
     display: inline;
-    letter-spacing: 5px;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+nav li a:hover {
+    color: grey;
 }
 
 h1 {
@@ -40,7 +45,7 @@ h1 {
 }
 
 h2 {
-    font-size: 40px;
+    font-size: 35px;
     padding-bottom: 25px;
 }
 
@@ -50,7 +55,11 @@ h2, header h4 {
 
 h3 {
     font-family: 'Roboto', sans-serif;
-    font-size: 30px;
+    font-size: 25px;
+}
+
+h4 {
+    font-size: 18px;
 }
 
 p {
@@ -76,6 +85,14 @@ button {
     padding-top: 15px;
     text-decoration: underline;
     text-underline-position: under;
+}
+
+footer {
+    margin-bottom: 50px;
+}
+
+.grid-wrapper {
+    display: flex;
 }
 
 .service {
@@ -105,14 +122,14 @@ button {
     height: 0;
     opacity: 0;
     visibility: hidden;
-    transition: height 1s ease;
+    transition: height 1s ease, opacity 2s ease;
 }
 
 .visible {
-    height: 200px;
+    height: 180px;
     opacity: 1;
     visibility: visible;
-    transition: height 1s ease, opacity 2s ease;
+    transition: height 1s ease, opacity 1s linear;
 }
 
 .service-description-wrapper > * {
@@ -128,11 +145,41 @@ button {
 }
 
 .time-slot {
-    border-bottom: 1px solid black;
+    border-bottom: 1px dotted grey;
     cursor: pointer;
     padding: 25px;
 }
 
 .time-slot:hover {
     background-color: #eefcb3;
+}
+
+.media-icon {
+    height: 30px;
+    margin: 20px 0 0;
+    width: 30px;
+}
+
+header .media-icon {
+    height: 20px;
+    margin: 15px 0 0;
+    width: 20px;
+}
+
+.media-icon a {
+    width: 100%;
+}
+
+#contact {
+    border-top: 1px solid black;
+    margin-top: 45px;
+    padding-top: 45px;
+}
+
+.available-hours {
+    padding-left: 40px;
+}
+
+.date-picker-wrapper h3 {
+    padding: 20px 0;
 }

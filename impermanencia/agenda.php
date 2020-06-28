@@ -27,22 +27,22 @@
     <body>
         <main>
             <header>
-                <h1>impermanencia</h1>
+                <h1>casa prasad</h1>
                 <h4>Natalia Behaine</h4>
+                <a href="http://www.nataliabehaine.com">
+                    <p>www.nataliabehaine.com</p>
+                </a>
+                <a href="" ><img class="media-icon" src="assets/instagram-logo.png" /></a>
 
                 <nav>
                     <ul>
-                        <li>inicio / home</li>
-                        <li>servicios / services</li>
-                        <li>paquetes / packages</li>
-                        <li>eventos / events</li>
-                    </ul>
+                        <li><a href="#services">Inicio</a></li>
+                     </ul>
                 </nav>
             </header>
 
             <section class="date-picker-wrapper">
-
-                <h4>seleccionaste | you've chosen:</h4>
+                <p>Seleccionaste:</p>
                 <h3><?php echo $product; ?></h3>
 
                 <h4 class="summary-product-price">$ <?php echo $price; ?></h4>
@@ -50,45 +50,49 @@
 
             </section>
 
-            <section>
-                <div class="calendar-wrapper">
-                    <div id="datepicker"></div>
-                </div>
-            </section>
+            <section class="grid-wrapper">
 
-            <section class="available-hours">
-                <h3 class="selected-day">
-                    escoge una fecha | pick a date
-                </h3>
-
-                <div class="hours-wrapper">
-                    <div class="slots-message <?php echo empty($timeSlots) ? '' : 'hidden' ?>">
-                        <p>sin horas diponibles este día | no available time slots this day</p>
-                    </div>
-
-                    <div class="slots-wrapper <?php echo empty($timeSlots) ? 'hidden' : '' ?>">
-                        <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
-                            <?php if ($timeSlots[$i]['state'] != 'blocked'): ?>
-                                <div class="time-slot hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
-                                    data-product-code="<?php echo $timeSlots[$i]['product_code']?>"
-                                    data-slot-type="<?php echo $timeSlots[$i]['type']?>"
-                                    data-slot-id="<?php echo $timeSlots[$i]['id']?>"
-                                    data-slot-state="<?php echo $timeSlots[$i]['state']?>"
-                                    data-slot-date="<?php echo $timeSlots[$i]['date']?>"
-                                    data-slot-time="<?php echo $timeSlots[$i]['time']?>"
-                                >
-
-                                    <h3>
-                                        <?php echo $timeSlots[$i]['time']?>
-                                    </h3>
-
-                                </div>
-                            <? endif; ?>
-                        <?php endfor;?>
+                <div>
+                    <div class="calendar-wrapper">
+                        <div id="datepicker"></div>
                     </div>
                 </div>
 
+                <div class="available-hours">
+                    <h3 class="selected-day">
+                        escoge una fecha
+                    </h3>
+
+                    <div class="hours-wrapper">
+                        <div class="slots-message <?php echo empty($timeSlots) ? '' : 'hidden' ?>">
+                            <p>sin horas diponibles este día</p>
+                        </div>
+
+                        <div class="slots-wrapper <?php echo empty($timeSlots) ? 'hidden' : '' ?>">
+                            <?php for ($i = 0; $i < count($timeSlots); $i++): ?>
+                                <?php if ($timeSlots[$i]['state'] != 'blocked'): ?>
+                                    <div class="time-slot hidden <?php echo $timeSlots[$i]['state'] == 'free' ? ' free' : ' booked' ?>"
+                                        data-product-code="<?php echo $timeSlots[$i]['product_code']?>"
+                                        data-slot-type="<?php echo $timeSlots[$i]['type']?>"
+                                        data-slot-id="<?php echo $timeSlots[$i]['id']?>"
+                                        data-slot-state="<?php echo $timeSlots[$i]['state']?>"
+                                        data-slot-date="<?php echo $timeSlots[$i]['date']?>"
+                                        data-slot-time="<?php echo $timeSlots[$i]['time']?>"
+                                    >
+                                        <h3>
+                                            <?php echo $timeSlots[$i]['time']?>
+                                        </h3>
+                                    </div>
+                                <? endif; ?>
+                            <?php endfor;?>
+                        </div>
+                    </div>
+
+                </div>
             </section>
+
+
+
 
             <section>
                 <?php if (!empty($timeSlots)): ?>
@@ -123,6 +127,14 @@
                     </form>
                 <?php endif; ?>
             </section>
+
+            <footer id="contact">
+                <h2>Contacto</h2>
+                <p>nataliabehaine@gmail.com</p>
+                <a href="">
+                    <img class="media-icon" src="assets/instagram-logo.png" />
+                </a>
+            </footer>
         </main>
 
         <script src="js/main.js"></script>
