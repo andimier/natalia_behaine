@@ -36,8 +36,12 @@
 
                 <nav>
                     <ul>
-                        <li><a href="#services">Inicio</a></li>
-                     </ul>
+                        <li><a href="#services">inicio</a> / </li>
+                        <li><a href="#courses">cursos mensuales</a> / </li>
+                        <li><a href="#events">eventos</a> / </li>
+                        <li><a href="#meditation">meditar juntos</a> / </li>
+                        <li><a href="#contact">contacto </a></li>
+                    </ul>
                 </nav>
             </header>
 

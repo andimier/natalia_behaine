@@ -66,7 +66,7 @@ function toggleSelectedDateHours (date, datePicker) {
 
         var message = messageWrapper.innerHTML;
 
-        messageWrapper.innerHTML = message + "<p>horas disponibles | available time slots:</p>"
+        messageWrapper.innerHTML = message + "<p>horas disponibles:</p>"
     }
 
     selectedHours = _selectedHours;
