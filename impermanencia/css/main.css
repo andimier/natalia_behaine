@@ -23,6 +23,10 @@ section {
     padding-top: 25px;
 }
 
+section p {
+    margin-bottom: 20px;
+}
+
 nav {
     padding-top: 20px;
 }
@@ -69,6 +73,14 @@ p {
     line-height: 20px;
 }
 
+p a {
+    font-weight: bold;
+}
+
+p a:hover {
+    color: grey
+}
+
 a {
     color: black;
     text-decoration: none;
@@ -91,12 +103,23 @@ footer {
     margin-bottom: 50px;
 }
 
+div a {
+    font-size: 13px;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    line-height: 20px;
+}
+
+div p a {
+    font-weight: bold;
+}
+
 .grid-wrapper {
     display: flex;
 }
 
 .service {
-    padding: 15px 0 20px;
+    padding: 15px 0 40px;
 }
 
 .service .service-cost {
@@ -127,10 +150,6 @@ footer {
     opacity: 1;
     visibility: visible;
     transition: height 1s ease, opacity 1s linear;
-}
-
-.service-description-wrapper > * {
-    padding-bottom: 15px;
 }
 
 .hidden {
