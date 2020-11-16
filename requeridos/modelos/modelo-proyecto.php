@@ -78,7 +78,7 @@
     }
 
     function getProjectVideoUrl($videoId) {
-        return '//player.vimeo.com/video/' . $videoId;
+        return 'https://www.youtube.com/embed/' . preg_replace('/\//', '' , $videoId);
     }
 
     function getProjectTexts($project_id) {
@@ -110,7 +110,7 @@
 
         return ['descripcion-obra' => $projectDescription, 'descripcion-tecnica' => $tecnicalDescription];
     }
-    
+
     function getVideoSRC($html) {
         preg_match('/https:\/\/[a-zA-Z\.\/=0-9?_]+/', $html, $match);
 
@@ -118,17 +118,17 @@
     }
 
     function getInstallationLinkTagAttributes($output) {
-        $att = 'class="f-box" 
-            href="'.$output['largeImage'].'" 
-            img-id="'.$output['id'].'" 
-            title="'.$output['title'].'" 
+        $att = 'class="f-box"
+            href="'.$output['largeImage'].'"
+            img-id="'.$output['id'].'"
+            title="'.$output['title'].'"
             type="'. $output['type'].'"';
- 
+
         if ($output['type'] == 'video') {
-            return $att . ' video-key="'. $output['videoKey'].'" video-src="'.$output['videoSRC'].'"';    
+            return $att . ' video-key="'. $output['videoKey'].'" video-src="'.$output['videoSRC'].'"';
         }
 
-        return $att;                        
+        return $att;
     }
 
     function getInstallationItems($query) {
@@ -143,7 +143,7 @@
                     'videoSRC' => !empty($item['video_html']) ? getVideoSRC($item['video_html']) : '',
                     'videoKey' => $item['video_key'],
                     'smallImage' => strpos($item['imagen1'], 'video') ? $item['imagen1'] : "cms/{$item['imagen1']}",
-                    'largeImage' => strpos($item['imagen3'], 'video') ? $item['imagen3'] : "cms/{$item['imagen3']}"          
+                    'largeImage' => strpos($item['imagen3'], 'video') ? $item['imagen3'] : "cms/{$item['imagen3']}"
                 ]);
 
                 $output[count($output) - 1]['linkTagAttributes'] = getInstallationLinkTagAttributes($output[count($output) - 1]);
@@ -155,12 +155,14 @@
 
     function getProjectQuery() {
         global $connection;
-
-        return phpMethods('fetch',
-            phpMethods('query',
-                "SELECT * FROM contenidos WHERE id=" . getEntryIdFromUrlTitle(getUrlTitle()),
-            )
+        $title = getUrlTitle();
+        $entry_id = getEntryIdFromUrlTitle($title);
+        $q = phpMethods(
+            'query',
+            "SELECT * FROM contenidos WHERE id=" . $entry_id
         );
+
+        return phpMethods('fetch', $q);
     }
 
     function getDataList() {
@@ -213,7 +215,7 @@
     function getAlbumIDS($projectId, $queryCondition) {
         global $connection;
 
-        return phpMethods('query', 
+        return phpMethods('query',
             "SELECT id, titulo FROM albumes WHERE contenido_id=" . $projectId . "{$queryCondition}"
         );
     }
@@ -223,12 +225,12 @@
         $queryList = [ $typeEntries[0] => [], $typeEntries[1] => [] ];
 
         for ($i = 0; $i < count($typeEntries); $i++) {
-            $item = phpMethods('fetch', 
+            $item = phpMethods('fetch',
                 getAlbumIDS($projectId, getQueryCondition($i))
             );
-   
+
             array_push(
-                $queryList[$typeEntries[$i]], 
+                $queryList[$typeEntries[$i]],
                 $item != NULL ? $item['id'] : ''
             );
         }
@@ -323,7 +325,7 @@
             return buildUrl($tt_prev);
         }
     }
-    
+
     function getMaxImagesOnDisplay($img_arr) {
         return (count($img_arr) <= 6) ? count($img_arr) : 6;
     }

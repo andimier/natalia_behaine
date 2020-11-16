@@ -111,9 +111,22 @@
                         </div>
                     </div>
             <?php elseif (!empty($projectDataList['project_video'])): ?>
-                <div class="video default-top-padding" style="border-bottom: <?php echo $estilo; ?>;">
-                    <iframe src="<?php echo getProjectVideoUrl($projectDataList['project_video']); ?>" width="100%" height="100%" frameborder="0" title="" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                </div>
+				<div class="video"
+					style="border-bottom: <?php echo $estilo; ?>;"
+				>
+					<iframe
+						src="<?php echo getProjectVideoUrl($projectDataList['project_video']); ?>"
+						style="
+							position: absolute;
+							top: 0;
+						"
+						width="100%"
+						height="100%"
+						frameborder="0"
+						allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					></iframe>
+				</div>
             <?php endif; ?>
 
 			<!--  GALERIA DE IMÁGENES -->

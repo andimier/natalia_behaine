@@ -50,7 +50,7 @@ function asignarEstilosAimagenes() {
     }
 
     ajusteCntTituloEImagen();
-    ajustarEstilosDelVideo();
+    // ajustarEstilosDelVideo();
 }
 
 function loadGallery() {
